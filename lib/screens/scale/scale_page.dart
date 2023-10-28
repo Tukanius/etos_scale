@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart' show Key, kDebugMode;
 import 'package:etos_scale_windows/components/container/container.dart';
-import 'package:etos_scale_windows/components/information/information-card.dart';
+// import 'package:etos_scale_windows/components/information/information-card.dart';
 import 'package:etos_scale_windows/components/trailer/trailer.dart';
 import 'package:etos_scale_windows/widgets/colors.dart';
 import 'package:libserialport/libserialport.dart';
 import 'package:after_layout/after_layout.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:etos_scale_windows/widgets/form_textfield.dart';
+import 'package:video_player/video_player.dart';
 
 class ScalePage extends StatefulWidget {
   static const routeName = 'ScalePage';
@@ -22,12 +24,43 @@ class _ScalePageState extends State<ScalePage> with AfterLayoutMixin {
   var ports = <String>[];
   String scaleData = "000000";
   GlobalKey<FormBuilderState> fbKey = GlobalKey<FormBuilderState>();
+  late VideoPlayerController _videoPlayerController;
+  bool startedPlaying = false;
 
+  @override
+  void initState() {
+    super.initState();
+
+    _videoPlayerController =
+        VideoPlayerController.asset('assets/Butterfly-209.mp4');
+    _videoPlayerController.addListener(() {
+      if (startedPlaying && !_videoPlayerController.value.isPlaying) {
+        Navigator.pop(context);
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    _videoPlayerController.dispose();
+    super.dispose();
+  }
+
+  Future<bool> started() async {
+    await _videoPlayerController.initialize();
+    await _videoPlayerController.play();
+    startedPlaying = true;
+    return true;
+  }
+
+  @override
   afterFirstLayout(BuildContext context) {
     final name = SerialPort.availablePorts.first;
     final port = SerialPort(name);
     if (!port.openReadWrite()) {
-      print(SerialPort.lastError);
+      if (kDebugMode) {
+        print(SerialPort.lastError);
+      }
     }
 
     var portConfig = SerialPortConfig()
@@ -58,7 +91,7 @@ class _ScalePageState extends State<ScalePage> with AfterLayoutMixin {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: 190, vertical: 30),
+      margin: const EdgeInsets.symmetric(horizontal: 190, vertical: 30),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -69,7 +102,7 @@ class _ScalePageState extends State<ScalePage> with AfterLayoutMixin {
                 children: [
                   FormBuilder(
                     key: fbKey,
-                    child: Column(
+                    child: const Column(
                       children: [
                         Row(
                           children: [
@@ -156,18 +189,32 @@ class _ScalePageState extends State<ScalePage> with AfterLayoutMixin {
                       ],
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 15,
                   ),
-                  CustomContainer(),
-                  SizedBox(
+                  const CustomContainer(),
+                  const SizedBox(
                     height: 15,
                   ),
-                  Trailer(),
-                  SizedBox(
+                  const Trailer(),
+                  const SizedBox(
                     height: 15,
                   ),
-                  InformationCard(scaleData: scaleData),
+                  // InformationCard(scaleData: scaleData),
+                  FutureBuilder<bool>(
+                    future: started(),
+                    builder:
+                        (BuildContext context, AsyncSnapshot<bool> snapshot) {
+                      if (snapshot.data ?? false) {
+                        return AspectRatio(
+                          aspectRatio: _videoPlayerController.value.aspectRatio,
+                          child: VideoPlayer(_videoPlayerController),
+                        );
+                      } else {
+                        return const Text('waiting for video to load');
+                      }
+                    },
+                  ),
                 ],
               ),
             ),
