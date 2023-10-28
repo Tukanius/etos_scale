@@ -224,15 +224,3 @@ class _ScalePageState extends State<ScalePage> with AfterLayoutMixin {
     );
   }
 }
-
-/*
-child: Center(
-              child: Text(
-                receivedData,
-                style: TextStyle(
-                  color: white,
-                  fontSize: 25,
-                  fontWeight: FontWeight.w500,
-                ),
-              ),
-            ),*/

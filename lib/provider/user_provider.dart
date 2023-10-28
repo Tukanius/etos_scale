@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
 import 'package:etos_scale_windows/models/user.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -18,7 +18,9 @@ class UserProvider extends ChangeNotifier {
 
   login(User data) async {
     // user = await AuthApi().login(data);
-    print(user);
+    if (kDebugMode) {
+      print(user);
+    }
     setAccessToken(user.accessToken);
     notifyListeners();
   }
