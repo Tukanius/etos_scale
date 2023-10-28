@@ -12,7 +12,7 @@ class Trailer extends StatefulWidget {
 class _TrailerState extends State<Trailer> {
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       height: 140,
       child: Row(
         children: [
@@ -22,14 +22,14 @@ class _TrailerState extends State<Trailer> {
                 borderRadius: BorderRadius.circular(15),
                 color: darkgrey,
               ),
-              padding: EdgeInsets.all(15),
+              padding: const EdgeInsets.all(15),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
+                      const Text(
                         'Чиргүүл',
                         style: TextStyle(
                           color: white,
@@ -37,7 +37,7 @@ class _TrailerState extends State<Trailer> {
                           fontWeight: FontWeight.w600,
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 10,
                       ),
                       Row(
@@ -47,11 +47,11 @@ class _TrailerState extends State<Trailer> {
                               borderRadius: BorderRadius.circular(10),
                               color: black.withOpacity(0.2),
                             ),
-                            margin: EdgeInsets.only(right: 10),
+                            margin: const EdgeInsets.only(right: 10),
                             child: Container(
-                              margin: EdgeInsets.symmetric(
+                              margin: const EdgeInsets.symmetric(
                                   horizontal: 14, vertical: 7),
-                              child: Text(
+                              child: const Text(
                                 '3030',
                                 style: TextStyle(
                                   color: white,
@@ -67,9 +67,9 @@ class _TrailerState extends State<Trailer> {
                               color: black.withOpacity(0.2),
                             ),
                             child: Container(
-                              margin: EdgeInsets.symmetric(
+                              margin: const EdgeInsets.symmetric(
                                   horizontal: 14, vertical: 7),
-                              child: Text(
+                              child: const Text(
                                 'УБГ',
                                 style: TextStyle(
                                   color: white,
@@ -89,8 +89,8 @@ class _TrailerState extends State<Trailer> {
                         'assets/svg/frame.svg',
                       ),
                       Container(
-                        margin: EdgeInsets.symmetric(horizontal: 20),
-                        child: Text(
+                        margin: const EdgeInsets.symmetric(horizontal: 20),
+                        child: const Text(
                           '3',
                           style: TextStyle(
                             color: white,
@@ -105,7 +105,7 @@ class _TrailerState extends State<Trailer> {
               ),
             ),
           ),
-          SizedBox(
+          const SizedBox(
             width: 15,
           ),
           Expanded(
@@ -114,11 +114,11 @@ class _TrailerState extends State<Trailer> {
                 borderRadius: BorderRadius.circular(15),
                 color: darkgrey,
               ),
-              padding: EdgeInsets.all(15),
+              padding: const EdgeInsets.all(15),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
+                  const Text(
                     'Чиргүүл',
                     style: TextStyle(
                       color: white,
@@ -126,7 +126,7 @@ class _TrailerState extends State<Trailer> {
                       fontWeight: FontWeight.w600,
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 10,
                   ),
                   Row(
@@ -136,11 +136,11 @@ class _TrailerState extends State<Trailer> {
                           borderRadius: BorderRadius.circular(10),
                           color: black.withOpacity(0.2),
                         ),
-                        margin: EdgeInsets.only(right: 10),
+                        margin: const EdgeInsets.only(right: 10),
                         child: Container(
-                          margin:
-                              EdgeInsets.symmetric(horizontal: 14, vertical: 7),
-                          child: Text(
+                          margin: const EdgeInsets.symmetric(
+                              horizontal: 14, vertical: 7),
+                          child: const Text(
                             '3030',
                             style: TextStyle(
                               color: white,
@@ -156,9 +156,9 @@ class _TrailerState extends State<Trailer> {
                           color: black.withOpacity(0.2),
                         ),
                         child: Container(
-                          margin:
-                              EdgeInsets.symmetric(horizontal: 14, vertical: 7),
-                          child: Text(
+                          margin: const EdgeInsets.symmetric(
+                              horizontal: 14, vertical: 7),
+                          child: const Text(
                             'УБГ',
                             style: TextStyle(
                               color: white,

@@ -2,7 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
-import 'package:etos_scale_windows/provider/tools-provider.dart';
+import 'package:etos_scale_windows/provider/tools_provider.dart';
 import 'package:etos_scale_windows/provider/user_provider.dart';
 import 'package:etos_scale_windows/screens/main_page.dart';
 import 'package:etos_scale_windows/screens/splash/splash_page.dart';

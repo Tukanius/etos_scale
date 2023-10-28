@@ -13,7 +13,7 @@ class CustomContainer extends StatefulWidget {
 class _CustomContainerState extends State<CustomContainer> {
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       height: 145,
       child: Row(
         children: [
@@ -24,11 +24,11 @@ class _CustomContainerState extends State<CustomContainer> {
                 borderRadius: BorderRadius.circular(15),
                 color: red,
               ),
-              padding: EdgeInsets.all(15),
+              padding: const EdgeInsets.all(15),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
+                  const Text(
                     'Чингэлэг 1',
                     style: TextStyle(
                       color: white,
@@ -36,7 +36,7 @@ class _CustomContainerState extends State<CustomContainer> {
                       fontSize: 16,
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 15,
                   ),
                   Row(
@@ -46,11 +46,11 @@ class _CustomContainerState extends State<CustomContainer> {
                           borderRadius: BorderRadius.circular(10),
                           color: black.withOpacity(0.2),
                         ),
-                        margin: EdgeInsets.only(right: 5),
+                        margin: const EdgeInsets.only(right: 5),
                         child: Container(
-                          margin:
-                              EdgeInsets.symmetric(horizontal: 7, vertical: 4),
-                          child: Text(
+                          margin: const EdgeInsets.symmetric(
+                              horizontal: 7, vertical: 4),
+                          child: const Text(
                             'CICU',
                             style: TextStyle(
                               color: white,
@@ -65,11 +65,11 @@ class _CustomContainerState extends State<CustomContainer> {
                           borderRadius: BorderRadius.circular(10),
                           color: black.withOpacity(0.2),
                         ),
-                        margin: EdgeInsets.only(right: 5),
+                        margin: const EdgeInsets.only(right: 5),
                         child: Container(
-                          margin:
-                              EdgeInsets.symmetric(horizontal: 7, vertical: 4),
-                          child: Text(
+                          margin: const EdgeInsets.symmetric(
+                              horizontal: 7, vertical: 4),
+                          child: const Text(
                             '123123',
                             style: TextStyle(
                               color: white,
@@ -85,9 +85,9 @@ class _CustomContainerState extends State<CustomContainer> {
                           color: black.withOpacity(0.2),
                         ),
                         child: Container(
-                          margin:
-                              EdgeInsets.symmetric(horizontal: 7, vertical: 4),
-                          child: Text(
+                          margin: const EdgeInsets.symmetric(
+                              horizontal: 7, vertical: 4),
+                          child: const Text(
                             '[2]',
                             style: TextStyle(
                               color: white,
@@ -99,7 +99,7 @@ class _CustomContainerState extends State<CustomContainer> {
                       ),
                     ],
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 6,
                   ),
                   Container(
@@ -108,8 +108,9 @@ class _CustomContainerState extends State<CustomContainer> {
                       color: black.withOpacity(0.2),
                     ),
                     child: Container(
-                      margin: EdgeInsets.symmetric(horizontal: 7, vertical: 4),
-                      child: Text(
+                      margin: const EdgeInsets.symmetric(
+                          horizontal: 7, vertical: 4),
+                      child: const Text(
                         'QWEQ',
                         style: TextStyle(
                           color: white,
@@ -123,7 +124,7 @@ class _CustomContainerState extends State<CustomContainer> {
               ),
             ),
           ),
-          SizedBox(
+          const SizedBox(
             width: 10,
           ),
           Expanded(
@@ -133,11 +134,11 @@ class _CustomContainerState extends State<CustomContainer> {
                 borderRadius: BorderRadius.circular(15),
                 color: red,
               ),
-              padding: EdgeInsets.all(15),
+              padding: const EdgeInsets.all(15),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
+                  const Text(
                     'Чингэлэг 1',
                     style: TextStyle(
                       color: white,
@@ -145,7 +146,7 @@ class _CustomContainerState extends State<CustomContainer> {
                       fontSize: 16,
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 15,
                   ),
                   Row(
@@ -155,11 +156,11 @@ class _CustomContainerState extends State<CustomContainer> {
                           borderRadius: BorderRadius.circular(10),
                           color: black.withOpacity(0.2),
                         ),
-                        margin: EdgeInsets.only(right: 5),
+                        margin: const EdgeInsets.only(right: 5),
                         child: Container(
-                          margin:
-                              EdgeInsets.symmetric(horizontal: 7, vertical: 4),
-                          child: Text(
+                          margin: const EdgeInsets.symmetric(
+                              horizontal: 7, vertical: 4),
+                          child: const Text(
                             'CICU',
                             style: TextStyle(
                               color: white,
@@ -174,11 +175,11 @@ class _CustomContainerState extends State<CustomContainer> {
                           borderRadius: BorderRadius.circular(10),
                           color: black.withOpacity(0.2),
                         ),
-                        margin: EdgeInsets.only(right: 5),
+                        margin: const EdgeInsets.only(right: 5),
                         child: Container(
-                          margin:
-                              EdgeInsets.symmetric(horizontal: 7, vertical: 4),
-                          child: Text(
+                          margin: const EdgeInsets.symmetric(
+                              horizontal: 7, vertical: 4),
+                          child: const Text(
                             '123123',
                             style: TextStyle(
                               color: white,
@@ -194,9 +195,9 @@ class _CustomContainerState extends State<CustomContainer> {
                           color: black.withOpacity(0.2),
                         ),
                         child: Container(
-                          margin:
-                              EdgeInsets.symmetric(horizontal: 7, vertical: 4),
-                          child: Text(
+                          margin: const EdgeInsets.symmetric(
+                              horizontal: 7, vertical: 4),
+                          child: const Text(
                             '[2]',
                             style: TextStyle(
                               color: white,
@@ -208,7 +209,7 @@ class _CustomContainerState extends State<CustomContainer> {
                       ),
                     ],
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 6,
                   ),
                   Container(
@@ -217,8 +218,9 @@ class _CustomContainerState extends State<CustomContainer> {
                       color: black.withOpacity(0.2),
                     ),
                     child: Container(
-                      margin: EdgeInsets.symmetric(horizontal: 7, vertical: 4),
-                      child: Text(
+                      margin: const EdgeInsets.symmetric(
+                          horizontal: 7, vertical: 4),
+                      child: const Text(
                         'QWEQ',
                         style: TextStyle(
                           color: white,
@@ -232,7 +234,7 @@ class _CustomContainerState extends State<CustomContainer> {
               ),
             ),
           ),
-          SizedBox(
+          const SizedBox(
             width: 10,
           ),
           Expanded(
@@ -242,11 +244,11 @@ class _CustomContainerState extends State<CustomContainer> {
                 borderRadius: BorderRadius.circular(15),
                 color: red,
               ),
-              padding: EdgeInsets.all(15),
+              padding: const EdgeInsets.all(15),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
+                  const Text(
                     'Чингэлэг 1',
                     style: TextStyle(
                       color: white,
@@ -254,7 +256,7 @@ class _CustomContainerState extends State<CustomContainer> {
                       fontSize: 16,
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 15,
                   ),
                   Row(
@@ -264,11 +266,11 @@ class _CustomContainerState extends State<CustomContainer> {
                           borderRadius: BorderRadius.circular(10),
                           color: black.withOpacity(0.2),
                         ),
-                        margin: EdgeInsets.only(right: 5),
+                        margin: const EdgeInsets.only(right: 5),
                         child: Container(
-                          margin:
-                              EdgeInsets.symmetric(horizontal: 7, vertical: 4),
-                          child: Text(
+                          margin: const EdgeInsets.symmetric(
+                              horizontal: 7, vertical: 4),
+                          child: const Text(
                             'CICU',
                             style: TextStyle(
                               color: white,
@@ -283,11 +285,11 @@ class _CustomContainerState extends State<CustomContainer> {
                           borderRadius: BorderRadius.circular(10),
                           color: black.withOpacity(0.2),
                         ),
-                        margin: EdgeInsets.only(right: 5),
+                        margin: const EdgeInsets.only(right: 5),
                         child: Container(
-                          margin:
-                              EdgeInsets.symmetric(horizontal: 7, vertical: 4),
-                          child: Text(
+                          margin: const EdgeInsets.symmetric(
+                              horizontal: 7, vertical: 4),
+                          child: const Text(
                             '123123',
                             style: TextStyle(
                               color: white,
@@ -303,9 +305,9 @@ class _CustomContainerState extends State<CustomContainer> {
                           color: black.withOpacity(0.2),
                         ),
                         child: Container(
-                          margin:
-                              EdgeInsets.symmetric(horizontal: 7, vertical: 4),
-                          child: Text(
+                          margin: const EdgeInsets.symmetric(
+                              horizontal: 7, vertical: 4),
+                          child: const Text(
                             '[2]',
                             style: TextStyle(
                               color: white,
@@ -317,7 +319,7 @@ class _CustomContainerState extends State<CustomContainer> {
                       ),
                     ],
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 6,
                   ),
                   Container(
@@ -326,8 +328,9 @@ class _CustomContainerState extends State<CustomContainer> {
                       color: black.withOpacity(0.2),
                     ),
                     child: Container(
-                      margin: EdgeInsets.symmetric(horizontal: 7, vertical: 4),
-                      child: Text(
+                      margin: const EdgeInsets.symmetric(
+                          horizontal: 7, vertical: 4),
+                      child: const Text(
                         'QWEQ',
                         style: TextStyle(
                           color: white,
@@ -341,7 +344,7 @@ class _CustomContainerState extends State<CustomContainer> {
               ),
             ),
           ),
-          SizedBox(
+          const SizedBox(
             width: 10,
           ),
           Expanded(
@@ -351,11 +354,11 @@ class _CustomContainerState extends State<CustomContainer> {
                 borderRadius: BorderRadius.circular(15),
                 color: red,
               ),
-              padding: EdgeInsets.all(15),
+              padding: const EdgeInsets.all(15),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
+                  const Text(
                     'Чингэлэг 1',
                     style: TextStyle(
                       color: white,
@@ -363,7 +366,7 @@ class _CustomContainerState extends State<CustomContainer> {
                       fontSize: 16,
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 15,
                   ),
                   Row(
@@ -373,11 +376,11 @@ class _CustomContainerState extends State<CustomContainer> {
                           borderRadius: BorderRadius.circular(10),
                           color: black.withOpacity(0.2),
                         ),
-                        margin: EdgeInsets.only(right: 5),
+                        margin: const EdgeInsets.only(right: 5),
                         child: Container(
-                          margin:
-                              EdgeInsets.symmetric(horizontal: 7, vertical: 4),
-                          child: Text(
+                          margin: const EdgeInsets.symmetric(
+                              horizontal: 7, vertical: 4),
+                          child: const Text(
                             'CICU',
                             style: TextStyle(
                               color: white,
@@ -392,11 +395,11 @@ class _CustomContainerState extends State<CustomContainer> {
                           borderRadius: BorderRadius.circular(10),
                           color: black.withOpacity(0.2),
                         ),
-                        margin: EdgeInsets.only(right: 5),
+                        margin: const EdgeInsets.only(right: 5),
                         child: Container(
-                          margin:
-                              EdgeInsets.symmetric(horizontal: 7, vertical: 4),
-                          child: Text(
+                          margin: const EdgeInsets.symmetric(
+                              horizontal: 7, vertical: 4),
+                          child: const Text(
                             '123123',
                             style: TextStyle(
                               color: white,
@@ -412,9 +415,9 @@ class _CustomContainerState extends State<CustomContainer> {
                           color: black.withOpacity(0.2),
                         ),
                         child: Container(
-                          margin:
-                              EdgeInsets.symmetric(horizontal: 7, vertical: 4),
-                          child: Text(
+                          margin: const EdgeInsets.symmetric(
+                              horizontal: 7, vertical: 4),
+                          child: const Text(
                             '[2]',
                             style: TextStyle(
                               color: white,
@@ -426,7 +429,7 @@ class _CustomContainerState extends State<CustomContainer> {
                       ),
                     ],
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 6,
                   ),
                   Container(
@@ -435,8 +438,9 @@ class _CustomContainerState extends State<CustomContainer> {
                       color: black.withOpacity(0.2),
                     ),
                     child: Container(
-                      margin: EdgeInsets.symmetric(horizontal: 7, vertical: 4),
-                      child: Text(
+                      margin: const EdgeInsets.symmetric(
+                          horizontal: 7, vertical: 4),
+                      child: const Text(
                         'QWEQ',
                         style: TextStyle(
                           color: white,

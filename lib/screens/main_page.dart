@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:etos_scale_windows/components/drawer/end-drawer.dart';
-import 'package:etos_scale_windows/screens/list/list-page.dart';
+import 'package:etos_scale_windows/components/drawer/end_drawer.dart';
+import 'package:etos_scale_windows/screens/list/list_page.dart';
 import 'package:etos_scale_windows/screens/scale/scale_page.dart';
 import 'package:etos_scale_windows/widgets/colors.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -42,12 +42,12 @@ class _MainPageState extends State<MainPage>
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: backgroundColor,
-      endDrawer: Container(
+      endDrawer: SizedBox(
         width: MediaQuery.of(context).size.width * 0.5,
         height: MediaQuery.of(context).size.height,
         child: Drawer(
           backgroundColor: Theme.of(context).colorScheme.background,
-          child: CustomDrawer(),
+          child: const CustomDrawer(),
         ),
       ),
       body: SafeArea(
@@ -66,80 +66,78 @@ class _MainPageState extends State<MainPage>
                     width: MediaQuery.of(context).size.width,
                     color: darkgrey,
                     child: Container(
-                      margin: EdgeInsets.symmetric(horizontal: 190),
+                      margin: const EdgeInsets.symmetric(horizontal: 190),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Container(
-                            child: Row(
-                              children: [
-                                Container(
-                                  decoration: tabController.index == 0
-                                      ? BoxDecoration(
-                                          border: Border(
-                                            bottom: BorderSide(
-                                              color: white,
-                                              width: 4,
-                                            ),
+                          Row(
+                            children: [
+                              Container(
+                                decoration: tabController.index == 0
+                                    ? const BoxDecoration(
+                                        border: Border(
+                                          bottom: BorderSide(
+                                            color: white,
+                                            width: 4,
                                           ),
-                                        )
-                                      : BoxDecoration(),
-                                  child: GestureDetector(
-                                    onTap: () {
-                                      changePage(0);
-                                    },
-                                    child: Center(
-                                      child: Text(
-                                        'ПҮҮЛЭХ',
-                                        style: TextStyle(
-                                          fontSize: 16,
-                                          color: white,
-                                          fontWeight: tabController.index == 0
-                                              ? FontWeight.w700
-                                              : FontWeight.w400,
                                         ),
+                                      )
+                                    : const BoxDecoration(),
+                                child: GestureDetector(
+                                  onTap: () {
+                                    changePage(0);
+                                  },
+                                  child: Center(
+                                    child: Text(
+                                      'ПҮҮЛЭХ',
+                                      style: TextStyle(
+                                        fontSize: 16,
+                                        color: white,
+                                        fontWeight: tabController.index == 0
+                                            ? FontWeight.w700
+                                            : FontWeight.w400,
                                       ),
                                     ),
                                   ),
                                 ),
-                                SizedBox(
-                                  width: 50,
-                                ),
-                                Container(
-                                  decoration: tabController.index == 1
-                                      ? BoxDecoration(
-                                          border: Border(
-                                            bottom: BorderSide(
-                                              color: white,
-                                              width: 4,
-                                            ),
+                              ),
+                              const SizedBox(
+                                width: 50,
+                              ),
+                              Container(
+                                decoration: tabController.index == 1
+                                    ? const BoxDecoration(
+                                        border: Border(
+                                          bottom: BorderSide(
+                                            color: white,
+                                            width: 4,
                                           ),
-                                        )
-                                      : BoxDecoration(),
-                                  child: GestureDetector(
-                                    onTap: () {
-                                      changePage(1);
-                                    },
-                                    child: Center(
-                                      child: Text(
-                                        'ТҮҮХ',
-                                        style: TextStyle(
-                                          fontSize: 16,
-                                          color: white,
-                                          fontWeight: tabController.index == 1
-                                              ? FontWeight.w700
-                                              : FontWeight.w400,
                                         ),
+                                      )
+                                    : const BoxDecoration(),
+                                child: GestureDetector(
+                                  onTap: () {
+                                    changePage(1);
+                                  },
+                                  child: Center(
+                                    child: Text(
+                                      'ТҮҮХ',
+                                      style: TextStyle(
+                                        fontSize: 16,
+                                        color: white,
+                                        fontWeight: tabController.index == 1
+                                            ? FontWeight.w700
+                                            : FontWeight.w400,
                                       ),
                                     ),
                                   ),
                                 ),
-                              ],
-                            ),
+                              ),
+                            ],
                           ),
                           Row(
                             children: [
-                              SizedBox(
+                              const SizedBox(
                                 width: 30,
                               ),
                               GestureDetector(
@@ -154,7 +152,7 @@ class _MainPageState extends State<MainPage>
                                             borderRadius:
                                                 BorderRadius.circular(15.0),
                                           ),
-                                          child: Container(
+                                          child: SizedBox(
                                             width: 320,
                                             height: 300,
                                             child: Column(
@@ -164,16 +162,17 @@ class _MainPageState extends State<MainPage>
                                               children: [
                                                 Column(
                                                   children: [
-                                                    SizedBox(
+                                                    const SizedBox(
                                                       height: 15,
                                                     ),
-                                                    SizedBox(
+                                                    const SizedBox(
                                                       height: 15,
                                                     ),
                                                     Container(
                                                       margin:
-                                                          EdgeInsets.all(35),
-                                                      child: Column(
+                                                          const EdgeInsets.all(
+                                                              35),
+                                                      child: const Column(
                                                         children: [
                                                           Center(
                                                             child: Text(
@@ -237,11 +236,12 @@ class _MainPageState extends State<MainPage>
                                     'assets/svg/wifi.svg',
                                     height: 28,
                                     width: 28,
+                                    // ignore: deprecated_member_use
                                     color: svgcolor,
                                   ),
                                 ),
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 width: 15,
                               ),
                               GestureDetector(
@@ -256,7 +256,7 @@ class _MainPageState extends State<MainPage>
                                             borderRadius:
                                                 BorderRadius.circular(15.0),
                                           ),
-                                          child: Container(
+                                          child: SizedBox(
                                             width: 320,
                                             height: 300,
                                             child: Column(
@@ -266,16 +266,17 @@ class _MainPageState extends State<MainPage>
                                               children: [
                                                 Column(
                                                   children: [
-                                                    SizedBox(
+                                                    const SizedBox(
                                                       height: 15,
                                                     ),
-                                                    SizedBox(
+                                                    const SizedBox(
                                                       height: 15,
                                                     ),
                                                     Container(
                                                       margin:
-                                                          EdgeInsets.all(35),
-                                                      child: Column(
+                                                          const EdgeInsets.all(
+                                                              35),
+                                                      child: const Column(
                                                         children: [
                                                           Center(
                                                             child: Text(
@@ -339,11 +340,12 @@ class _MainPageState extends State<MainPage>
                                     'assets/svg/transfer.svg',
                                     height: 28,
                                     width: 28,
+                                    // ignore: deprecated_member_use
                                     color: svgcolor,
                                   ),
                                 ),
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 width: 15,
                               ),
                               GestureDetector(
@@ -358,7 +360,7 @@ class _MainPageState extends State<MainPage>
                                             borderRadius:
                                                 BorderRadius.circular(15.0),
                                           ),
-                                          child: Container(
+                                          child: SizedBox(
                                             width: 320,
                                             height: 300,
                                             child: Column(
@@ -368,16 +370,17 @@ class _MainPageState extends State<MainPage>
                                               children: [
                                                 Column(
                                                   children: [
-                                                    SizedBox(
+                                                    const SizedBox(
                                                       height: 15,
                                                     ),
-                                                    SizedBox(
+                                                    const SizedBox(
                                                       height: 15,
                                                     ),
                                                     Container(
                                                       margin:
-                                                          EdgeInsets.all(35),
-                                                      child: Column(
+                                                          const EdgeInsets.all(
+                                                              35),
+                                                      child: const Column(
                                                         children: [
                                                           Center(
                                                             child: Text(
@@ -441,11 +444,12 @@ class _MainPageState extends State<MainPage>
                                     'assets/svg/dashboard.svg',
                                     height: 28,
                                     width: 28,
+                                    // ignore: deprecated_member_use
                                     color: svgcolor,
                                   ),
                                 ),
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 width: 15,
                               ),
                               GestureDetector(
@@ -460,7 +464,7 @@ class _MainPageState extends State<MainPage>
                                             borderRadius:
                                                 BorderRadius.circular(15.0),
                                           ),
-                                          child: Container(
+                                          child: SizedBox(
                                             width: 320,
                                             height: 300,
                                             child: Column(
@@ -470,16 +474,17 @@ class _MainPageState extends State<MainPage>
                                               children: [
                                                 Column(
                                                   children: [
-                                                    SizedBox(
+                                                    const SizedBox(
                                                       height: 15,
                                                     ),
-                                                    SizedBox(
+                                                    const SizedBox(
                                                       height: 15,
                                                     ),
                                                     Container(
                                                       margin:
-                                                          EdgeInsets.all(35),
-                                                      child: Column(
+                                                          const EdgeInsets.all(
+                                                              35),
+                                                      child: const Column(
                                                         children: [
                                                           Center(
                                                             child: Text(
@@ -541,11 +546,12 @@ class _MainPageState extends State<MainPage>
                                   backgroundColor: backgroundColor,
                                   child: SvgPicture.asset(
                                     'assets/svg/printer.svg',
+                                    // ignore: deprecated_member_use
                                     color: svgcolor,
                                   ),
                                 ),
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 width: 30,
                               ),
                               GestureDetector(
@@ -559,7 +565,7 @@ class _MainPageState extends State<MainPage>
                                   ),
                                 ),
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 width: 15,
                               ),
                               GestureDetector(
@@ -574,7 +580,7 @@ class _MainPageState extends State<MainPage>
                                             borderRadius:
                                                 BorderRadius.circular(15.0),
                                           ),
-                                          child: Container(
+                                          child: SizedBox(
                                             width: 320,
                                             height: 400,
                                             child: Column(
@@ -584,10 +590,10 @@ class _MainPageState extends State<MainPage>
                                               children: [
                                                 Column(
                                                   children: [
-                                                    SizedBox(
+                                                    const SizedBox(
                                                       height: 15,
                                                     ),
-                                                    Text(
+                                                    const Text(
                                                       'Баталгаажуулалт',
                                                       style: TextStyle(
                                                           fontSize: 25,
@@ -595,13 +601,14 @@ class _MainPageState extends State<MainPage>
                                                               FontWeight.bold,
                                                           color: white),
                                                     ),
-                                                    SizedBox(
+                                                    const SizedBox(
                                                       height: 15,
                                                     ),
                                                     Container(
                                                       margin:
-                                                          EdgeInsets.all(35),
-                                                      child: Column(
+                                                          const EdgeInsets.all(
+                                                              35),
+                                                      child: const Column(
                                                         children: [
                                                           Center(
                                                             child: Text(
@@ -636,7 +643,7 @@ class _MainPageState extends State<MainPage>
                                                   ],
                                                 ),
                                                 Container(
-                                                  margin: EdgeInsets.only(
+                                                  margin: const EdgeInsets.only(
                                                       bottom: 15),
                                                   child: Row(
                                                     mainAxisAlignment:
@@ -709,7 +716,7 @@ class _MainPageState extends State<MainPage>
             body: TabBarView(
               controller: tabController,
               physics: const NeverScrollableScrollPhysics(),
-              children: [
+              children: const [
                 ScalePage(),
                 ListPage(),
               ],
