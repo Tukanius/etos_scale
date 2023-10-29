@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 // import 'package:etos_scale_windows/provider/user_provider.dart';
 // import 'package:etos_scale_windows/screens/auth/login.dart';
-import 'package:etos_scale_windows/screens/main_page.dart';
+import 'package:etos_scale_windows/pages/main_page.dart';
 import "package:after_layout/after_layout.dart";
 import 'package:etos_scale_windows/widgets/colors.dart';
 // import 'package:provider/provider.dart';
@@ -27,7 +27,7 @@ class _SplashPageState extends State<SplashPage> with AfterLayoutMixin {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return const Scaffold(
       body: Center(
         child: CircularProgressIndicator(
           color: red,

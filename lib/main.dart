@@ -4,16 +4,20 @@ import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:etos_scale_windows/provider/tools_provider.dart';
 import 'package:etos_scale_windows/provider/user_provider.dart';
-import 'package:etos_scale_windows/screens/main_page.dart';
-import 'package:etos_scale_windows/screens/splash/splash_page.dart';
+import 'package:etos_scale_windows/pages/main_page.dart';
+import 'package:etos_scale_windows/pages/splash/splash_page.dart';
 import 'package:etos_scale_windows/services/dialog.dart';
 import 'package:etos_scale_windows/services/navigation.dart';
 import 'package:provider/provider.dart';
+import 'package:media_kit/media_kit.dart';
 
 void main() async {
   locator.registerLazySingleton(() => NavigationService());
   locator.registerLazySingleton(() => DialogService());
   DartPluginRegistrant.ensureInitialized();
+
+  WidgetsFlutterBinding.ensureInitialized();
+  MediaKit.ensureInitialized();
 
   runApp(const MyApp());
 }
