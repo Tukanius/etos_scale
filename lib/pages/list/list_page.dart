@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:etos_scale_windows/widgets/colors.dart';
 
-class ListPage extends StatefulWidget {
-  const ListPage({super.key});
+class ScaleListPage extends StatefulWidget {
+  const ScaleListPage({super.key});
 
   @override
-  State<ListPage> createState() => _ListPageState();
+  State<ScaleListPage> createState() => _ScaleListPageState();
 }
 
-class _ListPageState extends State<ListPage> {
+class _ScaleListPageState extends State<ScaleListPage> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -19,7 +18,7 @@ class _ListPageState extends State<ListPage> {
           const Text(
             'Жагсаалт',
             style: TextStyle(
-                color: white, fontSize: 16, fontWeight: FontWeight.w600),
+                color: Colors.white, fontSize: 16, fontWeight: FontWeight.w600),
           ),
           const SizedBox(
             height: 20,
@@ -30,73 +29,97 @@ class _ListPageState extends State<ListPage> {
                   child: Text(
                 '№',
                 style: TextStyle(
-                    color: white, fontSize: 16, fontWeight: FontWeight.w600),
+                    color: Colors.white,
+                    fontSize: 16,
+                    fontWeight: FontWeight.w600),
               )),
               Expanded(
                   child: Text(
                 'Харилцагч',
                 style: TextStyle(
-                    color: white, fontSize: 16, fontWeight: FontWeight.w600),
+                    color: Colors.white,
+                    fontSize: 16,
+                    fontWeight: FontWeight.w600),
               )),
               Expanded(
                   child: Text(
                 'Машин',
                 style: TextStyle(
-                    color: white, fontSize: 16, fontWeight: FontWeight.w600),
+                    color: Colors.white,
+                    fontSize: 16,
+                    fontWeight: FontWeight.w600),
               )),
               Expanded(
                   child: Text(
                 'Чиргүүл',
                 style: TextStyle(
-                    color: white, fontSize: 16, fontWeight: FontWeight.w600),
+                    color: Colors.white,
+                    fontSize: 16,
+                    fontWeight: FontWeight.w600),
               )),
               Expanded(
                   child: Text(
                 'С зөвшөөрөл',
                 style: TextStyle(
-                    color: white, fontSize: 16, fontWeight: FontWeight.w600),
+                    color: Colors.white,
+                    fontSize: 16,
+                    fontWeight: FontWeight.w600),
               )),
               Expanded(
                   child: Text(
                 'Жолооч',
                 style: TextStyle(
-                    color: white, fontSize: 16, fontWeight: FontWeight.w600),
+                    color: Colors.white,
+                    fontSize: 16,
+                    fontWeight: FontWeight.w600),
               )),
               Expanded(
                   child: Text(
                 'Машин жин',
                 style: TextStyle(
-                    color: white, fontSize: 16, fontWeight: FontWeight.w600),
+                    color: Colors.white,
+                    fontSize: 16,
+                    fontWeight: FontWeight.w600),
               )),
               Expanded(
                   child: Text(
                 'Ач жин',
                 style: TextStyle(
-                    color: white, fontSize: 16, fontWeight: FontWeight.w600),
+                    color: Colors.white,
+                    fontSize: 16,
+                    fontWeight: FontWeight.w600),
               )),
               Expanded(
                   child: Text(
                 'Цэвэр жин',
                 style: TextStyle(
-                    color: white, fontSize: 16, fontWeight: FontWeight.w600),
+                    color: Colors.white,
+                    fontSize: 16,
+                    fontWeight: FontWeight.w600),
               )),
               Expanded(
                   child: Text(
                 'Орсон огноо',
                 style: TextStyle(
-                    color: white, fontSize: 16, fontWeight: FontWeight.w600),
+                    color: Colors.white,
+                    fontSize: 16,
+                    fontWeight: FontWeight.w600),
               )),
               Expanded(
                   child: Text(
                 'Гарсан огноо',
                 style: TextStyle(
-                    color: white, fontSize: 16, fontWeight: FontWeight.w600),
+                    color: Colors.white,
+                    fontSize: 16,
+                    fontWeight: FontWeight.w600),
               )),
               Expanded(
                   child: Text(
                 'Тээвэрлэгч',
                 style: TextStyle(
-                    color: white, fontSize: 16, fontWeight: FontWeight.w600),
+                    color: Colors.white,
+                    fontSize: 16,
+                    fontWeight: FontWeight.w600),
               )),
             ],
           ),
@@ -111,7 +134,7 @@ class _ListPageState extends State<ListPage> {
                     Container(
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),
-                        color: listcolor,
+                        color: Colors.amber,
                       ),
                       margin: const EdgeInsets.only(bottom: 10),
                       height: 40,
@@ -123,7 +146,7 @@ class _ListPageState extends State<ListPage> {
                           Text(
                             '203035433',
                             style: TextStyle(
-                              color: white,
+                              color: Colors.white,
                               fontWeight: FontWeight.w700,
                               fontSize: 16,
                             ),

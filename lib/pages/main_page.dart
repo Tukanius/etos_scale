@@ -1,9 +1,15 @@
-import 'package:flutter/material.dart';
-import 'package:etos_scale_windows/components/drawer/end_drawer.dart';
 import 'package:etos_scale_windows/pages/list/list_page.dart';
+import 'package:flutter/material.dart';
+import 'package:etos_scale_windows/components/drawer/settings.dart';
+import 'package:etos_scale_windows/components/ui/button_circle.dart';
+import 'package:etos_scale_windows/components/ui/icons/network_icon.dart';
+import 'package:etos_scale_windows/components/ui/icons/printer_icon.dart';
+import 'package:etos_scale_windows/components/ui/icons/scale_icon.dart';
+import 'package:etos_scale_windows/components/ui/icons/settings_icon.dart';
+import 'package:etos_scale_windows/components/ui/icons/user_icon.dart';
+import 'package:etos_scale_windows/components/ui/icons/wifi_icon.dart';
+import 'package:etos_scale_windows/contants/colors.dart';
 import 'package:etos_scale_windows/pages/scale/scale_page.dart';
-import 'package:etos_scale_windows/widgets/colors.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 class MainPage extends StatefulWidget {
   static const routeName = 'MainPage';
@@ -16,12 +22,11 @@ class MainPage extends StatefulWidget {
 class _MainPageState extends State<MainPage>
     with SingleTickerProviderStateMixin {
   late TabController tabController;
-  int currentIndex = 0;
 
   @override
   void initState() {
     tabController = TabController(length: 2, vsync: this);
-    tabController.index = currentIndex;
+    tabController.index = 0;
     super.initState();
   }
 
@@ -31,23 +36,50 @@ class _MainPageState extends State<MainPage>
     super.dispose();
   }
 
-  changePage(index) {
-    setState(() {
-      tabController.index = index;
-      currentIndex = index;
-    });
+  renderLabel(String labelText, int index) {
+    return Container(
+      decoration: tabController.index == index
+          ? const BoxDecoration(
+              border: Border(
+                bottom: BorderSide(
+                  color: Colors.white,
+                  width: 4,
+                ),
+              ),
+            )
+          : const BoxDecoration(),
+      child: GestureDetector(
+        onTap: () {
+          setState(() {
+            tabController.index = index;
+          });
+        },
+        child: Center(
+          child: Text(
+            labelText.toUpperCase(),
+            style: TextStyle(
+              fontSize: 15,
+              color: Colors.white,
+              fontWeight: tabController.index == index
+                  ? FontWeight.w500
+                  : FontWeight.w400,
+            ),
+          ),
+        ),
+      ),
+    );
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: backgroundColor,
+      backgroundColor: colorBaseBg1,
       endDrawer: SizedBox(
         width: MediaQuery.of(context).size.width * 0.5,
         height: MediaQuery.of(context).size.height,
         child: Drawer(
           backgroundColor: Theme.of(context).colorScheme.background,
-          child: const CustomDrawer(),
+          child: const SettingsDrawer(),
         ),
       ),
       body: SafeArea(
@@ -64,645 +96,67 @@ class _MainPageState extends State<MainPage>
                   child: Container(
                     height: 60,
                     width: MediaQuery.of(context).size.width,
-                    color: darkgrey,
+                    color: colorBaseBg2,
                     child: Container(
-                      margin: const EdgeInsets.symmetric(horizontal: 190),
+                      padding: const EdgeInsets.symmetric(horizontal: 30),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Row(
                             children: [
-                              Container(
-                                decoration: tabController.index == 0
-                                    ? const BoxDecoration(
-                                        border: Border(
-                                          bottom: BorderSide(
-                                            color: white,
-                                            width: 4,
-                                          ),
-                                        ),
-                                      )
-                                    : const BoxDecoration(),
-                                child: GestureDetector(
-                                  onTap: () {
-                                    changePage(0);
-                                  },
-                                  child: Center(
-                                    child: Text(
-                                      'ПҮҮЛЭХ',
-                                      style: TextStyle(
-                                        fontSize: 16,
-                                        color: white,
-                                        fontWeight: tabController.index == 0
-                                            ? FontWeight.w700
-                                            : FontWeight.w400,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ),
+                              renderLabel("Хэмжилт", 0),
                               const SizedBox(
                                 width: 50,
                               ),
-                              Container(
-                                decoration: tabController.index == 1
-                                    ? const BoxDecoration(
-                                        border: Border(
-                                          bottom: BorderSide(
-                                            color: white,
-                                            width: 4,
-                                          ),
-                                        ),
-                                      )
-                                    : const BoxDecoration(),
-                                child: GestureDetector(
-                                  onTap: () {
-                                    changePage(1);
-                                  },
-                                  child: Center(
-                                    child: Text(
-                                      'ТҮҮХ',
-                                      style: TextStyle(
-                                        fontSize: 16,
-                                        color: white,
-                                        fontWeight: tabController.index == 1
-                                            ? FontWeight.w700
-                                            : FontWeight.w400,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ),
+                              renderLabel("Түүх", 1),
                             ],
                           ),
                           Row(
                             children: [
-                              const SizedBox(
-                                width: 30,
-                              ),
-                              GestureDetector(
-                                onTap: () {
-                                  showDialog(
-                                      context: context,
-                                      barrierDismissible: true,
-                                      builder: (context) {
-                                        return Dialog(
-                                          backgroundColor: backgroundColor,
-                                          shape: RoundedRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(15.0),
-                                          ),
-                                          child: SizedBox(
-                                            width: 320,
-                                            height: 300,
-                                            child: Column(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .spaceBetween,
-                                              children: [
-                                                Column(
-                                                  children: [
-                                                    const SizedBox(
-                                                      height: 15,
-                                                    ),
-                                                    const SizedBox(
-                                                      height: 15,
-                                                    ),
-                                                    Container(
-                                                      margin:
-                                                          const EdgeInsets.all(
-                                                              35),
-                                                      child: const Column(
-                                                        children: [
-                                                          Center(
-                                                            child: Text(
-                                                              'ПҮН',
-                                                              style: TextStyle(
-                                                                fontSize: 25,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .bold,
-                                                                color: white,
-                                                              ),
-                                                            ),
-                                                          ),
-                                                          SizedBox(
-                                                            height: 15,
-                                                          ),
-                                                          Center(
-                                                            child: Text(
-                                                              'Холбогдсон ПҮН COM6',
-                                                              style: TextStyle(
-                                                                fontSize: 25,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .bold,
-                                                                color: white,
-                                                              ),
-                                                            ),
-                                                          ),
-                                                        ],
-                                                      ),
-                                                    ),
-                                                    TextButton(
-                                                      style: ButtonStyle(
-                                                        overlayColor:
-                                                            MaterialStateProperty
-                                                                .all(Colors
-                                                                    .transparent),
-                                                      ),
-                                                      onPressed: () =>
-                                                          Navigator.of(context)
-                                                              .pop(false),
-                                                      child: const Text(
-                                                        'Ойлголоо',
-                                                        style: TextStyle(
-                                                          color: white,
-                                                          fontSize: 20,
-                                                        ),
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                        );
-                                      });
-                                },
-                                child: CircleAvatar(
-                                  backgroundColor: backgroundColor,
-                                  child: SvgPicture.asset(
-                                    'assets/svg/wifi.svg',
-                                    height: 28,
-                                    width: 28,
-                                    // ignore: deprecated_member_use
-                                    color: svgcolor,
-                                  ),
-                                ),
+                              ButtonCircle(
+                                color: colorBaseDarkLine,
+                                onPress: () {},
+                                icon: const WifiIcon(),
                               ),
                               const SizedBox(
                                 width: 15,
                               ),
-                              GestureDetector(
-                                onTap: () {
-                                  showDialog(
-                                      context: context,
-                                      barrierDismissible: true,
-                                      builder: (context) {
-                                        return Dialog(
-                                          backgroundColor: backgroundColor,
-                                          shape: RoundedRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(15.0),
-                                          ),
-                                          child: SizedBox(
-                                            width: 320,
-                                            height: 300,
-                                            child: Column(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .spaceBetween,
-                                              children: [
-                                                Column(
-                                                  children: [
-                                                    const SizedBox(
-                                                      height: 15,
-                                                    ),
-                                                    const SizedBox(
-                                                      height: 15,
-                                                    ),
-                                                    Container(
-                                                      margin:
-                                                          const EdgeInsets.all(
-                                                              35),
-                                                      child: const Column(
-                                                        children: [
-                                                          Center(
-                                                            child: Text(
-                                                              'Интернет',
-                                                              style: TextStyle(
-                                                                fontSize: 25,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .bold,
-                                                                color: white,
-                                                              ),
-                                                            ),
-                                                          ),
-                                                          SizedBox(
-                                                            height: 15,
-                                                          ),
-                                                          Center(
-                                                            child: Text(
-                                                              'Интернет холболт салсан',
-                                                              style: TextStyle(
-                                                                fontSize: 25,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .bold,
-                                                                color: white,
-                                                              ),
-                                                            ),
-                                                          ),
-                                                        ],
-                                                      ),
-                                                    ),
-                                                    TextButton(
-                                                      style: ButtonStyle(
-                                                        overlayColor:
-                                                            MaterialStateProperty
-                                                                .all(Colors
-                                                                    .transparent),
-                                                      ),
-                                                      onPressed: () =>
-                                                          Navigator.of(context)
-                                                              .pop(false),
-                                                      child: const Text(
-                                                        'Ойлголоо',
-                                                        style: TextStyle(
-                                                          color: white,
-                                                          fontSize: 20,
-                                                        ),
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                        );
-                                      });
-                                },
-                                child: CircleAvatar(
-                                  backgroundColor: backgroundColor,
-                                  child: SvgPicture.asset(
-                                    'assets/svg/transfer.svg',
-                                    height: 28,
-                                    width: 28,
-                                    // ignore: deprecated_member_use
-                                    color: svgcolor,
-                                  ),
-                                ),
+                              ButtonCircle(
+                                color: colorBaseDarkLine,
+                                onPress: () {},
+                                icon: const NetworkIcon(),
                               ),
                               const SizedBox(
                                 width: 15,
                               ),
-                              GestureDetector(
-                                onTap: () {
-                                  showDialog(
-                                      context: context,
-                                      barrierDismissible: true,
-                                      builder: (context) {
-                                        return Dialog(
-                                          backgroundColor: backgroundColor,
-                                          shape: RoundedRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(15.0),
-                                          ),
-                                          child: SizedBox(
-                                            width: 320,
-                                            height: 300,
-                                            child: Column(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .spaceBetween,
-                                              children: [
-                                                Column(
-                                                  children: [
-                                                    const SizedBox(
-                                                      height: 15,
-                                                    ),
-                                                    const SizedBox(
-                                                      height: 15,
-                                                    ),
-                                                    Container(
-                                                      margin:
-                                                          const EdgeInsets.all(
-                                                              35),
-                                                      child: const Column(
-                                                        children: [
-                                                          Center(
-                                                            child: Text(
-                                                              'ПҮН',
-                                                              style: TextStyle(
-                                                                fontSize: 25,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .bold,
-                                                                color: white,
-                                                              ),
-                                                            ),
-                                                          ),
-                                                          SizedBox(
-                                                            height: 15,
-                                                          ),
-                                                          Center(
-                                                            child: Text(
-                                                              'Холбогдсон ПҮН COM6',
-                                                              style: TextStyle(
-                                                                fontSize: 25,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .bold,
-                                                                color: white,
-                                                              ),
-                                                            ),
-                                                          ),
-                                                        ],
-                                                      ),
-                                                    ),
-                                                    TextButton(
-                                                      style: ButtonStyle(
-                                                        overlayColor:
-                                                            MaterialStateProperty
-                                                                .all(Colors
-                                                                    .transparent),
-                                                      ),
-                                                      onPressed: () =>
-                                                          Navigator.of(context)
-                                                              .pop(false),
-                                                      child: const Text(
-                                                        'Ойлголоо',
-                                                        style: TextStyle(
-                                                          color: white,
-                                                          fontSize: 20,
-                                                        ),
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                        );
-                                      });
-                                },
-                                child: CircleAvatar(
-                                  backgroundColor: backgroundColor,
-                                  child: SvgPicture.asset(
-                                    'assets/svg/dashboard.svg',
-                                    height: 28,
-                                    width: 28,
-                                    // ignore: deprecated_member_use
-                                    color: svgcolor,
-                                  ),
-                                ),
+                              ButtonCircle(
+                                color: colorBaseDarkLine,
+                                onPress: () {},
+                                icon: const ScaleIcon(),
                               ),
                               const SizedBox(
                                 width: 15,
                               ),
-                              GestureDetector(
-                                onTap: () {
-                                  showDialog(
-                                      context: context,
-                                      barrierDismissible: true,
-                                      builder: (context) {
-                                        return Dialog(
-                                          backgroundColor: backgroundColor,
-                                          shape: RoundedRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(15.0),
-                                          ),
-                                          child: SizedBox(
-                                            width: 320,
-                                            height: 300,
-                                            child: Column(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .spaceBetween,
-                                              children: [
-                                                Column(
-                                                  children: [
-                                                    const SizedBox(
-                                                      height: 15,
-                                                    ),
-                                                    const SizedBox(
-                                                      height: 15,
-                                                    ),
-                                                    Container(
-                                                      margin:
-                                                          const EdgeInsets.all(
-                                                              35),
-                                                      child: const Column(
-                                                        children: [
-                                                          Center(
-                                                            child: Text(
-                                                              'Printer',
-                                                              style: TextStyle(
-                                                                fontSize: 25,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .bold,
-                                                                color: white,
-                                                              ),
-                                                            ),
-                                                          ),
-                                                          SizedBox(
-                                                            height: 15,
-                                                          ),
-                                                          Center(
-                                                            child: Text(
-                                                              'Холбогдсон Printer байхгүй.',
-                                                              style: TextStyle(
-                                                                fontSize: 25,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .bold,
-                                                                color: white,
-                                                              ),
-                                                            ),
-                                                          ),
-                                                        ],
-                                                      ),
-                                                    ),
-                                                    TextButton(
-                                                      style: ButtonStyle(
-                                                        overlayColor:
-                                                            MaterialStateProperty
-                                                                .all(Colors
-                                                                    .transparent),
-                                                      ),
-                                                      onPressed: () =>
-                                                          Navigator.of(context)
-                                                              .pop(false),
-                                                      child: const Text(
-                                                        'Ойлголоо',
-                                                        style: TextStyle(
-                                                          color: white,
-                                                          fontSize: 20,
-                                                        ),
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                        );
-                                      });
-                                },
-                                child: CircleAvatar(
-                                  backgroundColor: backgroundColor,
-                                  child: SvgPicture.asset(
-                                    'assets/svg/printer.svg',
-                                    // ignore: deprecated_member_use
-                                    color: svgcolor,
-                                  ),
-                                ),
+                              ButtonCircle(
+                                color: colorBaseDarkLine,
+                                onPress: () {},
+                                icon: const PrinterIcon(),
                               ),
                               const SizedBox(
                                 width: 30,
                               ),
-                              GestureDetector(
-                                onTap: () {
-                                  Scaffold.of(context).openEndDrawer();
-                                },
-                                child: CircleAvatar(
-                                  backgroundColor: backgroundColor,
-                                  child: SvgPicture.asset(
-                                    'assets/svg/settings.svg',
-                                  ),
-                                ),
+                              ButtonCircle(
+                                color: colorBaseDarkLine,
+                                onPress: () {},
+                                icon: const SettingsIcon(),
                               ),
                               const SizedBox(
                                 width: 15,
                               ),
-                              GestureDetector(
-                                onTap: () {
-                                  showDialog(
-                                      context: context,
-                                      barrierDismissible: false,
-                                      builder: (context) {
-                                        return Dialog(
-                                          backgroundColor: backgroundColor,
-                                          shape: RoundedRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(15.0),
-                                          ),
-                                          child: SizedBox(
-                                            width: 320,
-                                            height: 400,
-                                            child: Column(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .spaceBetween,
-                                              children: [
-                                                Column(
-                                                  children: [
-                                                    const SizedBox(
-                                                      height: 15,
-                                                    ),
-                                                    const Text(
-                                                      'Баталгаажуулалт',
-                                                      style: TextStyle(
-                                                          fontSize: 25,
-                                                          fontWeight:
-                                                              FontWeight.bold,
-                                                          color: white),
-                                                    ),
-                                                    const SizedBox(
-                                                      height: 15,
-                                                    ),
-                                                    Container(
-                                                      margin:
-                                                          const EdgeInsets.all(
-                                                              35),
-                                                      child: const Column(
-                                                        children: [
-                                                          Center(
-                                                            child: Text(
-                                                              'UserName',
-                                                              style: TextStyle(
-                                                                fontSize: 25,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .bold,
-                                                                color: white,
-                                                              ),
-                                                            ),
-                                                          ),
-                                                          SizedBox(
-                                                            height: 15,
-                                                          ),
-                                                          Center(
-                                                            child: Text(
-                                                              'Та гарахдаа итгэлтэй байна уу?',
-                                                              style: TextStyle(
-                                                                fontSize: 25,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .bold,
-                                                                color: white,
-                                                              ),
-                                                            ),
-                                                          ),
-                                                        ],
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ),
-                                                Container(
-                                                  margin: const EdgeInsets.only(
-                                                      bottom: 15),
-                                                  child: Row(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .spaceAround,
-                                                    children: [
-                                                      TextButton(
-                                                        style: ButtonStyle(
-                                                          overlayColor:
-                                                              MaterialStateProperty
-                                                                  .all(Colors
-                                                                      .transparent),
-                                                        ),
-                                                        onPressed: () =>
-                                                            Navigator.of(
-                                                                    context)
-                                                                .pop(false),
-                                                        child: const Text(
-                                                          'Болих',
-                                                          style: TextStyle(
-                                                            color: white,
-                                                            fontSize: 20,
-                                                          ),
-                                                        ),
-                                                      ),
-                                                      TextButton(
-                                                        style: ButtonStyle(
-                                                          overlayColor:
-                                                              MaterialStateProperty
-                                                                  .all(Colors
-                                                                      .transparent),
-                                                        ),
-                                                        onPressed: () {
-                                                          Navigator.of(context)
-                                                              .pop(true);
-                                                        },
-                                                        child: const Text(
-                                                          'Гарах',
-                                                          style: TextStyle(
-                                                            color: white,
-                                                            fontSize: 20,
-                                                          ),
-                                                        ),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                        );
-                                      });
-                                },
-                                child: CircleAvatar(
-                                  backgroundColor: backgroundColor,
-                                  child: SvgPicture.asset(
-                                    'assets/svg/user.svg',
-                                  ),
-                                ),
+                              ButtonCircle(
+                                color: colorBaseDarkLine,
+                                onPress: () {},
+                                icon: const UserIcon(),
                               ),
                             ],
                           ),
@@ -716,10 +170,7 @@ class _MainPageState extends State<MainPage>
             body: TabBarView(
               controller: tabController,
               physics: const NeverScrollableScrollPhysics(),
-              children: const [
-                ScalePage(),
-                ListPage(),
-              ],
+              children: const [ScalePage(), ScaleListPage()],
             ),
           ),
         ),

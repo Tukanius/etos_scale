@@ -1,16 +1,16 @@
+import 'package:etos_scale_windows/contants/colors.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:etos_scale_windows/widgets/colors.dart';
 import 'package:libserialport/libserialport.dart';
 
-class CustomDrawer extends StatefulWidget {
-  const CustomDrawer({super.key});
+class SettingsDrawer extends StatefulWidget {
+  const SettingsDrawer({super.key});
 
   @override
-  State<CustomDrawer> createState() => _CustomDrawerState();
+  State<SettingsDrawer> createState() => _SettingsDrawerState();
 }
 
-class _CustomDrawerState extends State<CustomDrawer> {
+class _SettingsDrawerState extends State<SettingsDrawer> {
   late String selectedPort;
 
   @override
@@ -51,13 +51,13 @@ class _CustomDrawerState extends State<CustomDrawer> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Container(
-        color: backgroundColor,
+        color: colorPrimary,
         child: Column(
           children: [
             Container(
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(15),
-                color: darkgrey,
+                color: Colors.grey,
               ),
               width: 600,
               height: MediaQuery.of(context).size.height - 60,
@@ -73,7 +73,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
                         child: const Text(
                           'Пүү сонгох',
                           style: TextStyle(
-                            color: white,
+                            color: Colors.white,
                             fontWeight: FontWeight.w700,
                             fontSize: 16,
                           ),
@@ -84,7 +84,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
                         width: 400,
                         child: DropdownButtonFormField(
                             onChanged: (value) {},
-                            dropdownColor: lightgrey,
+                            dropdownColor: Colors.grey,
                             itemHeight: 70,
                             menuMaxHeight: 400,
                             elevation: 2,
@@ -92,7 +92,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
                             borderRadius: BorderRadius.circular(10),
                             icon: const Icon(
                               Icons.keyboard_arrow_down_outlined,
-                              color: white,
+                              color: Colors.white,
                             ),
                             decoration: InputDecoration(
                               contentPadding: const EdgeInsets.symmetric(
@@ -101,7 +101,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
                                   color: Theme.of(context).disabledColor,
                                   fontSize: 14),
                               filled: true,
-                              fillColor: lightgrey,
+                              fillColor: Colors.grey,
                               border: OutlineInputBorder(
                                 borderSide: BorderSide.none,
                                 borderRadius: BorderRadius.circular(10),
@@ -123,7 +123,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
                                       child: Text(
                                         "COM6",
                                         style: TextStyle(
-                                          color: white,
+                                          color: Colors.white,
                                           fontSize: 16,
                                           fontWeight: FontWeight.w600,
                                         ),
@@ -140,7 +140,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
                         child: const Text(
                           'Хэвлэх төхөөрөмж сонгох',
                           style: TextStyle(
-                            color: white,
+                            color: Colors.white,
                             fontWeight: FontWeight.w700,
                             fontSize: 16,
                           ),
@@ -158,7 +158,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
                               }
                             });
                           },
-                          dropdownColor: lightgrey,
+                          dropdownColor: Colors.white,
                           itemHeight: 70,
                           menuMaxHeight: 400,
                           elevation: 2,
@@ -166,7 +166,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
                           borderRadius: BorderRadius.circular(10),
                           icon: const Icon(
                             Icons.keyboard_arrow_down_outlined,
-                            color: white,
+                            color: Colors.white,
                           ),
                           decoration: InputDecoration(
                             contentPadding: const EdgeInsets.symmetric(
@@ -175,7 +175,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
                                 color: Theme.of(context).disabledColor,
                                 fontSize: 14),
                             filled: true,
-                            fillColor: lightgrey,
+                            fillColor: Colors.white,
                             border: OutlineInputBorder(
                               borderSide: BorderSide.none,
                               borderRadius: BorderRadius.circular(10),
@@ -210,13 +210,13 @@ class _CustomDrawerState extends State<CustomDrawer> {
                         margin: const EdgeInsets.only(bottom: 30),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(44),
-                          color: backgroundColor,
+                          color: colorPrimary,
                         ),
                         child: const Center(
                           child: Text(
                             'Хадгалах',
                             style: TextStyle(
-                              color: white,
+                              color: Colors.white,
                               fontWeight: FontWeight.w600,
                               fontSize: 16,
                             ),
