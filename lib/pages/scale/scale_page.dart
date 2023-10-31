@@ -96,8 +96,17 @@ class _ScalePageState extends State<ScalePage> with AfterLayoutMixin {
                       scrollDirection: Axis.horizontal,
                       children: const [
                         CameraCard(),
+                        SizedBox(
+                          width: 20,
+                        ),
                         CameraCard(),
+                        SizedBox(
+                          width: 20,
+                        ),
                         CameraCard(),
+                        SizedBox(
+                          width: 20,
+                        ),
                         CameraCard(),
                       ]),
                 ),
