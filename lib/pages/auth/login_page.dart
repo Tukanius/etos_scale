@@ -10,7 +10,7 @@ import 'package:provider/provider.dart';
 
 class LoginPage extends StatefulWidget {
   static const routeName = "LoginPage";
-  const LoginPage({super.key});
+  const LoginPage({Key? key}) : super(key: key);
 
   @override
   State<LoginPage> createState() => _LoginPageState();
@@ -37,103 +37,88 @@ class _LoginPageState extends State<LoginPage> {
         backgroundColor: colorBlue,
         body: Center(
           child: Container(
+            width: 1200,
+            height: 600,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(15),
-              color: white,
+              color: gray101,
             ),
-            margin: const EdgeInsets.symmetric(vertical: 30),
-            width: 1180,
             child: Row(
               children: [
-                Container(
-                  width: 1180 / 2,
-                  decoration: BoxDecoration(
+                SizedBox(
+                  width: 700,
+                  height: 600,
+                  child: ClipRRect(
                     borderRadius: const BorderRadius.only(
                       topLeft: Radius.circular(15),
                       bottomLeft: Radius.circular(15),
                     ),
-                    color: gray101,
+                    child: Image.asset(
+                      'assets/images/loginbg.jpg',
+                      fit: BoxFit.cover,
+                    ),
                   ),
                 ),
-                Expanded(
+                Container(
+                  padding: const EdgeInsets.symmetric(vertical: 30),
+                  width: 500,
+                  height: 600,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Column(
-                        children: [
-                          const SizedBox(
-                            height: 40,
-                          ),
-                          Text(
-                            'Нэвтрэх',
-                            style: TextStyle(
-                              color: black,
-                              fontWeight: FontWeight.w600,
-                              fontSize: 35,
-                            ),
-                          ),
-                          const SizedBox(
-                            height: 40,
-                          ),
-                          FormBuilder(
-                            key: fbkey,
-                            child: Column(
-                              children: [
-                                FormTextField(
-                                  name: "username",
-                                  labelText: "Нэвтрэх нэр",
-                                  filled: true,
-                                  width: 350,
-                                  fillColor: gray102,
-                                  textColor: black,
-                                  labelColor: black,
-                                  bgColor: Colors.transparent,
-                                  validator: FormBuilderValidators.compose([
-                                    FormBuilderValidators.required(
-                                        errorText: 'Заавал бөглөнө үү.'),
-                                  ]),
-                                ),
-                                const SizedBox(
-                                  height: 15,
-                                ),
-                                FormTextField(
-                                  name: "password",
-                                  labelText: "Нууц үг",
-                                  filled: true,
-                                  width: 350,
-                                  fillColor: gray102,
-                                  textColor: black,
-                                  labelColor: black,
-                                  bgColor: Colors.transparent,
-                                  validator: FormBuilderValidators.compose([
-                                    FormBuilderValidators.required(
-                                        errorText: 'Заавал бөглөнө үү.'),
-                                  ]),
-                                ),
-                              ],
-                            ),
-                          ),
-                          const SizedBox(
-                            height: 30,
-                          ),
-                        ],
+                      Text(
+                        'Нэвтрэх',
+                        style: TextStyle(
+                          color: black,
+                          fontWeight: FontWeight.w600,
+                          fontSize: 35,
+                        ),
                       ),
-                      Column(
-                        children: [
-                          SizedBox(
-                            width: 350,
-                            child: Button(
-                              color: colorSecondary,
-                              labelText: "Нэвтрэх",
-                              onPress: () {
-                                onSubmit();
-                              },
+                      FormBuilder(
+                        key: fbkey,
+                        child: Column(
+                          children: [
+                            FormTextField(
+                              name: "username",
+                              labelText: "Нэвтрэх нэр",
+                              filled: true,
+                              width: 300,
+                              fillColor: gray102,
+                              textColor: black,
+                              labelColor: black,
+                              bgColor: Colors.transparent,
+                              validator: FormBuilderValidators.compose([
+                                FormBuilderValidators.required(
+                                  errorText: 'Заавал бөглөнө үү.',
+                                ),
+                              ]),
                             ),
-                          ),
-                          const SizedBox(
-                            height: 30,
-                          ),
-                        ],
+                            const SizedBox(height: 20),
+                            FormTextField(
+                              name: "password",
+                              labelText: "Нууц үг",
+                              filled: true,
+                              width: 300,
+                              fillColor: gray102,
+                              textColor: black,
+                              labelColor: black,
+                              bgColor: Colors.transparent,
+                              validator: FormBuilderValidators.compose([
+                                FormBuilderValidators.required(
+                                  errorText: 'Заавал бөглөнө үү.',
+                                ),
+                              ]),
+                            ),
+                          ],
+                        ),
+                      ),
+                      SizedBox(
+                        width: 250,
+                        child: Button(
+                          labelText: "Нэвтрэх",
+                          color: primary,
+                          onPress: onSubmit,
+                        ),
                       ),
                     ],
                   ),

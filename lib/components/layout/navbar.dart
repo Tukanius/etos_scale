@@ -6,8 +6,11 @@ import 'package:etos_scale_windows/components/ui/icons/settings_icon.dart';
 import 'package:etos_scale_windows/components/ui/icons/user_icon.dart';
 import 'package:etos_scale_windows/components/ui/icons/wifi_icon.dart';
 import 'package:etos_scale_windows/contants/colors.dart';
+import 'package:etos_scale_windows/pages/splash/splash_page.dart';
+import 'package:etos_scale_windows/provider/user_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:provider/provider.dart';
 
 class CustomSideNavigationBar extends StatefulWidget {
   final String selectedItem;
@@ -26,6 +29,20 @@ class CustomSideNavigationBar extends StatefulWidget {
 }
 
 class _CustomSideNavigationBarState extends State<CustomSideNavigationBar> {
+  bool isSubmit = false;
+
+  logout() async {
+    setState(() {
+      isSubmit = true;
+    });
+    await Provider.of<UserProvider>(context, listen: false).logout();
+    // ignore: use_build_context_synchronously
+    Navigator.of(context).pushNamed(SplashPage.routeName);
+    setState(() {
+      isSubmit = false;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -163,18 +180,26 @@ class _CustomSideNavigationBarState extends State<CustomSideNavigationBar> {
                   return ButtonCircle(
                     color: colorBlue,
                     onPress: () {
+                      final RenderBox renderBox =
+                          context.findRenderObject() as RenderBox;
+                      final Offset localOffset =
+                          renderBox.localToGlobal(Offset.zero);
+
                       showMenu(
                         context: context,
-                        position: RelativeRect.fill,
-                        elevation: 0,
+                        position: RelativeRect.fromLTRB(
+                          localOffset.dx,
+                          localOffset.dy + renderBox.size.height,
+                          localOffset.dx + renderBox.size.width,
+                          localOffset.dy + renderBox.size.height + 10,
+                        ),
                         items: <PopupMenuItem<String>>[
                           PopupMenuItem<String>(
-                            value: 'logout',
                             child: ListTile(
-                              title: const Text('Log Out'),
                               leading: const Icon(Icons.logout),
+                              title: const Text('Гарах'),
                               onTap: () {
-                                Navigator.pop(context);
+                                logout();
                               },
                             ),
                           ),
