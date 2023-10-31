@@ -1,7 +1,7 @@
-import 'package:etos_scale_windows/components/drawer/settings.dart';
-import 'package:etos_scale_windows/components/side_navigation/side_navigation.dart';
+import 'package:etos_scale_windows/components/drawer/settings_drawer.dart';
+import 'package:etos_scale_windows/components/layout/navbar.dart';
 import 'package:etos_scale_windows/contants/colors.dart';
-import 'package:etos_scale_windows/pages/list/list_page.dart';
+import 'package:etos_scale_windows/pages/scale/list_page.dart';
 import 'package:etos_scale_windows/provider/connection_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:etos_scale_windows/pages/scale/scale_page.dart';

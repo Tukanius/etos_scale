@@ -1,4 +1,4 @@
-import 'package:etos_scale_windows/components/list_item/list_title.dart';
+import 'package:etos_scale_windows/components/layout/table_header.dart';
 import 'package:etos_scale_windows/contants/colors.dart';
 import 'package:flutter/material.dart';
 

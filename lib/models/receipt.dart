@@ -24,21 +24,38 @@ class User {
   String? updatedAt;
 
   // customer: string | ICustomer;
-  // registerNo: string;
-  // lastname: string;
-  // firstname: string;
-  // gender: USER_GENDER;
-  // phone: string;
-  // phoneSecond: string;
-  // email: string;
-  // address: string;
-  // isActive: boolean;
-  // userRole: USER_ROLES;
-  // userStatus: string;
-  // userStatusDate: Date;
-  // sessionId: string;
-  // createdAt: Date;
-  // updatedAt: Date | null;
+  // contractNo: string;
+  // contractId: string;
+  // receiptNo: string;
+  // receiptDate: Date;
+  // supplierName: string;
+  // buyerName: string;
+  // buyer: string | ICustomer;
+  // productName: string;
+  // product: string;
+  // transportName: string;
+  // transport: string | ICustomer;
+  // routeName: string;
+  // vehicle: string | IVehicle;
+  // vehiclePlateNumber: string;
+  // vehicleMark: string;
+  // vehicleWeight: number;
+  // vehicleAxleCount: number;
+  // unladedWeight: number;
+  // totalWeight: number;
+  // trailerCount: number;
+  // containerCount: number;
+  // trailers: IVehicle[];
+  // driver: string | IDriver;
+  // driverName: string;
+  // driverPhone: string;
+  // driverRegisterNo: string;
+  // driverPdlNumber: string;
+  // containers: IContianer[];
+  // description: string;
+  // receiptStatus: string;
+  // receiptStatusDate: Date;
+  // note: string;
 
   User({
     this.username,
