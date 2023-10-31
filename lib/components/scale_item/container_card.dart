@@ -72,63 +72,87 @@ class _ContainerCardState extends State<ContainerCard> {
                 ],
               ),
               widget.index == 1
-                  ? Container(
-                      margin: const EdgeInsets.only(top: 20, left: 5),
-                      width: 38,
-                      height: 38,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(8),
-                        color: colorBlue,
-                      ),
-                      child: Center(
-                        child: Text(
-                          '[${widget.index}]',
+                  ? Expanded(
+                      child: Container(
+                        margin: const EdgeInsets.only(top: 20, left: 5),
+                        height: 36,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          color: colorBlue,
+                        ),
+                        child: Center(
+                          child: Text(
+                            '${widget.index}',
+                            style: TextStyle(
+                              color: black,
+                              fontWeight: FontWeight.w500,
+                              fontSize: 16,
+                            ),
+                          ),
                         ),
                       ),
                     )
                   : widget.index == 2
-                      ? Container(
-                          margin: const EdgeInsets.only(top: 20, left: 5),
-                          width: 38,
-                          height: 38,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(8),
-                            color: colorRed,
-                          ),
-                          child: Center(
-                            child: Text(
-                              '[${widget.index}]',
+                      ? Expanded(
+                          child: Container(
+                            margin: const EdgeInsets.only(top: 20, left: 5),
+                            height: 36,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              color: colorRed,
+                            ),
+                            child: Center(
+                              child: Text(
+                                '${widget.index}',
+                                style: TextStyle(
+                                  color: black,
+                                  fontWeight: FontWeight.w500,
+                                  fontSize: 16,
+                                ),
+                              ),
                             ),
                           ),
                         )
                       : widget.index == 3
-                          ? Container(
-                              margin: const EdgeInsets.only(top: 20, left: 5),
-                              width: 38,
-                              height: 38,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(8),
-                                color: colorGreen,
-                              ),
-                              child: Center(
-                                child: Text(
-                                  '[${widget.index}]',
+                          ? Expanded(
+                              child: Container(
+                                margin: const EdgeInsets.only(top: 20, left: 5),
+                                height: 36,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
+                                  color: colorGreen,
+                                ),
+                                child: Center(
+                                  child: Text(
+                                    '${widget.index}',
+                                    style: TextStyle(
+                                      color: black,
+                                      fontWeight: FontWeight.w500,
+                                      fontSize: 16,
+                                    ),
+                                  ),
                                 ),
                               ),
                             )
                           : widget.index == 4
-                              ? Container(
-                                  margin:
-                                      const EdgeInsets.only(top: 20, left: 5),
-                                  width: 38,
-                                  height: 38,
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(8),
-                                    color: colorYellow,
-                                  ),
-                                  child: Center(
-                                    child: Text(
-                                      '[${widget.index}]',
+                              ? Expanded(
+                                  child: Container(
+                                    margin:
+                                        const EdgeInsets.only(top: 20, left: 5),
+                                    height: 36,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(10),
+                                      color: colorYellow,
+                                    ),
+                                    child: Center(
+                                      child: Text(
+                                        '${widget.index}',
+                                        style: TextStyle(
+                                          color: black,
+                                          fontWeight: FontWeight.w500,
+                                          fontSize: 16,
+                                        ),
+                                      ),
                                     ),
                                   ),
                                 )

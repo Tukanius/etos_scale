@@ -1,10 +1,10 @@
 import 'package:etos_scale_windows/components/ui/button_circle.dart';
-import 'package:etos_scale_windows/components/ui/icons/network_icon.dart';
-import 'package:etos_scale_windows/components/ui/icons/printer_icon.dart';
-import 'package:etos_scale_windows/components/ui/icons/scale_icon.dart';
+// import 'package:etos_scale_windows/components/ui/icons/network_icon.dart';
+// import 'package:etos_scale_windows/components/ui/icons/printer_icon.dart';
+// import 'package:etos_scale_windows/components/ui/icons/scale_icon.dart';
 import 'package:etos_scale_windows/components/ui/icons/settings_icon.dart';
 import 'package:etos_scale_windows/components/ui/icons/user_icon.dart';
-import 'package:etos_scale_windows/components/ui/icons/wifi_icon.dart';
+// import 'package:etos_scale_windows/components/ui/icons/wifi_icon.dart';
 import 'package:etos_scale_windows/contants/colors.dart';
 import 'package:etos_scale_windows/pages/splash/splash_page.dart';
 import 'package:etos_scale_windows/provider/user_provider.dart';
@@ -31,10 +31,11 @@ class CustomSideNavigationBar extends StatefulWidget {
 class _CustomSideNavigationBarState extends State<CustomSideNavigationBar> {
   bool isSubmit = false;
 
-  logout() async {
+  logout(context) async {
     setState(() {
       isSubmit = true;
     });
+
     await Provider.of<UserProvider>(context, listen: false).logout();
     // ignore: use_build_context_synchronously
     Navigator.of(context).pushNamed(SplashPage.routeName);
@@ -133,38 +134,38 @@ class _CustomSideNavigationBarState extends State<CustomSideNavigationBar> {
           ),
           Column(
             children: [
-              ButtonCircle(
-                color: colorBlue,
-                onPress: () {},
-                icon: const WifiIcon(),
-              ),
-              const SizedBox(
-                height: 15,
-              ),
-              ButtonCircle(
-                color: colorBlue,
-                onPress: () {},
-                icon: const NetworkIcon(),
-              ),
-              const SizedBox(
-                height: 15,
-              ),
-              ButtonCircle(
-                color: colorBlue,
-                onPress: () {},
-                icon: const ScaleIcon(),
-              ),
-              const SizedBox(
-                height: 15,
-              ),
-              ButtonCircle(
-                color: colorBlue,
-                onPress: () {},
-                icon: const PrinterIcon(),
-              ),
-              const SizedBox(
-                height: 30,
-              ),
+              // ButtonCircle(
+              //   color: colorBlue,
+              //   onPress: () {},
+              //   icon: const WifiIcon(),
+              // ),
+              // const SizedBox(
+              //   height: 15,
+              // ),
+              // ButtonCircle(
+              //   color: colorBlue,
+              //   onPress: () {},
+              //   icon: const NetworkIcon(),
+              // ),
+              // const SizedBox(
+              //   height: 15,
+              // ),
+              // ButtonCircle(
+              //   color: colorBlue,
+              //   onPress: () {},
+              //   icon: const ScaleIcon(),
+              // ),
+              // const SizedBox(
+              //   height: 15,
+              // ),
+              // ButtonCircle(
+              //   color: colorBlue,
+              //   onPress: () {},
+              //   icon: const PrinterIcon(),
+              // ),
+              // const SizedBox(
+              //   height: 30,
+              // ),
               ButtonCircle(
                 color: colorBlue,
                 onPress: () {
@@ -199,7 +200,7 @@ class _CustomSideNavigationBarState extends State<CustomSideNavigationBar> {
                               leading: const Icon(Icons.logout),
                               title: const Text('Гарах'),
                               onTap: () {
-                                logout();
+                                logout(context);
                               },
                             ),
                           ),
