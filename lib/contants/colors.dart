@@ -13,11 +13,12 @@ Color colorTextLight = HexColor("#ABBBC2");
 Color colorTextLighter = HexColor("#E0E6E9");
 
 Color colorYellow = HexColor("#FFC600");
-Color colorGreen = HexColor("#50D1AA");
-Color colorRed = HexColor("#FF7CA3");
+Color colorGreen = HexColor("#28d700");
+Color colorRed = HexColor("#F42828");
 Color colorOrange = HexColor("#FFB572");
 Color colorBlue = HexColor("#1177E8");
 Color colorPurple = HexColor("#65B0F6");
+// Color colorGreen = HexColor("#28d700");
 
 Color white = HexColor("#FFFFFF");
 Color black = HexColor("#000000");

@@ -1,4 +1,5 @@
 import 'package:etos_scale_windows/contants/colors.dart';
+import 'package:etos_scale_windows/pages/auth/login.dart';
 // import 'package:etos_scale_windows/pages/auth/login.dart';
 import 'package:flutter/material.dart';
 import 'package:etos_scale_windows/pages/main_page.dart';
@@ -17,8 +18,8 @@ class _SplashPageState extends State<SplashPage> with AfterLayoutMixin {
   afterFirstLayout(BuildContext context) async {
     try {
       // await Provider.of<UserProvider>(context, listen: false).me(false);
-      // Navigator.of(context).pushNamed(LoginPage.routeName);
-      Navigator.of(context).pushNamed(MainPage.routeName);
+      Navigator.of(context).pushNamed(LoginPage.routeName);
+      // Navigator.of(context).pushNamed(MainPage.routeName);
     } catch (e) {
       Navigator.of(context).pushNamed(MainPage.routeName);
     }

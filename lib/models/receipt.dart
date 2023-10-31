@@ -1,88 +1,54 @@
-part '../parts/user.dart';
+import 'package:etos_scale_windows/models/user.dart';
+part '../parts/receipt.dart';
 
-class User {
-  String? username;
-  String? phone;
-  String? password;
-  String? userId;
-  String? tokenType;
-  String? accessToken;
-  String? refreshToken;
-  String? sessionState;
-  String? sessionScope;
-  String? id;
-  String? isActive;
-  String? role;
-  String? registerNo;
-  String? email;
-  String? firstName;
-  String? lastName;
-  String? address;
-  String? userSuspended;
-  String? userTerminated;
-  String? createdAt;
-  String? updatedAt;
+class Receipt {
+  User? user;
+  String? contractNo;
+  String? receiptNo;
+  String? receiptDate;
+  String? supplierName;
+  String? buyerName;
+  String? productName;
+  String? routeName;
+  String? transportName;
+  String? vehiclePlateNo;
+  List<Receipt>? trailerPlateNumbers;
+  String? vehicleWeight;
+  String? unladedWeight;
+  String? totalWeight;
+  List<Receipt>? containerNumbers;
+  String? driverName;
+  String? driverPhone;
+  String? driverRegisterNo;
+  String? driverPdlNumber;
+  String? description;
 
-  // customer: string | ICustomer;
-  // contractNo: string;
-  // contractId: string;
-  // receiptNo: string;
-  // receiptDate: Date;
-  // supplierName: string;
-  // buyerName: string;
-  // buyer: string | ICustomer;
-  // productName: string;
-  // product: string;
-  // transportName: string;
-  // transport: string | ICustomer;
-  // routeName: string;
-  // vehicle: string | IVehicle;
-  // vehiclePlateNumber: string;
-  // vehicleMark: string;
-  // vehicleWeight: number;
-  // vehicleAxleCount: number;
-  // unladedWeight: number;
-  // totalWeight: number;
-  // trailerCount: number;
-  // containerCount: number;
-  // trailers: IVehicle[];
-  // driver: string | IDriver;
-  // driverName: string;
-  // driverPhone: string;
-  // driverRegisterNo: string;
-  // driverPdlNumber: string;
-  // containers: IContianer[];
-  // description: string;
-  // receiptStatus: string;
-  // receiptStatusDate: Date;
-  // note: string;
-
-  User({
-    this.username,
-    this.password,
-    this.userId,
-    this.tokenType,
-    this.accessToken,
-    this.refreshToken,
-    this.sessionState,
-    this.sessionScope,
-    this.phone,
-    this.id,
-    this.isActive,
-    this.role,
-    this.registerNo,
-    this.email,
-    this.firstName,
-    this.lastName,
-    this.address,
-    this.userSuspended,
-    this.userTerminated,
-    this.createdAt,
-    this.updatedAt,
+  Receipt({
+    this.user,
+    this.contractNo,
+    this.receiptNo,
+    this.receiptDate,
+    this.supplierName,
+    this.buyerName,
+    this.productName,
+    this.routeName,
+    this.transportName,
+    this.vehiclePlateNo,
+    this.trailerPlateNumbers,
+    this.vehicleWeight,
+    this.unladedWeight,
+    this.totalWeight,
+    this.containerNumbers,
+    this.driverName,
+    this.driverPhone,
+    this.driverRegisterNo,
+    this.driverPdlNumber,
+    this.description,
   });
 
-  static $fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
+  static $fromJson(Map<String, dynamic> json) => _$ReceiptFromJson(json);
 
-  factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
-  Map<String, dynamic> toJson() => _$UserToJson(this);
+  factory Receipt.fromJson(Map<String, dynamic> json) =>
+      _$ReceiptFromJson(json);
+  Map<String, dynamic> toJson() => _$ReceiptToJson(this);
 }

@@ -23,6 +23,8 @@ class _ButtonCircleState extends State<ButtonCircle> {
       style: ElevatedButton.styleFrom(
         shape: const CircleBorder(),
         padding: const EdgeInsets.all(18),
+        elevation: 0.0,
+        shadowColor: Colors.transparent,
       ),
       child: widget.icon,
     );

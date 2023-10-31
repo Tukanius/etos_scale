@@ -1,67 +1,40 @@
 part '../parts/user.dart';
 
 class User {
-  String? username;
-  String? phone;
-  String? password;
-  String? userId;
-  String? tokenType;
-  String? accessToken;
-  String? refreshToken;
-  String? sessionState;
-  String? sessionScope;
-  String? id;
-  String? isActive;
-  String? role;
-  String? registerNo;
   String? email;
-  String? firstName;
-  String? lastName;
-  String? address;
-  String? userSuspended;
-  String? userTerminated;
+  String? password;
+  String? sessionId;
+  String? id;
   String? createdAt;
   String? updatedAt;
-
-  // customer: string | ICustomer;
-  // registerNo: string;
-  // lastname: string;
-  // firstname: string;
-  // gender: USER_GENDER;
-  // phone: string;
-  // phoneSecond: string;
-  // email: string;
-  // address: string;
-  // isActive: boolean;
-  // userRole: USER_ROLES;
-  // userStatus: string;
-  // userStatusDate: Date;
-  // sessionId: string;
-  // createdAt: Date;
-  // updatedAt: Date | null;
+  String? tokenType;
+  String? accessToken;
+  String? sessionState;
+  String? sessionScope;
+  String? registerNo;
+  String? lastname;
+  String? firstname;
+  String? gender;
+  String? phone;
+  String? address;
 
   User({
-    this.username,
-    this.password,
-    this.userId,
-    this.tokenType,
-    this.accessToken,
-    this.refreshToken,
-    this.sessionState,
-    this.sessionScope,
-    this.phone,
-    this.id,
-    this.isActive,
-    this.role,
-    this.registerNo,
     this.email,
-    this.firstName,
-    this.lastName,
-    this.address,
-    this.userSuspended,
-    this.userTerminated,
+    this.password,
+    this.sessionId,
+    this.id,
     this.createdAt,
     this.updatedAt,
+    this.tokenType,
+    this.accessToken,
+    this.sessionState,
+    this.sessionScope,
+    this.registerNo,
+    this.lastname,
+    this.firstname,
+    this.gender,
+    this.phone,
+    this.address,
   });
 
   static $fromJson(Map<String, dynamic> json) => _$UserFromJson(json);

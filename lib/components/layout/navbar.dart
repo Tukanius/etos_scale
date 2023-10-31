@@ -102,6 +102,7 @@ class _CustomSideNavigationBarState extends State<CustomSideNavigationBar> {
                           'assets/svg/history.svg',
                           height: 25,
                           width: 25,
+                          // ignore: deprecated_member_use
                           color: widget.selectedItem == 'ScaleList'
                               ? black
                               : white,
@@ -157,10 +158,32 @@ class _CustomSideNavigationBarState extends State<CustomSideNavigationBar> {
               const SizedBox(
                 height: 15,
               ),
-              ButtonCircle(
-                color: colorBlue,
-                onPress: () {},
-                icon: const UserIcon(),
+              Builder(
+                builder: (context) {
+                  return ButtonCircle(
+                    color: colorBlue,
+                    onPress: () {
+                      showMenu(
+                        context: context,
+                        position: RelativeRect.fill,
+                        elevation: 0,
+                        items: <PopupMenuItem<String>>[
+                          PopupMenuItem<String>(
+                            value: 'logout',
+                            child: ListTile(
+                              title: const Text('Log Out'),
+                              leading: const Icon(Icons.logout),
+                              onTap: () {
+                                Navigator.pop(context);
+                              },
+                            ),
+                          ),
+                        ],
+                      );
+                    },
+                    icon: const UserIcon(),
+                  );
+                },
               ),
             ],
           ),

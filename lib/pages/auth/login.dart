@@ -31,7 +31,7 @@ class _LoginPageState extends State<LoginPage> {
           child: Container(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(15),
-              color: colorBlue,
+              color: white,
             ),
             margin: const EdgeInsets.symmetric(vertical: 30),
             width: 1180,
@@ -44,7 +44,7 @@ class _LoginPageState extends State<LoginPage> {
                       topLeft: Radius.circular(15),
                       bottomLeft: Radius.circular(15),
                     ),
-                    color: colorBlue,
+                    color: gray101,
                   ),
                 ),
                 Expanded(
@@ -59,7 +59,7 @@ class _LoginPageState extends State<LoginPage> {
                           Text(
                             'Нэвтрэх',
                             style: TextStyle(
-                              color: colorWhite,
+                              color: black,
                               fontWeight: FontWeight.w600,
                               fontSize: 35,
                             ),
@@ -71,42 +71,36 @@ class _LoginPageState extends State<LoginPage> {
                             key: fbkey,
                             child: Column(
                               children: [
-                                SizedBox(
+                                FormTextField(
+                                  name: "username",
+                                  labelText: "Нэвтрэх нэр",
+                                  filled: true,
                                   width: 350,
-                                  child: FormTextField(
-                                    name: "username",
-                                    labelText: "Нэвтрэх нэр",
-                                    textColor: Colors.white,
-                                    labelColor: Colors.white70,
-                                    fillColor: colorBlue,
-                                    bgColor: Colors.transparent,
-                                    padding: const EdgeInsets.symmetric(
-                                        vertical: 20, horizontal: 10),
-                                    validator: FormBuilderValidators.compose([
-                                      FormBuilderValidators.required(
-                                          errorText: 'Заавал бөглөнө үү.')
-                                    ]),
-                                  ),
+                                  fillColor: gray102,
+                                  textColor: black,
+                                  labelColor: black,
+                                  bgColor: Colors.transparent,
+                                  validator: FormBuilderValidators.compose([
+                                    FormBuilderValidators.required(
+                                        errorText: 'Заавал бөглөнө үү.'),
+                                  ]),
                                 ),
                                 const SizedBox(
                                   height: 15,
                                 ),
-                                SizedBox(
+                                FormTextField(
+                                  name: "password",
+                                  labelText: "Нууц үг",
+                                  filled: true,
                                   width: 350,
-                                  child: FormTextField(
-                                    name: "password",
-                                    labelText: "Нууц үг",
-                                    textColor: Colors.white,
-                                    labelColor: Colors.white70,
-                                    fillColor: colorBlue,
-                                    bgColor: Colors.transparent,
-                                    padding: const EdgeInsets.symmetric(
-                                        vertical: 20, horizontal: 10),
-                                    validator: FormBuilderValidators.compose([
-                                      FormBuilderValidators.required(
-                                          errorText: 'Заавал бөглөнө үү.')
-                                    ]),
-                                  ),
+                                  fillColor: gray102,
+                                  textColor: black,
+                                  labelColor: black,
+                                  bgColor: Colors.transparent,
+                                  validator: FormBuilderValidators.compose([
+                                    FormBuilderValidators.required(
+                                        errorText: 'Заавал бөглөнө үү.'),
+                                  ]),
                                 ),
                               ],
                             ),

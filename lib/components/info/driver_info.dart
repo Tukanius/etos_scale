@@ -31,8 +31,8 @@ class _DriverInfoState extends State<DriverInfo> {
             height: 20,
           ),
           FormTextField(
-            name: "name",
-            labelText: "Овог нэр",
+            name: "registerNo",
+            labelText: "Регистрийн дугаар",
             filled: true,
             fillColor: gray102,
             textColor: black,
@@ -46,8 +46,8 @@ class _DriverInfoState extends State<DriverInfo> {
             height: 15,
           ),
           FormTextField(
-            name: "registerNo",
-            labelText: "Регистрийн дугаар",
+            name: "name",
+            labelText: "Овог нэр",
             filled: true,
             fillColor: gray102,
             textColor: black,

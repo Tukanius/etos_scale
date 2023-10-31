@@ -44,26 +44,11 @@ class _TrailerCardState extends State<TrailerCard> {
                   FormTextField(
                     bgColor: Colors.transparent,
                     name: "number${widget.index}",
-                    labelText: "0000",
-                    width: 80,
+                    labelText: "0000 AAA",
+                    width: 160,
                     filled: true,
                     textColor: black,
                     labelColor: black,
-                    fillColor: white,
-                    validator: FormBuilderValidators.compose([
-                      FormBuilderValidators.required(
-                          errorText: 'Заавал бөглөнө үү.'),
-                    ]),
-                  ),
-                  const SizedBox(width: 5),
-                  FormTextField(
-                    name: "character${widget.index}",
-                    labelText: "AAA",
-                    width: 80,
-                    textColor: black,
-                    bgColor: Colors.transparent,
-                    labelColor: black,
-                    filled: true,
                     fillColor: white,
                     validator: FormBuilderValidators.compose([
                       FormBuilderValidators.required(

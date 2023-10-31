@@ -26,13 +26,13 @@ class _ScaleInfoState extends State<ScaleInfo> {
             Container(
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(20),
-                color: colorBlue.withOpacity(0.2),
+                color: white.withOpacity(0.4),
               ),
               child: Center(
                 child: Text(
                   widget.scaleData,
-                  style: const TextStyle(
-                    color: Colors.white,
+                  style: TextStyle(
+                    color: black,
                     fontSize: 56,
                     fontWeight: FontWeight.w500,
                   ),

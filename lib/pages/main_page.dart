@@ -35,7 +35,7 @@ class _MainPageState extends State<MainPage>
       drawer: SizedBox(
         width: MediaQuery.of(context).size.width * 0.5,
         child: Drawer(
-          backgroundColor: colorBlue,
+          backgroundColor: gray101,
           child: const SettingsDrawer(),
         ),
       ),
