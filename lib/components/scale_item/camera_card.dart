@@ -17,13 +17,6 @@ class _CameraCardState extends State<CameraCard> {
   @override
   void initState() {
     super.initState();
-
-    player.open(Media('rtsp://admin:pi@123456@192.168.1.246:554'), play: true);
-
-    //   player.open(
-    //       Media(
-    //           'https://user-images.githubusercontent.com/28951144/229373695-22f88f13-d18f-4288-9bf1-c3e078d83722.mp4'),
-    //       play: true);
   }
 
   @override
@@ -38,7 +31,9 @@ class _CameraCardState extends State<CameraCard> {
       width: MediaQuery.of(context).size.width * 0.25,
       height: MediaQuery.of(context).size.width * 0.14,
       // Use [Video] widget to display video output.
-      child: Video(controller: controller),
+      child: const Center(
+        child: CircularProgressIndicator(),
+      ),
     );
   }
 }

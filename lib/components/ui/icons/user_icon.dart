@@ -4,7 +4,7 @@ import 'package:flutter_svg/svg.dart';
 class UserIcon extends StatefulWidget {
   final double? size;
   final Color? color;
-  const UserIcon({super.key, this.size = 28, this.color = Colors.white});
+  const UserIcon({super.key, this.size = 24, this.color = Colors.white});
 
   @override
   State<UserIcon> createState() => _UserIconState();

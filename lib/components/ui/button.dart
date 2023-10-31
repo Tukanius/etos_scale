@@ -1,3 +1,4 @@
+import 'package:etos_scale_windows/contants/colors.dart';
 import 'package:flutter/material.dart';
 
 class Button extends StatefulWidget {
@@ -22,22 +23,22 @@ class _ButtonState extends State<Button> {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: widget.onPress,
-      child: Container(
-        height: 50,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(15),
-          color: widget.color,
+    return ElevatedButton(
+      style: ElevatedButton.styleFrom(
+        backgroundColor: primary,
+        padding: const EdgeInsets.symmetric(vertical: 20),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10.0),
         ),
-        child: Center(
-          child: Text(
-            widget.labelText,
-            style: TextStyle(
-              color: widget.labelColor,
-              fontWeight: FontWeight.w600,
-              fontSize: 16,
-            ),
+      ),
+      onPressed: widget.onPress,
+      child: Center(
+        child: Text(
+          widget.labelText,
+          style: TextStyle(
+            color: widget.labelColor,
+            fontWeight: FontWeight.w600,
+            fontSize: 16,
           ),
         ),
       ),

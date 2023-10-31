@@ -37,17 +37,17 @@ dependencies:
   dio: ^5.3.3
   dio_cookie_manager: ^3.1.1
   flutter_form_builder: ^9.1.1
+  form_builder_validators: ^9.1.0
   path_provider: ^2.1.1
   flutter_local_notifications: ^16.1.0
   shared_preferences: ^2.2.2
   after_layout: ^1.2.0
   flutter_svg: ^2.0.8
-  libserialport: ^0.3.0+1
   media_kit: ^1.1.10                             # Primary package.
   media_kit_video: ^1.2.4                        # For video rendering.
   media_kit_libs_video: ^1.0.4                   # Native video dependencies.
   hexcolor: ^3.0.1
-
+  flutter_libserialport: ^0.3.0
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2

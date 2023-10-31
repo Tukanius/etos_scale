@@ -4,7 +4,7 @@ import 'package:flutter_svg/svg.dart';
 class NetworkIcon extends StatefulWidget {
   final double? size;
   final Color? color;
-  const NetworkIcon({super.key, this.size = 28, this.color = Colors.white});
+  const NetworkIcon({super.key, this.size = 24, this.color = Colors.white});
 
   @override
   State<NetworkIcon> createState() => _NetworkIconState();

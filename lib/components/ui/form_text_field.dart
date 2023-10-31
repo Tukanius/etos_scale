@@ -6,20 +6,26 @@ class FormTextField extends StatefulWidget {
   final String name;
   final String labelText;
   final double? width;
+  final bool? filled;
   final Color? textColor;
   final Color? labelColor;
   final Color? bgColor;
   final EdgeInsetsGeometry? padding;
-
-  const FormTextField(
-      {super.key,
-      required this.name,
-      required this.labelText,
-      this.width,
-      this.textColor,
-      this.labelColor,
-      this.bgColor,
-      this.padding});
+  final String? Function(dynamic)? validator;
+  final Color? fillColor;
+  const FormTextField({
+    super.key,
+    required this.name,
+    required this.labelText,
+    this.width,
+    this.textColor,
+    this.filled = false,
+    this.labelColor,
+    this.bgColor,
+    this.padding,
+    this.validator,
+    this.fillColor,
+  });
 
   @override
   State<FormTextField> createState() => _FormTextFieldState();
@@ -28,27 +34,42 @@ class FormTextField extends StatefulWidget {
 class _FormTextFieldState extends State<FormTextField> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-        width: widget.width,
-        decoration: BoxDecoration(
-            color: widget.bgColor ?? colorBaseDarkLine,
-            borderRadius: BorderRadius.circular(8.0)),
-        child: FormBuilderTextField(
-          name: widget.name,
-          style: TextStyle(color: widget.textColor ?? colorTextDark),
-          decoration: InputDecoration(
-            border: OutlineInputBorder(
-                borderSide: BorderSide(
-                    width: 0, color: widget.labelColor ?? colorBlue)),
-            fillColor: Colors.transparent,
-            labelText: widget.labelText,
-            labelStyle: TextStyle(
-                fontWeight: FontWeight.w500, color: widget.labelColor),
-            isDense: true,
-            filled: true,
-            contentPadding: widget.padding ??
-                const EdgeInsets.symmetric(vertical: 12, horizontal: 10),
+    return SizedBox(
+      width: widget.width,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          // ignore: unnecessary_null_comparison
+          widget.labelText != null
+              ? Text(
+                  widget.labelText,
+                  style: TextStyle(
+                    fontSize: 13,
+                    fontWeight: FontWeight.w500,
+                    color: widget.labelColor,
+                  ),
+                )
+              : const SizedBox(),
+          const SizedBox(
+            height: 5,
           ),
-        ));
+          FormBuilderTextField(
+            name: widget.name,
+            validator: widget.validator,
+            style: TextStyle(color: widget.textColor ?? white),
+            decoration: InputDecoration(
+              border: OutlineInputBorder(
+                  borderSide: BorderSide.none,
+                  borderRadius: BorderRadius.circular(10)),
+              fillColor: widget.fillColor ?? Colors.transparent,
+              isDense: true,
+              filled: widget.filled,
+              contentPadding: widget.padding ??
+                  const EdgeInsets.symmetric(vertical: 12, horizontal: 10),
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }

@@ -1,7 +1,12 @@
+import 'package:etos_scale_windows/components/ui/button.dart';
 import 'package:etos_scale_windows/contants/colors.dart';
+import 'package:etos_scale_windows/pages/scale/scale_page.dart';
+import 'package:etos_scale_windows/provider/connection_provider.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:libserialport/libserialport.dart';
+import 'package:after_layout/after_layout.dart';
+import 'package:flutter_libserialport/flutter_libserialport.dart';
+import 'package:provider/provider.dart';
 
 class SettingsDrawer extends StatefulWidget {
   const SettingsDrawer({super.key});
@@ -10,226 +15,279 @@ class SettingsDrawer extends StatefulWidget {
   State<SettingsDrawer> createState() => _SettingsDrawerState();
 }
 
-class _SettingsDrawerState extends State<SettingsDrawer> {
-  late String selectedPort;
-
-  @override
-  void initState() {
-    super.initState();
-    _loadSerialPorts();
-  }
-
-  void _loadSerialPorts() {
-    final availablePorts = SerialPort.availablePorts;
-
-    if (availablePorts.isEmpty) {
-      if (kDebugMode) {
-        print('No serial ports available.');
-      }
-    } else {
-      if (kDebugMode) {
-        print(availablePorts);
-      }
-      setState(() {
-        selectedPort = availablePorts[0];
-      });
-    }
-  }
-
+class _SettingsDrawerState extends State<SettingsDrawer> with AfterLayoutMixin {
   bool isSubmit = false;
-
-  logout() async {
-    setState(() {
-      isSubmit = true;
-    });
-    setState(() {
-      isSubmit = false;
-    });
-  }
+  late String selectedPort;
+  bool isLoading = false;
 
   @override
-  Widget build(BuildContext context) {
-    return SafeArea(
-      child: Container(
-        color: colorPrimary,
-        child: Column(
-          children: [
-            Container(
+  afterFirstLayout(BuildContext context) {}
+
+  onChangeSerialPort(String port) {
+    Provider.of<ConnectionProvider>(context, listen: false)
+        .changeScalePort(port);
+  }
+
+  showSuccess(ctx) async {
+    showDialog(
+        barrierDismissible: false,
+        context: context,
+        builder: (context) {
+          return Container(
+            alignment: Alignment.center,
+            child: Container(
+              width: 400,
+              height: 450,
+              margin: const EdgeInsets.only(top: 75),
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(15),
-                color: Colors.grey,
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(12),
               ),
-              width: 600,
-              height: MediaQuery.of(context).size.height - 60,
-              margin: const EdgeInsets.symmetric(vertical: 30),
+              padding: const EdgeInsets.only(top: 90, left: 20, right: 20),
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Column(
-                    children: [
-                      Container(
-                        width: 400,
-                        margin: const EdgeInsets.only(top: 30, bottom: 10),
-                        child: const Text(
-                          'Пүү сонгох',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.w700,
-                            fontSize: 16,
-                          ),
-                          textAlign: TextAlign.start,
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  Text(
+                    'Амжилттай',
+                    style: TextStyle(
+                        color: black,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 24),
+                  ),
+                  const SizedBox(
+                    height: 16,
+                  ),
+                  const Text(
+                    'COM PORT Амжилттай солигдлоо.',
+                    textAlign: TextAlign.center,
+                  ),
+                  ButtonBar(
+                    buttonMinWidth: 100,
+                    alignment: MainAxisAlignment.spaceEvenly,
+                    children: <Widget>[
+                      TextButton(
+                        style: ButtonStyle(
+                          overlayColor:
+                              MaterialStateProperty.all(Colors.transparent),
                         ),
-                      ),
-                      SizedBox(
-                        width: 400,
-                        child: DropdownButtonFormField(
-                            onChanged: (value) {},
-                            dropdownColor: Colors.grey,
-                            itemHeight: 70,
-                            menuMaxHeight: 400,
-                            elevation: 2,
-                            isExpanded: true,
-                            borderRadius: BorderRadius.circular(10),
-                            icon: const Icon(
-                              Icons.keyboard_arrow_down_outlined,
-                              color: Colors.white,
-                            ),
-                            decoration: InputDecoration(
-                              contentPadding: const EdgeInsets.symmetric(
-                                  vertical: 15, horizontal: 15),
-                              hintStyle: TextStyle(
-                                  color: Theme.of(context).disabledColor,
-                                  fontSize: 14),
-                              filled: true,
-                              fillColor: Colors.grey,
-                              border: OutlineInputBorder(
-                                borderSide: BorderSide.none,
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                              enabledBorder: OutlineInputBorder(
-                                borderSide: BorderSide.none,
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                            ),
-                            items: const [
-                              DropdownMenuItem(
-                                enabled: true,
-                                child: Row(
-                                  children: [
-                                    SizedBox(
-                                      width: 15,
-                                    ),
-                                    Expanded(
-                                      child: Text(
-                                        "COM6",
-                                        style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.w600,
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ]),
-                      ),
-                      Container(
-                        width: 400,
-                        margin: const EdgeInsets.only(top: 30, bottom: 10),
-                        child: const Text(
-                          'Хэвлэх төхөөрөмж сонгох',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.w700,
-                            fontSize: 16,
-                          ),
-                          textAlign: TextAlign.start,
+                        child: Text(
+                          "Буцах",
+                          style: TextStyle(color: black),
                         ),
-                      ),
-                      SizedBox(
-                        width: 400,
-                        child: DropdownButtonFormField(
-                          onChanged: (value) {
-                            setState(() {
-                              value = selectedPort;
-                              if (kDebugMode) {
-                                print(value);
-                              }
-                            });
-                          },
-                          dropdownColor: Colors.white,
-                          itemHeight: 70,
-                          menuMaxHeight: 400,
-                          elevation: 2,
-                          isExpanded: true,
-                          borderRadius: BorderRadius.circular(10),
-                          icon: const Icon(
-                            Icons.keyboard_arrow_down_outlined,
-                            color: Colors.white,
-                          ),
-                          decoration: InputDecoration(
-                            contentPadding: const EdgeInsets.symmetric(
-                                vertical: 15, horizontal: 15),
-                            hintStyle: TextStyle(
-                                color: Theme.of(context).disabledColor,
-                                fontSize: 14),
-                            filled: true,
-                            fillColor: Colors.white,
-                            border: OutlineInputBorder(
-                              borderSide: BorderSide.none,
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            enabledBorder: OutlineInputBorder(
-                              borderSide: BorderSide.none,
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                          ),
-                          items: SerialPort.availablePorts
-                              .map((portName) => DropdownMenuItem<String>(
-                                    value: portName,
-                                    child: Text(portName),
-                                  ))
-                              .toList(),
-                        ),
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
                       ),
                     ],
-                  ),
-                  SizedBox(
-                    width: 400,
-                    child: GestureDetector(
-                      onTap: () {
-                        setState(() {
-                          if (kDebugMode) {
-                            print(selectedPort);
-                          }
-                        });
-                      },
-                      child: Container(
-                        height: 50,
-                        margin: const EdgeInsets.only(bottom: 30),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(44),
-                          color: colorPrimary,
-                        ),
-                        child: const Center(
-                          child: Text(
-                            'Хадгалах',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.w600,
-                              fontSize: 16,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
                   ),
                 ],
               ),
             ),
-          ],
-        ),
+          );
+        });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final scalePort =
+        Provider.of<ConnectionProvider>(context, listen: true).scalePort;
+
+    return SafeArea(
+      child: Column(
+        children: [
+          Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(15),
+              color: gray101,
+            ),
+            width: 500,
+            height: MediaQuery.of(context).size.height - 60,
+            margin: const EdgeInsets.symmetric(vertical: 30),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Column(
+                  children: [
+                    Container(
+                      width: 400,
+                      margin: const EdgeInsets.only(top: 30, bottom: 10),
+                      child: Text(
+                        'Пүү сонгох',
+                        style: TextStyle(
+                          color: black,
+                          fontWeight: FontWeight.w500,
+                          fontSize: 16,
+                        ),
+                        textAlign: TextAlign.start,
+                      ),
+                    ),
+                    SizedBox(
+                      width: 400,
+                      child: DropdownButtonFormField(
+                        onChanged: (value) {
+                          onChangeSerialPort(value!);
+                        },
+                        dropdownColor: white,
+                        value: scalePort,
+                        itemHeight: 70,
+                        menuMaxHeight: 400,
+                        elevation: 2,
+                        isExpanded: true,
+                        borderRadius: BorderRadius.circular(10),
+                        icon: SerialPort.availablePorts.isEmpty
+                            ? const SizedBox()
+                            : Icon(
+                                Icons.keyboard_arrow_down_outlined,
+                                color: black,
+                              ),
+                        disabledHint: Text(
+                          'Холболт салсан',
+                          style: TextStyle(
+                            color: black,
+                            fontSize: 16,
+                            fontWeight: FontWeight.w400,
+                          ),
+                        ),
+                        decoration: InputDecoration(
+                          contentPadding: const EdgeInsets.symmetric(
+                              vertical: 15, horizontal: 15),
+                          hintText: 'COM Сонгох',
+                          hintStyle: TextStyle(
+                            color: black,
+                            fontSize: 16,
+                            fontWeight: FontWeight.w400,
+                          ),
+                          filled: true,
+                          fillColor: white,
+                          border: OutlineInputBorder(
+                            borderSide: BorderSide.none,
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          enabledBorder: OutlineInputBorder(
+                            borderSide: BorderSide.none,
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                        ),
+                        items: SerialPort.availablePorts
+                            .map(
+                              (portName) => DropdownMenuItem<String>(
+                                value: portName,
+                                child: Text(
+                                  portName,
+                                  style: TextStyle(
+                                    color: black,
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w400,
+                                  ),
+                                ),
+                              ),
+                            )
+                            .toList(),
+                      ),
+                    ),
+                    Container(
+                      width: 400,
+                      margin: const EdgeInsets.only(top: 30, bottom: 10),
+                      child: Text(
+                        'Хэвлэх төхөөрөмж сонгох',
+                        style: TextStyle(
+                          color: black,
+                          fontWeight: FontWeight.w500,
+                          fontSize: 16,
+                        ),
+                        textAlign: TextAlign.start,
+                      ),
+                    ),
+                    SizedBox(
+                      width: 400,
+                      child: DropdownButtonFormField(
+                        onChanged: (value) {
+                          setState(() {
+                            value = selectedPort;
+                            if (kDebugMode) {
+                              print(value);
+                            }
+                          });
+                        },
+                        dropdownColor: white,
+                        itemHeight: 70,
+                        menuMaxHeight: 400,
+                        elevation: 2,
+                        isExpanded: true,
+                        borderRadius: BorderRadius.circular(10),
+                        icon: Icon(
+                          Icons.keyboard_arrow_down_outlined,
+                          color: black,
+                        ),
+                        disabledHint: Text(
+                          'Холболт салсан',
+                          style: TextStyle(
+                            color: black,
+                            fontSize: 16,
+                            fontWeight: FontWeight.w400,
+                          ),
+                        ),
+                        decoration: InputDecoration(
+                          contentPadding: const EdgeInsets.symmetric(
+                              vertical: 15, horizontal: 15),
+                          hintText: 'Printer Сонгох',
+                          hintStyle: TextStyle(
+                            color: black,
+                            fontSize: 16,
+                            fontWeight: FontWeight.w400,
+                          ),
+                          filled: true,
+                          fillColor: white,
+                          border: OutlineInputBorder(
+                            borderSide: BorderSide.none,
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          enabledBorder: OutlineInputBorder(
+                            borderSide: BorderSide.none,
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                        ),
+                        items: [
+                          DropdownMenuItem(
+                            enabled: true,
+                            child: Row(
+                              children: [
+                                const SizedBox(
+                                  width: 10,
+                                ),
+                                Expanded(
+                                  child: Text(
+                                    "Printer",
+                                    style: TextStyle(
+                                      color: black,
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w400,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+                Container(
+                  margin: const EdgeInsets.only(bottom: 20),
+                  width: 400,
+                  child: Button(
+                    labelText: 'Хадгалах',
+                    color: colorSecondary,
+                    onPress: () {
+                      Navigator.of(context).pushNamed(ScalePage.routeName);
+                    },
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }

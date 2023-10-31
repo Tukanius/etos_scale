@@ -4,7 +4,7 @@ import 'package:flutter_svg/svg.dart';
 class ScaleIcon extends StatefulWidget {
   final double? size;
   final Color? color;
-  const ScaleIcon({super.key, this.size = 28, this.color = Colors.white});
+  const ScaleIcon({super.key, this.size = 24, this.color = Colors.white});
 
   @override
   State<ScaleIcon> createState() => _ScaleIconState();

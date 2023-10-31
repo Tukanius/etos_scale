@@ -16,13 +16,15 @@ class ButtonCircle extends StatefulWidget {
 }
 
 class _ButtonCircleState extends State<ButtonCircle> {
-  Color? color;
-
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: widget.onPress,
-      child: CircleAvatar(backgroundColor: widget.color, child: widget.icon),
+    return ElevatedButton(
+      onPressed: widget.onPress,
+      style: ElevatedButton.styleFrom(
+        shape: const CircleBorder(),
+        padding: const EdgeInsets.all(18),
+      ),
+      child: widget.icon,
     );
   }
 }

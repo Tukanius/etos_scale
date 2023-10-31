@@ -4,7 +4,7 @@ import 'package:flutter_svg/svg.dart';
 class SettingsIcon extends StatefulWidget {
   final double? size;
   final Color? color;
-  const SettingsIcon({super.key, this.size = 28, this.color = Colors.white});
+  const SettingsIcon({super.key, this.size = 24, this.color = Colors.white});
 
   @override
   State<SettingsIcon> createState() => _SettingsIconState();

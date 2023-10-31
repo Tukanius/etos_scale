@@ -4,7 +4,7 @@ import 'package:flutter_svg/svg.dart';
 class PrinterIcon extends StatefulWidget {
   final double? size;
   final Color? color;
-  const PrinterIcon({super.key, this.size = 28, this.color = Colors.white});
+  const PrinterIcon({super.key, this.size = 24, this.color = Colors.white});
 
   @override
   State<PrinterIcon> createState() => _PrinterIconState();
