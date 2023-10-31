@@ -10,25 +10,24 @@ import 'http_handler.dart';
 import '../main.dart';
 
 class HttpRequest {
-  // static const host = "http://dev-cb-admin.zto.mn";
-  static const host = 'http://192.168.1.10:9000';
-
-  static const version = '/api';
-
-  static const uri = host;
+  String host = 'http://192.168.1.96:30605/api';
 
   Dio dio = Dio();
+
+  HttpRequest(String? host) {
+    if (host != null) this.host = host;
+  }
 
   Future<dynamic> request(String api, String method, dynamic data,
       {bool handler = true, bool approve = false}) async {
     Response? response;
     final String uri;
 
-    uri = '$host$version$api';
+    uri = '$host$api';
     debugPrint(uri);
 
     debugPrint('+++++++++++++++++++++++++++++++++++++++++++++++++++');
-    debugPrint('handler: ' + handler.toString());
+    debugPrint('handler: $handler');
     debugPrint('+++++++++++++++++++++++++++++++++++++++++++++++++++ ');
 
     try {
@@ -46,7 +45,7 @@ class HttpRequest {
 
       dio.options.headers = {
         'authorization': 'Bearer $token',
-        'device-token': '$deviceToken',
+        'device-token': deviceToken,
         'device_type': 'MOS',
         'device_imei': 'test-imei',
         'device_info': 'iphone 13'
@@ -116,7 +115,7 @@ class HttpRequest {
     try {
       return await request(url, 'GET', data, handler: handler);
     } catch (e) {
-      debugPrint("GET =>" + e.toString());
+      debugPrint("GET => $e");
       rethrow;
     }
   }
@@ -131,8 +130,8 @@ class HttpRequest {
         handler: handler,
         approve: approve,
       );
-    } catch (e) {
-      debugPrint("POST =>" + e.toString());
+    } catch (ex) {
+      debugPrint("POST => $ex");
       rethrow;
     }
   }

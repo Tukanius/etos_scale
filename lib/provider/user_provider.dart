@@ -1,60 +1,49 @@
+import 'package:etos_scale_windows/api/auth_api.dart';
 import 'package:flutter/foundation.dart';
 import 'package:etos_scale_windows/models/user.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class UserProvider extends ChangeNotifier {
-  User user = User();
+  late User? user;
 
   static Future<String?> getAccessToken() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    String? token = prefs.getString("ACCESS_TOKEN");
+    String? token = prefs.getString("accessToken");
     return token;
   }
 
-  me(bool handler) async {
-    // user = await AuthApi().me(handler);
+  me() async {
+    user = await AuthApi().me();
     notifyListeners();
   }
 
-  login(User data) async {
-    // user = await AuthApi().login(data);
-    if (kDebugMode) {
-      print(user);
-    }
-    setAccessToken(user.accessToken);
+  login(data) async {
+    String accessToken = await AuthApi().login(data);
+
+    setAccessToken(accessToken);
     notifyListeners();
   }
 
   setAccessToken(String? token) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    if (token != null) prefs.setString("ACCESS_TOKEN", token);
+    if (token != null) prefs.setString("accessToken", token);
   }
 
-  clearAccessToken() async {
+  removeAccessToken() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    await prefs.remove("ACCESS_TOKEN");
-  }
-
-  Future<String?> getUsername() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    String? username = prefs.getString("PHONE");
-    return username;
+    await prefs.remove("accessToken");
   }
 
   logout() async {
-    user = User();
-    clearAccessToken();
+    user = null;
+
+    removeAccessToken();
   }
 
   Future auth() async {
     String? token = await getAccessToken();
     if (token != null) {
-      await clearAccessToken();
+      await removeAccessToken();
     }
-  }
-
-  setUsername(String username) async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setString("PHONE", username);
   }
 }

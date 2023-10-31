@@ -24,8 +24,7 @@ class _SettingsDrawerState extends State<SettingsDrawer> with AfterLayoutMixin {
   afterFirstLayout(BuildContext context) {}
 
   onChangeSerialPort(String port) {
-    Provider.of<ConnectionProvider>(context, listen: false)
-        .changeScalePort(port);
+    Provider.of<ConnectionProvider>(context, listen: false).setSerialPort(port);
   }
 
   showSuccess(ctx) async {
@@ -89,8 +88,8 @@ class _SettingsDrawerState extends State<SettingsDrawer> with AfterLayoutMixin {
 
   @override
   Widget build(BuildContext context) {
-    final scalePort =
-        Provider.of<ConnectionProvider>(context, listen: true).scalePort;
+    final scalePort = Provider.of<ConnectionProvider>(context, listen: true)
+        .selectedSerialPort;
 
     return SafeArea(
       child: Column(

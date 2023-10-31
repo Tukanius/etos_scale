@@ -39,23 +39,14 @@ Map<String, dynamic> _$ResultArgumentToJson(ResultArguments? instance) {
       params['filter']['query'] = instance.filter!.query;
     }
 
-    if (instance.filter!.isReceived != null) {
-      params['filter']['isReceived'] = instance.filter!.isReceived;
-    }
-
     if (instance.filter!.type != null) {
       params['filter']['type'] = instance.filter!.type;
-    }
-    if (instance.filter!.orderConfirmTerm != null) {
-      params['filter']['orderConfirmTerm'] = instance.filter!.orderConfirmTerm;
-    }
-    if (instance.filter!.isParent != null) {
-      params['filter']['isParent'] = instance.filter!.isParent;
     }
 
     if (instance.offset!.page! > 0) {
       params['offset']['page'] = instance.offset!.page;
     }
+
     if (instance.offset!.limit! > 0) {
       params['offset']['limit'] = instance.offset!.limit;
     }

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class ConnectionProvider extends ChangeNotifier {
-  String? scalePort;
+  String? selectedSerialPort;
   String selectedItem = 'ScalePage';
 
   void setSelectedItem(String item) {
@@ -9,8 +9,8 @@ class ConnectionProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void changeScalePort(String port) {
-    scalePort = port;
+  void setSerialPort(String port) {
+    selectedSerialPort = port;
     notifyListeners();
   }
 }

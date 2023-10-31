@@ -1,14 +1,18 @@
 import 'package:etos_scale_windows/models/user.dart';
 import 'package:etos_scale_windows/utils/http_request.dart';
 
-class Auth extends HttpRequest {
-  login(User user) async {
-    var res = await post('/auth/login', data: user.toJson(), handler: true);
-    return User.fromJson(res as Map<String, dynamic>);
+final httpRequest = HttpRequest("http://192.168.1.96:30601/app");
+
+class AuthApi {
+  login(data) async {
+    var res =
+        await httpRequest.post('/auth/login', data: User.toAuthJson(data));
+
+    return User.fromAuthJson(res as Map<String, dynamic>);
   }
 
-  me(bool handler) async {
-    var res = await get('auth/me', handler: handler);
+  me() async {
+    var res = await httpRequest.get('/auth/me');
     return User.fromJson(res as Map<String, dynamic>);
   }
 }

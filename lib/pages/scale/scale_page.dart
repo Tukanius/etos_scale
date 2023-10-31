@@ -31,8 +31,8 @@ class _ScalePageState extends State<ScalePage> with AfterLayoutMixin {
 
   @override
   afterFirstLayout(BuildContext context) {
-    final scalePort =
-        Provider.of<ConnectionProvider>(context, listen: false).scalePort;
+    final scalePort = Provider.of<ConnectionProvider>(context, listen: false)
+        .selectedSerialPort;
 
     if (scalePort != null) {
       final port = SerialPort(scalePort);

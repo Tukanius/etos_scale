@@ -1,43 +1,16 @@
+import 'package:flutter/material.dart';
+
 part '../parts/user.dart';
 
 class User {
-  String? email;
-  String? password;
-  String? sessionId;
-  String? id;
-  String? createdAt;
-  String? updatedAt;
-  String? tokenType;
-  String? accessToken;
-  String? sessionState;
-  String? sessionScope;
-  String? registerNo;
-  String? lastname;
-  String? firstname;
-  String? gender;
-  String? phone;
-  String? address;
+  String id;
+  String email;
+  String username;
 
-  User({
-    this.email,
-    this.password,
-    this.sessionId,
-    this.id,
-    this.createdAt,
-    this.updatedAt,
-    this.tokenType,
-    this.accessToken,
-    this.sessionState,
-    this.sessionScope,
-    this.registerNo,
-    this.lastname,
-    this.firstname,
-    this.gender,
-    this.phone,
-    this.address,
-  });
+  User({required this.id, required this.email, required this.username});
 
-  static $fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
+  static toAuthJson(Map<String, dynamic> json) => _$UserToAuthJson(json);
+  static fromAuthJson(Map<String, dynamic> json) => _$UserFromAuthJson(json);
 
   factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
   Map<String, dynamic> toJson() => _$UserToJson(this);

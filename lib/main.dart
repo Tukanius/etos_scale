@@ -1,6 +1,6 @@
 import 'dart:ui';
 
-import 'package:etos_scale_windows/pages/auth/login.dart';
+import 'package:etos_scale_windows/pages/auth/login_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:etos_scale_windows/provider/connection_provider.dart';

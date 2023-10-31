@@ -1,10 +1,12 @@
 import 'package:etos_scale_windows/components/ui/button.dart';
 import 'package:etos_scale_windows/components/ui/form_text_field.dart';
 import 'package:etos_scale_windows/contants/colors.dart';
-import 'package:etos_scale_windows/pages/main_page.dart';
+import 'package:etos_scale_windows/pages/splash/splash_page.dart';
+import 'package:etos_scale_windows/provider/user_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
+import 'package:provider/provider.dart';
 
 class LoginPage extends StatefulWidget {
   static const routeName = "LoginPage";
@@ -16,9 +18,15 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   GlobalKey<FormBuilderState> fbkey = GlobalKey<FormBuilderState>();
-  onSubmit() {
-    if (fbkey.currentState!.saveAndValidate()) {
-      Navigator.of(context).pushNamed(MainPage.routeName);
+
+  onSubmit() async {
+    final form = fbkey.currentState;
+
+    if (form!.saveAndValidate()) {
+      await Provider.of<UserProvider>(context, listen: false).login(form.value);
+
+      // ignore: use_build_context_synchronously
+      Navigator.of(context).pushNamed(SplashPage.routeName);
     }
   }
 
