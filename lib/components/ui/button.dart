@@ -6,13 +6,16 @@ class Button extends StatefulWidget {
   final Color? labelColor;
   final Color color;
   final Function() onPress;
+  final bool? isLoading;
 
-  const Button(
-      {super.key,
-      required this.labelText,
-      required this.color,
-      this.labelColor = Colors.white,
-      required this.onPress});
+  const Button({
+    super.key,
+    required this.labelText,
+    required this.color,
+    this.labelColor = Colors.white,
+    required this.onPress,
+    this.isLoading,
+  });
 
   @override
   State<Button> createState() => _ButtonState();
@@ -32,15 +35,30 @@ class _ButtonState extends State<Button> {
         ),
       ),
       onPressed: widget.onPress,
-      child: Center(
-        child: Text(
-          widget.labelText,
-          style: TextStyle(
-            color: widget.labelColor,
-            fontWeight: FontWeight.w600,
-            fontSize: 16,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          if (widget.isLoading == true)
+            Container(
+              margin: const EdgeInsets.only(
+                right: 15,
+              ),
+              width: 20,
+              height: 20,
+              child: CircularProgressIndicator(
+                color: white,
+                strokeWidth: 2.5,
+              ),
+            ),
+          Text(
+            widget.labelText,
+            style: TextStyle(
+              color: widget.labelColor,
+              fontWeight: FontWeight.w600,
+              fontSize: 16,
+            ),
           ),
-        ),
+        ],
       ),
     );
   }

@@ -18,15 +18,25 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   GlobalKey<FormBuilderState> fbkey = GlobalKey<FormBuilderState>();
-
+  bool isVisible = true;
+  bool isLoading = false;
   onSubmit() async {
     final form = fbkey.currentState;
 
     if (form!.saveAndValidate()) {
-      await Provider.of<UserProvider>(context, listen: false).login(form.value);
-
-      // ignore: use_build_context_synchronously
-      Navigator.of(context).pushNamed(SplashPage.routeName);
+      try {
+        setState(() {
+          isLoading = true;
+        });
+        await Provider.of<UserProvider>(context, listen: false)
+            .login(form.value);
+        Navigator.of(context).pushNamed(SplashPage.routeName);
+      } catch (e) {
+        debugPrint(e.toString());
+        setState(() {
+          isLoading = false;
+        });
+      }
     }
   }
 
@@ -102,6 +112,7 @@ class _LoginPageState extends State<LoginPage> {
                               fillColor: gray102,
                               textColor: black,
                               labelColor: black,
+                              obscureText: isVisible,
                               bgColor: Colors.transparent,
                               validator: FormBuilderValidators.compose([
                                 FormBuilderValidators.required(
@@ -115,6 +126,7 @@ class _LoginPageState extends State<LoginPage> {
                       SizedBox(
                         width: 250,
                         child: Button(
+                          isLoading: isLoading,
                           labelText: "Нэвтрэх",
                           color: primary,
                           onPress: onSubmit,

@@ -9,11 +9,17 @@ class FormTextField extends StatefulWidget {
   final bool? filled;
   final Color? textColor;
   final Color? labelColor;
+  final Widget? suffixIcon;
   final Color? bgColor;
   final EdgeInsetsGeometry? padding;
   final String? Function(dynamic)? validator;
   final Color? fillColor;
+  final bool obscureText;
+  final bool hasObscureControl;
+  final TextEditingController? controller;
+
   const FormTextField({
+    this.suffixIcon,
     super.key,
     required this.name,
     required this.labelText,
@@ -25,6 +31,9 @@ class FormTextField extends StatefulWidget {
     this.padding,
     this.validator,
     this.fillColor,
+    this.obscureText = false,
+    this.hasObscureControl = false,
+    this.controller,
   });
 
   @override
@@ -32,6 +41,13 @@ class FormTextField extends StatefulWidget {
 }
 
 class _FormTextFieldState extends State<FormTextField> {
+  bool isPasswordVisible = false;
+  @override
+  void initState() {
+    isPasswordVisible = widget.hasObscureControl;
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -56,8 +72,29 @@ class _FormTextFieldState extends State<FormTextField> {
           FormBuilderTextField(
             name: widget.name,
             validator: widget.validator,
+            controller: widget.controller,
+            obscureText:
+                !widget.obscureText ? isPasswordVisible : !isPasswordVisible,
             style: TextStyle(color: widget.textColor ?? white),
             decoration: InputDecoration(
+              suffixIcon: widget.obscureText == true
+                  ? IconButton(
+                      onPressed: () {
+                        setState(() {
+                          isPasswordVisible = !isPasswordVisible;
+                        });
+                      },
+                      icon: isPasswordVisible == true
+                          ? Icon(
+                              Icons.visibility,
+                              color: Colors.grey.shade700,
+                            )
+                          : Icon(
+                              Icons.visibility_off,
+                              color: Colors.grey.shade700,
+                            ),
+                    )
+                  : widget.suffixIcon,
               border: OutlineInputBorder(
                   borderSide: BorderSide.none,
                   borderRadius: BorderRadius.circular(10)),
