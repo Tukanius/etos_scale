@@ -2,98 +2,51 @@ part of '../models/receipt.dart';
 
 Receipt _$ReceiptFromJson(Map<String, dynamic> json) {
   return Receipt(
-    user: json['user'] != null
-        ? User.fromJson(json['user'] as Map<String, dynamic>)
-        : null,
-    contractNo:
-        json['contractNo'] != null ? json['contractNo'] as String : null,
-    receiptNo: json['receiptNo'] != null ? json['receiptNo'] as String : null,
-    receiptDate:
-        json['receiptDate'] != null ? json['receiptDate'] as String : null,
-    supplierName:
-        json['supplierName'] != null ? json['supplierName'] as String : null,
-    buyerName: json['buyerName'] != null ? json['buyerName'] as String : null,
-    productName:
-        json['productName'] != null ? json['productName'] as String : null,
-    routeName: json['routeName'] != null ? json['routeName'] as String : null,
-    transportName:
-        json['transportName'] != null ? json['transportName'] as String : null,
-    vehiclePlateNo: json['vehiclePlateNo'] != null
-        ? json['vehiclePlateNo'] as String
-        : null,
-    trailerPlateNumbers: json['trailerPlateNumbers'] != null
-        ? (json['trailerPlateNumbers'] as List)
-            .map((e) => Receipt.fromJson(e))
-            .toList()
-        : null,
-    vehicleWeight:
-        json['vehicleWeight'] != null ? json['vehicleWeight'] as String : null,
-    unladedWeight:
-        json['unladedWeight'] != null ? json['unladedWeight'] as String : null,
-    totalWeight:
-        json['totalWeight'] != null ? json['totalWeight'] as String : null,
-    containerNumbers: json['containerNumbers'] != null
-        ? (json['containerNumbers'] as List)
-            .map((e) => Receipt.fromJson(e))
-            .toList()
-        : null,
-    driverName:
-        json['driverName'] != null ? json['driverName'] as String : null,
-    driverPhone:
-        json['driverPhone'] != null ? json['driverPhone'] as String : null,
-    driverRegisterNo: json['driverRegisterNo'] != null
-        ? json['driverRegisterNo'] as String
-        : null,
-    driverPdlNumber: json['driverPdlNumber'] != null
-        ? json['driverPdlNumber'] as String
-        : null,
-    description:
-        json['description'] != null ? json['description'] as String : null,
-  );
+      id: json["id"] as String,
+      contractNo: json["contractNo"] as String,
+      receiptNo: json["receiptNo"] as String,
+      receiptDate: json["receiptDate"] as String,
+      supplierName: json["supplierName"] as String,
+      buyerName: json["buyerName"] as String,
+      productName: json["productName"] as String,
+      routeName: json["routeName"] as String,
+      transportName: json["transportName"] as String,
+      vehiclePlateNo: json["vehiclePlateNo"] as String,
+      trailerPlateNumbers: json["trailerPlateNumbers"] as List<String>,
+      vehicleWeight: json["vehicleWeight"] as String,
+      unladedWeight: json["unladedWeight"] as String,
+      totalWeight: json["totalWeight"] as String,
+      containerNumbers: json["containerNumbers"] as List<String>,
+      driverName: json["driverName"] as String,
+      driverPhone: json["driverPhone"] as String,
+      driverRegisterNo: json["driverRegisterNo"] as String,
+      driverPdlNumber: json["driverPdlNumber"] as String,
+      user: json["user"] ? User.fromJson(json["user"]) : null,
+      createdAt: json["createdAt"] as String,
+      updatedAt: json["updatedAt"] as String);
 }
 
 Map<String, dynamic> _$ReceiptToJson(Receipt instance) {
   Map<String, dynamic> json = {};
-  if (instance.user != null) json['user'] = instance.user;
-  if (instance.contractNo != null) json['contractNo'] = instance.contractNo;
-  if (instance.receiptNo != null) json['receiptNo'] = instance.receiptNo;
-  if (instance.receiptDate != null) json['receiptDate'] = instance.receiptDate;
-  if (instance.supplierName != null) {
-    json['supplierName'] = instance.supplierName;
-  }
-  if (instance.buyerName != null) json['buyerName'] = instance.buyerName;
-  if (instance.productName != null) json['productName'] = instance.productName;
-  if (instance.routeName != null) json['routeName'] = instance.routeName;
-  if (instance.transportName != null) {
-    json['transportName'] = instance.transportName;
-  }
-  if (instance.vehiclePlateNo != null) {
-    json['vehiclePlateNo'] = instance.vehiclePlateNo;
-  }
 
-  if (instance.trailerPlateNumbers != null) {
-    json['trailerPlateNumbers'] = instance.trailerPlateNumbers;
-  }
-  if (instance.vehicleWeight != null) {
-    json['vehicleWeight'] = instance.vehicleWeight;
-  }
-  if (instance.unladedWeight != null) {
-    json['unladedWeight'] = instance.unladedWeight;
-  }
-  if (instance.totalWeight != null) json['totalWeight'] = instance.totalWeight;
-
-  if (instance.containerNumbers != null) {
-    json['containerNumbers'] = instance.containerNumbers;
-  }
-  if (instance.driverName != null) json['driverName'] = instance.driverName;
-  if (instance.driverPhone != null) json['driverPhone'] = instance.driverPhone;
-  if (instance.driverRegisterNo != null) {
-    json['driverRegisterNo'] = instance.driverRegisterNo;
-  }
-  if (instance.driverPdlNumber != null) {
-    json['driverPdlNumber'] = instance.driverPdlNumber;
-  }
-  if (instance.description != null) json['description'] = instance.description;
+  json['contractNo'] = instance.contractNo;
+  json['receiptNo'] = instance.receiptNo;
+  json['receiptDate'] = instance.receiptDate;
+  json['supplierName'] = instance.supplierName;
+  json['buyerName'] = instance.buyerName;
+  json['productName'] = instance.productName;
+  json['routeName'] = instance.routeName;
+  json['transportName'] = instance.transportName;
+  json['vehiclePlateNo'] = instance.vehiclePlateNo;
+  json['trailerPlateNumbers'] = instance.trailerPlateNumbers;
+  json['vehicleWeight'] = instance.vehicleWeight;
+  json['unladedWeight'] = instance.unladedWeight;
+  json['totalWeight'] = instance.totalWeight;
+  json['containerNumbers'] = instance.containerNumbers;
+  json['driverName'] = instance.driverName;
+  json['driverPhone'] = instance.driverPhone;
+  json['driverRegisterNo'] = instance.driverRegisterNo;
+  json['driverPdlNumber'] = instance.driverPdlNumber;
 
   return json;
 }

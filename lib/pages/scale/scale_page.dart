@@ -1,3 +1,5 @@
+import 'package:etos_scale_windows/api/trcuk_api.dart';
+import 'package:etos_scale_windows/models/receipt.dart';
 import 'package:etos_scale_windows/provider/connection_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
@@ -75,8 +77,12 @@ class _ScalePageState extends State<ScalePage> with AfterLayoutMixin {
   }
 
   onSubmit() async {
-    if (containerFbKey.currentState!.saveAndValidate() == false) {
-      debugPrint('Helo');
+    final form = containerFbKey.currentState;
+
+    debugPrint(form?.value.toString());
+
+    if (form!.saveAndValidate()) {
+      await TruckApi().scale(Receipt.fromJson(form.value));
     }
   }
 
