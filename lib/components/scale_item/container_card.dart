@@ -1,11 +1,14 @@
 import 'package:etos_scale_windows/components/ui/form_text_field.dart';
 import 'package:etos_scale_windows/contants/colors.dart';
 import 'package:flutter/material.dart';
-import 'package:form_builder_validators/form_builder_validators.dart';
+import 'package:flutter_form_builder/flutter_form_builder.dart';
 
 class ContainerCard extends StatefulWidget {
   final int index;
-  const ContainerCard({super.key, required this.index});
+  final Color? color;
+  final GlobalKey<FormBuilderState> fbKey;
+  const ContainerCard(
+      {super.key, required this.index, this.color, required this.fbKey});
 
   @override
   State<ContainerCard> createState() => _ContainerCardState();
@@ -41,7 +44,8 @@ class _ContainerCardState extends State<ContainerCard> {
               Row(
                 children: [
                   FormTextField(
-                    name: "AAAA${widget.index}",
+                    fbKey: widget.fbKey,
+                    name: "containerNum_${widget.index}_1",
                     labelText: "AAAA",
                     filled: true,
                     width: 100,
@@ -49,14 +53,11 @@ class _ContainerCardState extends State<ContainerCard> {
                     textColor: black,
                     labelColor: black,
                     bgColor: Colors.transparent,
-                    validator: FormBuilderValidators.compose([
-                      FormBuilderValidators.required(
-                          errorText: 'Заавал бөглөнө үү.'),
-                    ]),
                   ),
                   const SizedBox(width: 5),
                   FormTextField(
-                    name: "num2${widget.index}",
+                    fbKey: widget.fbKey,
+                    name: "containerNum_${widget.index}_2",
                     labelText: "0000000",
                     filled: true,
                     width: 100,
@@ -64,99 +65,29 @@ class _ContainerCardState extends State<ContainerCard> {
                     textColor: black,
                     labelColor: black,
                     bgColor: Colors.transparent,
-                    validator: FormBuilderValidators.compose([
-                      FormBuilderValidators.required(
-                          errorText: 'Заавал бөглөнө үү.'),
-                    ]),
                   ),
                 ],
               ),
-              widget.index == 1
-                  ? Expanded(
-                      child: Container(
-                        margin: const EdgeInsets.only(top: 20, left: 5),
-                        height: 36,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          color: colorBlue,
-                        ),
-                        child: Center(
-                          child: Text(
-                            '${widget.index}',
-                            style: TextStyle(
-                              color: black,
-                              fontWeight: FontWeight.w500,
-                              fontSize: 16,
-                            ),
-                          ),
-                        ),
+              Expanded(
+                child: Container(
+                  margin: const EdgeInsets.only(top: 20, left: 5),
+                  height: 36,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    color: widget.color,
+                  ),
+                  child: Center(
+                    child: Text(
+                      '1',
+                      style: TextStyle(
+                        color: white,
+                        fontWeight: FontWeight.w500,
+                        fontSize: 16,
                       ),
-                    )
-                  : widget.index == 2
-                      ? Expanded(
-                          child: Container(
-                            margin: const EdgeInsets.only(top: 20, left: 5),
-                            height: 36,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
-                              color: colorRed,
-                            ),
-                            child: Center(
-                              child: Text(
-                                '${widget.index}',
-                                style: TextStyle(
-                                  color: black,
-                                  fontWeight: FontWeight.w500,
-                                  fontSize: 16,
-                                ),
-                              ),
-                            ),
-                          ),
-                        )
-                      : widget.index == 3
-                          ? Expanded(
-                              child: Container(
-                                margin: const EdgeInsets.only(top: 20, left: 5),
-                                height: 36,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(10),
-                                  color: colorGreen,
-                                ),
-                                child: Center(
-                                  child: Text(
-                                    '${widget.index}',
-                                    style: TextStyle(
-                                      color: black,
-                                      fontWeight: FontWeight.w500,
-                                      fontSize: 16,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            )
-                          : widget.index == 4
-                              ? Expanded(
-                                  child: Container(
-                                    margin:
-                                        const EdgeInsets.only(top: 20, left: 5),
-                                    height: 36,
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(10),
-                                      color: colorYellow,
-                                    ),
-                                    child: Center(
-                                      child: Text(
-                                        '${widget.index}',
-                                        style: TextStyle(
-                                          color: black,
-                                          fontWeight: FontWeight.w500,
-                                          fontSize: 16,
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                )
-                              : const SizedBox(),
+                    ),
+                  ),
+                ),
+              )
             ],
           ),
         ],

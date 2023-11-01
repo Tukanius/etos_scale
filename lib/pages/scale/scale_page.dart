@@ -29,7 +29,7 @@ class ScalePage extends StatefulWidget {
 class _ScalePageState extends State<ScalePage> with AfterLayoutMixin {
   var ports = <String>[];
   String scaleData = "000000";
-  GlobalKey<FormBuilderState> containerFbKey = GlobalKey<FormBuilderState>();
+  GlobalKey<FormBuilderState> fbKey = GlobalKey<FormBuilderState>();
 
   @override
   afterFirstLayout(BuildContext context) {
@@ -77,7 +77,7 @@ class _ScalePageState extends State<ScalePage> with AfterLayoutMixin {
   }
 
   onSubmit() async {
-    final form = containerFbKey.currentState;
+    final form = fbKey.currentState;
 
     debugPrint(form?.value.toString());
 
@@ -89,7 +89,7 @@ class _ScalePageState extends State<ScalePage> with AfterLayoutMixin {
   @override
   Widget build(BuildContext context) {
     return FormBuilder(
-      key: containerFbKey,
+      key: fbKey,
       child: Column(
         children: [
           Expanded(
@@ -121,22 +121,22 @@ class _ScalePageState extends State<ScalePage> with AfterLayoutMixin {
                   width: MediaQuery.of(context).size.width,
                   alignment: Alignment.center,
                   child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [1, 2, 3, 4]
-                        .map(
-                          (e) => Row(
-                            children: [
-                              ContainerCard(
-                                index: e,
-                              ),
-                              e == 1 || e == 2 || e == 3
-                                  ? const SizedBox(width: 20)
-                                  : const SizedBox(),
-                            ],
-                          ),
-                        )
-                        .toList(),
-                  ),
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        ContainerCard(index: 0, color: colorBlue),
+                        const SizedBox(
+                          width: 20,
+                        ),
+                        ContainerCard(index: 1, color: colorRed),
+                        const SizedBox(
+                          width: 20,
+                        ),
+                        ContainerCard(index: 2, color: colorGreen),
+                        const SizedBox(
+                          width: 20,
+                        ),
+                        ContainerCard(index: 3, color: colorYellow)
+                      ]),
                 ),
                 const SizedBox(height: 20),
                 Container(

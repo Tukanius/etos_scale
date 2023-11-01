@@ -1,3 +1,4 @@
+import 'package:etos_scale_windows/components/ui/form_date_field.dart';
 import 'package:etos_scale_windows/components/ui/form_text_field.dart';
 import 'package:etos_scale_windows/contants/colors.dart';
 import 'package:flutter/material.dart';
@@ -136,7 +137,7 @@ class _ReceiptInfoState extends State<ReceiptInfo> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  FormTextField(
+                  FormDateField(
                     name: "receiptDate",
                     labelText: "Огноо",
                     filled: true,

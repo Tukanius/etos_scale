@@ -31,7 +31,7 @@ class _VehicleInfoState extends State<VehicleInfo> {
             height: 20,
           ),
           FormTextField(
-            name: "plateNo",
+            name: "vehiclePlateNo",
             labelText: "Улсын дугаар",
             filled: true,
             fillColor: gray102,
@@ -46,7 +46,7 @@ class _VehicleInfoState extends State<VehicleInfo> {
             height: 15,
           ),
           FormTextField(
-            name: "weight",
+            name: "unladedWeight",
             labelText: "Ачаагүй жин",
             filled: true,
             fillColor: gray102,
@@ -61,7 +61,7 @@ class _VehicleInfoState extends State<VehicleInfo> {
             height: 15,
           ),
           FormTextField(
-            name: "weight2",
+            name: "fullWeight",
             labelText: "Ачаатай жин",
             filled: true,
             fillColor: gray102,
@@ -76,7 +76,7 @@ class _VehicleInfoState extends State<VehicleInfo> {
             height: 15,
           ),
           FormTextField(
-            name: "fullweight",
+            name: "totalWeight",
             labelText: "Цэвэр жин",
             filled: true,
             fillColor: gray102,

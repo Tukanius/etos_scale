@@ -13,9 +13,9 @@ class Receipt {
   String transportName;
   String vehiclePlateNo;
   List<String> trailerPlateNumbers;
-  String vehicleWeight;
-  String unladedWeight;
-  String totalWeight;
+  double unladedWeight;
+  double fullWeight;
+  double totalWeight;
   List<String> containerNumbers;
   String driverName;
   String driverPhone;
@@ -37,8 +37,8 @@ class Receipt {
       required this.transportName,
       required this.vehiclePlateNo,
       required this.trailerPlateNumbers,
-      required this.vehicleWeight,
       required this.unladedWeight,
+      required this.fullWeight,
       required this.totalWeight,
       required this.containerNumbers,
       required this.driverName,

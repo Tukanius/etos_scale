@@ -13,9 +13,9 @@ Receipt _$ReceiptFromJson(Map<String, dynamic> json) {
       transportName: json["transportName"] as String,
       vehiclePlateNo: json["vehiclePlateNo"] as String,
       trailerPlateNumbers: json["trailerPlateNumbers"] as List<String>,
-      vehicleWeight: json["vehicleWeight"] as String,
-      unladedWeight: json["unladedWeight"] as String,
-      totalWeight: json["totalWeight"] as String,
+      fullWeight: json["fullWeight"] as double,
+      unladedWeight: json["unladedWeight"] as double,
+      totalWeight: json["totalWeight"] as double,
       containerNumbers: json["containerNumbers"] as List<String>,
       driverName: json["driverName"] as String,
       driverPhone: json["driverPhone"] as String,
@@ -39,7 +39,7 @@ Map<String, dynamic> _$ReceiptToJson(Receipt instance) {
   json['transportName'] = instance.transportName;
   json['vehiclePlateNo'] = instance.vehiclePlateNo;
   json['trailerPlateNumbers'] = instance.trailerPlateNumbers;
-  json['vehicleWeight'] = instance.vehicleWeight;
+  json['fullWeight'] = instance.fullWeight;
   json['unladedWeight'] = instance.unladedWeight;
   json['totalWeight'] = instance.totalWeight;
   json['containerNumbers'] = instance.containerNumbers;
