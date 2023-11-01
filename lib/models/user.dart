@@ -1,5 +1,3 @@
-import 'package:flutter/material.dart';
-
 part '../parts/user.dart';
 
 class User {
