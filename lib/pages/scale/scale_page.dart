@@ -1,23 +1,23 @@
-import 'package:etos_scale_windows/api/trcuk_api.dart';
-import 'package:etos_scale_windows/models/receipt.dart';
-import 'package:etos_scale_windows/provider/user_provider.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/foundation.dart';
-import 'package:after_layout/after_layout.dart';
-import 'package:etos_scale_windows/contants/colors.dart';
-import 'package:etos_scale_windows/components/info/scale_info.dart';
-import 'package:etos_scale_windows/components/info/receipt_info.dart';
-import 'package:etos_scale_windows/components/info/vehicle_info.dart';
-import 'package:flutter_form_builder/flutter_form_builder.dart';
-import 'package:etos_scale_windows/components/scale_item/camera_card.dart';
-import 'package:etos_scale_windows/components/scale_item/container_card.dart';
-import 'package:etos_scale_windows/components/scale_item/trailer_card.dart';
-import 'package:etos_scale_windows/components/info/driver_info.dart';
-import 'package:flutter_libserialport/flutter_libserialport.dart';
-import 'package:provider/provider.dart';
+import "package:etos_scale_windows/api/trcuk_api.dart";
+import "package:etos_scale_windows/models/receipt.dart";
+import "package:etos_scale_windows/provider/user_provider.dart";
+import "package:flutter/material.dart";
+import "package:flutter/foundation.dart";
+import "package:after_layout/after_layout.dart";
+import "package:etos_scale_windows/contants/colors.dart";
+import "package:etos_scale_windows/components/info/scale_info.dart";
+import "package:etos_scale_windows/components/info/receipt_info.dart";
+import "package:etos_scale_windows/components/info/vehicle_info.dart";
+import "package:flutter_form_builder/flutter_form_builder.dart";
+import "package:etos_scale_windows/components/scale_item/camera_card.dart";
+import "package:etos_scale_windows/components/scale_item/container_card.dart";
+import "package:etos_scale_windows/components/scale_item/trailer_card.dart";
+import "package:etos_scale_windows/components/info/driver_info.dart";
+import "package:flutter_libserialport/flutter_libserialport.dart";
+import "package:provider/provider.dart";
 
 class ScalePage extends StatefulWidget {
-  static const routeName = 'ScalePage';
+  static const routeName = "ScalePage";
   const ScalePage({
     Key? key,
   }) : super(key: key);
@@ -40,7 +40,7 @@ class _ScalePageState extends State<ScalePage> with AfterLayoutMixin {
 
       if (!port.isOpen && port.openReadWrite()) {
         if (kDebugMode) {
-          print('PORT OPENED: $serialPort');
+          print("PORT OPENED: $serialPort");
           print(SerialPort.lastError);
         }
 
@@ -69,7 +69,7 @@ class _ScalePageState extends State<ScalePage> with AfterLayoutMixin {
         });
       } else {
         if (kDebugMode) {
-          print('PORT ClOSED: $serialPort');
+          print("PORT ClOSED: $serialPort");
         }
       }
     }
@@ -81,7 +81,36 @@ class _ScalePageState extends State<ScalePage> with AfterLayoutMixin {
     debugPrint(form?.value.toString());
 
     if (form!.saveAndValidate()) {
-      await TruckApi().scale(Receipt.fromJson(form.value));
+      Map<String, dynamic> data = {};
+
+      data["contractNo"] = form.value["contractNo"];
+      data["receiptNo"] = form.value["receiptNo"];
+      data["receiptDate"] = form.value["receiptDate"];
+      data["supplierName"] = form.value["supplierName"];
+      data["buyerName"] = form.value["buyerName"];
+      data["productName"] = form.value["productName"];
+      data["routeName"] = form.value["routeName"];
+      data["transportName"] = form.value["transportName"];
+      data["vehiclePlateNo"] = form.value["vehiclePlateNo"];
+      data["trailerPlateNumbers"] = [
+        form.value["trailerPlateNumber_0"],
+        form.value["trailerPlateNumber_1"]
+      ];
+      data["fullWeight"] = double.parse(form.value["fullWeight"]);
+      data["unladedWeight"] = double.parse(form.value["unladedWeight"]);
+      data["totalWeight"] = double.parse(form.value["totalWeight"]);
+      data["containerNumbers"] = [
+        form.value["containerNumber_0_4"] + form.value["containerNumber_0_7"],
+        form.value["containerNumber_1_4"] + form.value["containerNumber_1_7"],
+        form.value["containerNumber_2_4"] + form.value["containerNumber_2_7"],
+        form.value["containerNumber_3_4"] + form.value["containerNumber_3_7"],
+      ];
+      data["driverName"] = form.value["driverName"];
+      data["driverPhone"] = form.value["driverPhone"];
+      data["driverRegisterNo"] = form.value["driverRegisterNo"];
+      data["driverPdlNumber"] = form.value["driverPdlNumber"];
+
+      await TruckApi().scale(data);
     }
   }
 
@@ -141,23 +170,13 @@ class _ScalePageState extends State<ScalePage> with AfterLayoutMixin {
                 Container(
                   width: MediaQuery.of(context).size.width,
                   alignment: Alignment.center,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [1, 2]
-                        .map(
-                          (e) => Row(
-                            children: [
-                              TrailerCard(index: e),
-                              e == 1
-                                  ? const SizedBox(
-                                      width: 20,
-                                    )
-                                  : const SizedBox(),
-                            ],
-                          ),
-                        )
-                        .toList(),
-                  ),
+                  child: const Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        TrailerCard(index: 0),
+                        SizedBox(width: 20),
+                        TrailerCard(index: 1),
+                      ]),
                 ),
                 const SizedBox(height: 20),
                 Container(

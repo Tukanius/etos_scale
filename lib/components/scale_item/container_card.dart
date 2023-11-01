@@ -42,7 +42,7 @@ class _ContainerCardState extends State<ContainerCard> {
               Row(
                 children: [
                   FormTextField(
-                    name: "containerNumber_${widget.index}_1",
+                    name: "containerNumber_${widget.index}_4",
                     labelText: "AAAA",
                     filled: true,
                     width: 100,
@@ -57,7 +57,7 @@ class _ContainerCardState extends State<ContainerCard> {
                   ),
                   const SizedBox(width: 5),
                   FormTextField(
-                    name: "containerNumber_${widget.index}_2",
+                    name: "containerNumber_${widget.index}_7",
                     labelText: "0000000",
                     filled: true,
                     width: 100,
