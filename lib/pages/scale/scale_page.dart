@@ -98,50 +98,59 @@ class _ScalePageState extends State<ScalePage> with AfterLayoutMixin {
         data["routeName"] = form.value["routeName"];
         data["transportName"] = form.value["transportName"];
         data["vehiclePlateNo"] = form.value["vehiclePlateNo"];
-        data["trailerPlateNumbers"] = [];
+        List<String> trailerPlateNumbers = [];
 
-        if (form.value["trailerPlateNumber_0"]) {
-          data["trailerPlateNumbers"].push(form.value["trailerPlateNumber_0"]);
+        if (form.value["trailerPlateNumber_0"] != null) {
+          trailerPlateNumbers.add(form.value["trailerPlateNumber_0"]);
         }
-        if (form.value["trailerPlateNumber_1"]) {
-          data["trailerPlateNumbers"].push(form.value["trailerPlateNumber_1"]);
-        }
-        data["fullWeight"] = double.parse(form.value["fullWeight"]);
-        data["unladedWeight"] = double.parse(form.value["unladedWeight"]);
-        data["totalWeight"] = double.parse(form.value["totalWeight"]);
-        data["containerNumbers"] = [];
 
-        if (form.value["containerNumber_0_4"] &&
-            form.value["containerNumber_0_7"]) {
-          data["containerNumbers"].push(
+        if (form.value["trailerPlateNumber_1"] != null) {
+          trailerPlateNumbers.add(form.value["trailerPlateNumber_1"]);
+        }
+
+        data["trailerPlateNumbers"] = trailerPlateNumbers;
+
+        data["fullWeight"] = form.value["fullWeight"];
+        data["unladedWeight"] = form.value["unladedWeight"];
+        data["totalWeight"] = form.value["totalWeight"];
+        List<String> containerNumbers = [];
+
+        if (form.value["containerNumber_0_4"] != null &&
+            form.value["containerNumber_0_7"] != null) {
+          containerNumbers.add(
             form.value["containerNumber_0_4"] +
                 form.value["containerNumber_0_7"],
           );
         }
-        if (form.value["containerNumber_1_4"] &&
-            form.value["containerNumber_1_7"]) {
-          data["containerNumbers"].push(form.value["containerNumber_1_4"] +
+        if (form.value["containerNumber_1_4"] != null &&
+            form.value["containerNumber_1_7"] != null) {
+          containerNumbers.add(form.value["containerNumber_1_4"] +
               form.value["containerNumber_1_7"]);
         }
-        if (form.value["containerNumber_2_4"] &&
-            form.value["containerNumber_2_7"]) {
-          data["containerNumbers"].push(form.value["containerNumber_2_4"] +
+        if (form.value["containerNumber_2_4"] != null &&
+            form.value["containerNumber_2_7"] != null) {
+          containerNumbers.add(form.value["containerNumber_2_4"] +
               form.value["containerNumber_2_7"]);
         }
-        if (form.value["containerNumber_3_4"] &&
-            form.value["containerNumber_3_7"]) {
-          data["containerNumbers"].push(form.value["containerNumber_3_4"] +
+        if (form.value["containerNumber_3_4"] != null &&
+            form.value["containerNumber_3_7"] != null) {
+          containerNumbers.add(form.value["containerNumber_3_4"] +
               form.value["containerNumber_3_7"]);
         }
+
+        data["containerNumbers"] = containerNumbers;
 
         data["driverName"] = form.value["driverName"];
         data["driverPhone"] = form.value["driverPhone"];
         data["driverRegisterNo"] = form.value["driverRegisterNo"];
         data["driverPdlNumber"] = form.value["driverPdlNumber"];
 
+        print(data);
+
         await TruckApi().scale(data);
-      } catch (e) {
         showSnackbar();
+      } catch (e) {
+        //  showSnackbar();
         debugPrint(e.toString());
         setState(() {
           isLoading = false;

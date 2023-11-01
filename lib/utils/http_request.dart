@@ -10,7 +10,7 @@ import 'http_handler.dart';
 import '../main.dart';
 
 class HttpRequest {
-  String host = 'http://192.168.1.96:30605/api';
+  String host = 'http://mine.etos.mn/sca/api';
 
   Dio dio = Dio();
 
