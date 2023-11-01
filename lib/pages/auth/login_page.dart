@@ -30,6 +30,7 @@ class _LoginPageState extends State<LoginPage> {
         });
         await Provider.of<UserProvider>(context, listen: false)
             .login(form.value);
+        // ignore: use_build_context_synchronously
         Navigator.of(context).pushNamed(SplashPage.routeName);
       } catch (e) {
         debugPrint(e.toString());
