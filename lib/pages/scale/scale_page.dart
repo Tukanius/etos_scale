@@ -31,16 +31,16 @@ class _ScalePageState extends State<ScalePage> with AfterLayoutMixin {
   GlobalKey<FormBuilderState> fbKey = GlobalKey<FormBuilderState>();
 
   @override
-  afterFirstLayout(BuildContext context) {
-    final scalePort =
-        Provider.of<UserProvider>(context, listen: true).selectedSerialPort;
+  afterFirstLayout(BuildContext context) async {
+    final serialPort = await Provider.of<UserProvider>(context, listen: false)
+        .getSelectedSerialPort();
 
-    if (scalePort != null) {
-      final port = SerialPort(scalePort);
+    if (serialPort != null) {
+      final port = SerialPort(serialPort);
 
       if (!port.isOpen && port.openReadWrite()) {
         if (kDebugMode) {
-          print('PORT OPENED: $scalePort');
+          print('PORT OPENED: $serialPort');
           print(SerialPort.lastError);
         }
 
@@ -69,7 +69,7 @@ class _ScalePageState extends State<ScalePage> with AfterLayoutMixin {
         });
       } else {
         if (kDebugMode) {
-          print('PORT ClOSED: $scalePort');
+          print('PORT ClOSED: $serialPort');
         }
       }
     }

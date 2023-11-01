@@ -6,21 +6,28 @@ import 'package:shared_preferences/shared_preferences.dart';
 class UserProvider extends ChangeNotifier {
   late User? user;
   late String selectedPage = 'ScalePage';
-  late String? selectedSerialPort;
 
   void setSelectedPage(String page) {
     selectedPage = page;
     notifyListeners();
   }
 
-  void setSerialPort(String port) {
-    selectedSerialPort = port;
-    notifyListeners();
+  getSelectedSerialPort() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String? port = prefs.getString("serialPort");
+
+    return port;
+  }
+
+  setSelectedSerialPort(String port) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setString("serialPort", port);
   }
 
   static Future<String?> getAccessToken() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String? token = prefs.getString("accessToken");
+
     return token;
   }
 

@@ -17,14 +17,22 @@ class SettingsDrawer extends StatefulWidget {
 
 class _SettingsDrawerState extends State<SettingsDrawer> with AfterLayoutMixin {
   bool isSubmit = false;
-  late String selectedPort;
+  String? selectedSerialPort;
   bool isLoading = false;
 
   @override
-  afterFirstLayout(BuildContext context) {}
+  afterFirstLayout(BuildContext context) async {
+    final port = await Provider.of<UserProvider>(context, listen: false)
+        .getSelectedSerialPort();
 
-  onChangeSerialPort(String port) {
-    Provider.of<UserProvider>(context, listen: false).setSerialPort(port);
+    setState(() {
+      selectedSerialPort = port;
+    });
+  }
+
+  onChangeSerialPort(String port) async {
+    await Provider.of<UserProvider>(context, listen: false)
+        .setSelectedSerialPort(port);
   }
 
   showSuccess(ctx) async {
@@ -88,9 +96,6 @@ class _SettingsDrawerState extends State<SettingsDrawer> with AfterLayoutMixin {
 
   @override
   Widget build(BuildContext context) {
-    final scalePort =
-        Provider.of<UserProvider>(context, listen: true).selectedSerialPort;
-
     return SafeArea(
       child: Column(
         children: [
@@ -127,7 +132,7 @@ class _SettingsDrawerState extends State<SettingsDrawer> with AfterLayoutMixin {
                           onChangeSerialPort(value!);
                         },
                         dropdownColor: white,
-                        value: scalePort,
+                        value: selectedSerialPort,
                         itemHeight: 70,
                         menuMaxHeight: 400,
                         elevation: 2,
@@ -202,7 +207,7 @@ class _SettingsDrawerState extends State<SettingsDrawer> with AfterLayoutMixin {
                       child: DropdownButtonFormField(
                         onChanged: (value) {
                           setState(() {
-                            value = selectedPort;
+                            value = selectedSerialPort;
                             if (kDebugMode) {
                               print(value);
                             }
