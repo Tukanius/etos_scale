@@ -25,7 +25,6 @@ class _SplashPageState extends State<SplashPage> with AfterLayoutMixin {
       Navigator.of(context).pushNamed(MainPage.routeName);
     } catch (ex) {
       debugPrint(ex.toString());
-
       Navigator.of(context).pushNamed(LoginPage.routeName);
     }
   }

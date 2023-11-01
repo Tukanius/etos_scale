@@ -2,7 +2,7 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "Etos Scale"
-#define MyAppVersion "1.2"
+#define MyAppVersion "1.4"
 #define MyAppPublisher "Good Tech LLC"
 #define MyAppURL "https://www.example.com/"
 #define MyAppExeName "etos_scale_windows.exe"
@@ -23,7 +23,7 @@ DisableProgramGroupPage=yes
 ; Uncomment the following line to run in non administrative install mode (install for current user only.)
 ;PrivilegesRequired=lowest
 OutputDir=C:\Users\Tu Tukanius\Desktop\WorkSpace\etos-scale-windows\installer
-OutputBaseFilename=etos_setup_v1.2
+OutputBaseFilename=etos_setup_v1.4
 SetupIconFile=C:\Users\Tu Tukanius\Desktop\app_icon.ico
 Compression=lzma
 SolidCompression=yes
