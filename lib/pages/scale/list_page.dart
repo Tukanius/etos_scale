@@ -1,6 +1,4 @@
 import 'package:etos_scale_windows/api/trcuk_api.dart';
-import 'package:etos_scale_windows/components/layout/table_header.dart';
-import 'package:etos_scale_windows/contants/colors.dart';
 import 'package:etos_scale_windows/models/result.dart';
 import 'package:flutter/material.dart';
 import 'package:after_layout/after_layout.dart';
@@ -16,17 +14,19 @@ class _ScaleListPageState extends State<ScaleListPage> with AfterLayoutMixin {
   var tableRow = TableRow();
 
   int page = 1;
-  int limit = 10;
+  int limit = 100;
 
   Result result = Result(rows: [], count: 0);
 
-  loadData(page, limit) async {
-    Offset offset = Offset(page: page, limit: limit);
+  loadData(int page, int limit) async {
     Filter filter = Filter();
 
-    result = await TruckApi()
+    Offset offset = Offset(limit: limit, page: page);
+
+    Result res = await TruckApi()
         .scaleList(ResultArguments(filter: filter, offset: offset));
-    // debugPrint(scaleList.rows);
+
+    setState(() => result = res);
   }
 
   @override
@@ -39,14 +39,25 @@ class _ScaleListPageState extends State<ScaleListPage> with AfterLayoutMixin {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return Expanded(
+        child: Container(
       width: double.infinity,
       padding: const EdgeInsets.all(20),
       child: SingleChildScrollView(
         child: PaginatedDataTable(
+          availableRowsPerPage: const [50, 100],
           header: const Text("Хэмжилтийн түүх"),
-          onRowsPerPageChanged: (perPage) {},
-          rowsPerPage: 10,
+          onRowsPerPageChanged: (perPage) {
+            setState(() {
+              limit = perPage!;
+            });
+          },
+          onPageChanged: (value) {
+            setState(() {
+              page = value;
+            });
+          },
+          rowsPerPage: limit,
           columns: const <DataColumn>[
             DataColumn(
               label: Text('Country'),
@@ -61,7 +72,7 @@ class _ScaleListPageState extends State<ScaleListPage> with AfterLayoutMixin {
           source: tableRow,
         ),
       ),
-    );
+    ));
   }
 }
 
