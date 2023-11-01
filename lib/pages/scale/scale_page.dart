@@ -1,5 +1,4 @@
 import "package:etos_scale_windows/api/trcuk_api.dart";
-import "package:etos_scale_windows/models/receipt.dart";
 import "package:etos_scale_windows/provider/user_provider.dart";
 import "package:flutter/material.dart";
 import "package:flutter/foundation.dart";
