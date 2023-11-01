@@ -1,7 +1,7 @@
 import 'package:etos_scale_windows/components/ui/button.dart';
 import 'package:etos_scale_windows/contants/colors.dart';
 import 'package:etos_scale_windows/pages/scale/scale_page.dart';
-import 'package:etos_scale_windows/provider/connection_provider.dart';
+import 'package:etos_scale_windows/provider/user_provider.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:after_layout/after_layout.dart';
@@ -24,7 +24,7 @@ class _SettingsDrawerState extends State<SettingsDrawer> with AfterLayoutMixin {
   afterFirstLayout(BuildContext context) {}
 
   onChangeSerialPort(String port) {
-    Provider.of<ConnectionProvider>(context, listen: false).setSerialPort(port);
+    Provider.of<UserProvider>(context, listen: false).setSerialPort(port);
   }
 
   showSuccess(ctx) async {
@@ -88,8 +88,8 @@ class _SettingsDrawerState extends State<SettingsDrawer> with AfterLayoutMixin {
 
   @override
   Widget build(BuildContext context) {
-    final scalePort = Provider.of<ConnectionProvider>(context, listen: true)
-        .selectedSerialPort;
+    final scalePort =
+        Provider.of<UserProvider>(context, listen: true).selectedSerialPort;
 
     return SafeArea(
       child: Column(

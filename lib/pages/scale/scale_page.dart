@@ -1,6 +1,6 @@
 import 'package:etos_scale_windows/api/trcuk_api.dart';
 import 'package:etos_scale_windows/models/receipt.dart';
-import 'package:etos_scale_windows/provider/connection_provider.dart';
+import 'package:etos_scale_windows/provider/user_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 import 'package:after_layout/after_layout.dart';
@@ -27,52 +27,51 @@ class ScalePage extends StatefulWidget {
 }
 
 class _ScalePageState extends State<ScalePage> with AfterLayoutMixin {
-  var ports = <String>[];
   String scaleData = "000000";
   GlobalKey<FormBuilderState> fbKey = GlobalKey<FormBuilderState>();
 
   @override
   afterFirstLayout(BuildContext context) {
-    final scalePort = Provider.of<ConnectionProvider>(context, listen: false)
-        .selectedSerialPort;
+    final scalePort =
+        Provider.of<UserProvider>(context, listen: true).selectedSerialPort;
 
     if (scalePort != null) {
       final port = SerialPort(scalePort);
 
-      if (port.openReadWrite()) {
+      if (!port.isOpen && port.openReadWrite()) {
         if (kDebugMode) {
           print('PORT OPENED: $scalePort');
           print(SerialPort.lastError);
         }
+
+        var portConfig = SerialPortConfig()
+          ..baudRate = 9600
+          ..bits = 8
+          ..stopBits = 1;
+        port.config = portConfig;
+
+        final reader = SerialPortReader(port);
+
+        var received = "";
+
+        reader.stream.listen((data) {
+          var chr = String.fromCharCodes(data);
+
+          received += chr;
+
+          if (received.length == 12) {
+            setState(() {
+              scaleData = received.substring(2, 8);
+            });
+
+            received = "";
+          }
+        });
       } else {
         if (kDebugMode) {
           print('PORT ClOSED: $scalePort');
         }
       }
-
-      var portConfig = SerialPortConfig()
-        ..baudRate = 9600
-        ..bits = 8
-        ..stopBits = 1;
-      port.config = portConfig;
-
-      final reader = SerialPortReader(port);
-
-      var received = "";
-
-      reader.stream.listen((data) {
-        var chr = String.fromCharCodes(data);
-
-        received += chr;
-
-        if (received.length == 12) {
-          setState(() {
-            scaleData = received.substring(2, 8);
-          });
-
-          received = "";
-        }
-      });
     }
   }
 

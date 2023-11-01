@@ -2,7 +2,7 @@ import 'package:etos_scale_windows/components/drawer/settings_drawer.dart';
 import 'package:etos_scale_windows/components/layout/navbar.dart';
 import 'package:etos_scale_windows/contants/colors.dart';
 import 'package:etos_scale_windows/pages/scale/list_page.dart';
-import 'package:etos_scale_windows/provider/connection_provider.dart';
+import 'package:etos_scale_windows/provider/user_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:etos_scale_windows/pages/scale/scale_page.dart';
 import 'package:provider/provider.dart';
@@ -20,15 +20,12 @@ class _MainPageState extends State<MainPage>
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   void _onSidebarItemSelected(String item) {
-    final selectedItem =
-        Provider.of<ConnectionProvider>(context, listen: false);
-    selectedItem.setSelectedItem(item);
+    Provider.of<UserProvider>(context, listen: false).setSelectedPage(item);
   }
 
   @override
   Widget build(BuildContext context) {
-    final selectedItemProvider = Provider.of<ConnectionProvider>(context);
-    String selectedItem = selectedItemProvider.selectedItem;
+    String selectedItem = Provider.of<UserProvider>(context).selectedPage;
 
     return Scaffold(
       key: _scaffoldKey,
@@ -61,8 +58,7 @@ class _MainPageState extends State<MainPage>
   }
 
   Widget _buildContentSection() {
-    final selectedItemProvider = Provider.of<ConnectionProvider>(context);
-    final selectedItem = selectedItemProvider.selectedItem;
+    final selectedItem = Provider.of<UserProvider>(context).selectedPage;
 
     if (selectedItem == 'ScalePage') {
       return const ScalePage();
