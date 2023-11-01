@@ -39,7 +39,11 @@ class _VehicleInfoState extends State<VehicleInfo> {
             labelColor: black,
             bgColor: Colors.transparent,
             validator: FormBuilderValidators.compose([
-              FormBuilderValidators.required(errorText: 'Заавал бөглөнө үү.'),
+              (value) {
+                return carNumber(
+                  (value != null ? value as String : value) as String?,
+                );
+              }
             ]),
           ),
           const SizedBox(
@@ -54,7 +58,11 @@ class _VehicleInfoState extends State<VehicleInfo> {
             labelColor: black,
             bgColor: Colors.transparent,
             validator: FormBuilderValidators.compose([
-              FormBuilderValidators.required(errorText: 'Заавал бөглөнө үү.'),
+              (value) {
+                return validateWeight(
+                  (value != null ? value as String : value) as String?,
+                );
+              }
             ]),
           ),
           const SizedBox(
@@ -69,7 +77,11 @@ class _VehicleInfoState extends State<VehicleInfo> {
             labelColor: black,
             bgColor: Colors.transparent,
             validator: FormBuilderValidators.compose([
-              FormBuilderValidators.required(errorText: 'Заавал бөглөнө үү.'),
+              (value) {
+                return validateWeight(
+                  (value != null ? value as String : value) as String?,
+                );
+              }
             ]),
           ),
           const SizedBox(
@@ -84,11 +96,32 @@ class _VehicleInfoState extends State<VehicleInfo> {
             labelColor: black,
             bgColor: Colors.transparent,
             validator: FormBuilderValidators.compose([
-              FormBuilderValidators.required(errorText: 'Заавал бөглөнө үү.'),
+              (value) {
+                return validateWeight(
+                  (value != null ? value as String : value) as String?,
+                );
+              }
             ]),
           ),
         ],
       ),
     );
+  }
+}
+
+String? carNumber(String? value) {
+  if (value != null && value.length == 7) {
+    return null;
+  } else {
+    return 'Алдаа!';
+  }
+}
+
+String? validateWeight(String? value) {
+  final RegExp numericRegex = RegExp(r'^[0-9]+$');
+  if (value != null && numericRegex.hasMatch(value)) {
+    return null;
+  } else {
+    return 'Алдаа!';
   }
 }

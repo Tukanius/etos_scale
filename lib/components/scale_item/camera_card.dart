@@ -1,7 +1,7 @@
 import 'package:etos_scale_windows/contants/colors.dart';
 import 'package:flutter/material.dart';
-import 'package:media_kit_video/media_kit_video.dart';
-import 'package:media_kit/media_kit.dart';
+// import 'package:media_kit_video/media_kit_video.dart';
+// import 'package:media_kit/media_kit.dart';
 
 class CameraCard extends StatefulWidget {
   const CameraCard({super.key});
@@ -11,19 +11,19 @@ class CameraCard extends StatefulWidget {
 }
 
 class _CameraCardState extends State<CameraCard> {
-  late final player = Player();
-  late final controller = VideoController(player);
+  // late final player = Player();
+  // late final controller = VideoController(player);
 
-  @override
-  void initState() {
-    super.initState();
-  }
+  // @override
+  // void initState() {
+  //   super.initState();
+  // }
 
-  @override
-  void dispose() async {
-    player.dispose();
-    super.dispose();
-  }
+  // @override
+  // void dispose() async {
+  //   player.dispose();
+  //   super.dispose();
+  // }
 
   @override
   Widget build(BuildContext context) {

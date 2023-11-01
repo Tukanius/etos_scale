@@ -2,17 +2,18 @@ part of '../models/user.dart';
 
 User _$UserFromJson(Map<String, dynamic> json) {
   return User(
-      id: json["_id"] as String,
-      email: json["email"] as String,
-      username: json["username"] as String);
+    id: json['id'] != null ? json['id'] as String : null,
+    email: json['email'] != null ? json['email'] as String : null,
+    username: json['username'] != null ? json['username'] as String : null,
+  );
 }
 
 Map<String, dynamic> _$UserToJson(User instance) {
   Map<String, dynamic> json = {};
 
-  json['id'] = instance.id;
-  json['email'] = instance.email;
-  json['username'] = instance.username;
+  if (instance.id != null) json['id'] = instance.id;
+  if (instance.email != null) json['email'] = instance.email;
+  if (instance.username != null) json['username'] = instance.username;
 
   return json;
 }

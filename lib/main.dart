@@ -10,6 +10,7 @@ import 'package:etos_scale_windows/services/dialog.dart';
 import 'package:etos_scale_windows/services/navigation.dart';
 import 'package:provider/provider.dart';
 import 'package:media_kit/media_kit.dart';
+import 'package:flutter_dropdown_alert/dropdown_alert.dart';
 
 void main() async {
   locator.registerLazySingleton(() => NavigationService());
@@ -45,6 +46,9 @@ class MyApp extends StatelessWidget {
             title: 'E-TOS',
             theme: ThemeData(),
             debugShowCheckedModeBanner: false,
+            builder: (context, child) => Stack(
+              children: [child!, const DropdownAlert()],
+            ),
             onGenerateRoute: (RouteSettings settings) {
               switch (settings.name) {
                 case MainPage.routeName:

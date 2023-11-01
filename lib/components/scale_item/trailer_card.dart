@@ -51,8 +51,12 @@ class _TrailerCardState extends State<TrailerCard> {
                       labelColor: white,
                       fillColor: white,
                       validator: FormBuilderValidators.compose([
-                        // FormBuilderValidators.required(
-                        //     errorText: 'Заавал бөглөнө үү.'),
+                        (value) {
+                          return validateTrail(
+                            (value != null ? value as String : value)
+                                as String?,
+                          );
+                        }
                       ])),
                 ],
               ),
@@ -76,5 +80,13 @@ class _TrailerCardState extends State<TrailerCard> {
         ],
       ),
     );
+  }
+}
+
+String? validateTrail(String? value) {
+  if (value == null || value.isEmpty || value.length == 6) {
+    return null;
+  } else {
+    return 'Алдаа!';
   }
 }

@@ -2,6 +2,8 @@ import 'package:etos_scale_windows/models/user.dart';
 part '../parts/receipt.dart';
 
 class Receipt {
+  int? count;
+  List<Receipt>? rows;
   String id;
   String contractNo;
   String receiptNo;
@@ -13,9 +15,9 @@ class Receipt {
   String transportName;
   String vehiclePlateNo;
   List<String> trailerPlateNumbers;
-  double unladedWeight;
-  double fullWeight;
-  double totalWeight;
+  int unladedWeight;
+  int fullWeight;
+  int totalWeight;
   List<String> containerNumbers;
   String driverName;
   String driverPhone;
@@ -25,29 +27,32 @@ class Receipt {
   String updatedAt;
   User? user;
 
-  Receipt(
-      {required this.id,
-      required this.contractNo,
-      required this.receiptNo,
-      required this.receiptDate,
-      required this.supplierName,
-      required this.buyerName,
-      required this.productName,
-      required this.routeName,
-      required this.transportName,
-      required this.vehiclePlateNo,
-      required this.trailerPlateNumbers,
-      required this.unladedWeight,
-      required this.fullWeight,
-      required this.totalWeight,
-      required this.containerNumbers,
-      required this.driverName,
-      required this.driverPhone,
-      required this.driverRegisterNo,
-      required this.driverPdlNumber,
-      this.user,
-      required this.createdAt,
-      required this.updatedAt});
+  Receipt({
+    required this.id,
+    required this.contractNo,
+    required this.receiptNo,
+    required this.receiptDate,
+    required this.supplierName,
+    required this.buyerName,
+    required this.productName,
+    required this.routeName,
+    required this.transportName,
+    required this.vehiclePlateNo,
+    required this.trailerPlateNumbers,
+    required this.unladedWeight,
+    required this.fullWeight,
+    required this.totalWeight,
+    required this.containerNumbers,
+    required this.driverName,
+    required this.driverPhone,
+    required this.driverRegisterNo,
+    required this.driverPdlNumber,
+    this.user,
+    required this.createdAt,
+    required this.updatedAt,
+    this.count,
+    this.rows,
+  });
 
   static $fromJson(Map<String, dynamic> json) => _$ReceiptFromJson(json);
 

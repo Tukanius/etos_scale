@@ -5,7 +5,12 @@ import 'package:flutter/material.dart';
 class ScaleInfo extends StatefulWidget {
   final String scaleData;
   final Function()? onClick;
-  const ScaleInfo({Key? key, this.onClick, required this.scaleData})
+  final bool isLoading;
+  const ScaleInfo(
+      {Key? key,
+      this.onClick,
+      required this.scaleData,
+      required this.isLoading})
       : super(key: key);
 
   @override
@@ -41,6 +46,7 @@ class _ScaleInfoState extends State<ScaleInfo> {
             ),
             const SizedBox(height: 20),
             Button(
+              isLoading: widget.isLoading,
               labelText: "Баталгаажуулах",
               color: colorSecondary,
               onPress: widget.onClick!,

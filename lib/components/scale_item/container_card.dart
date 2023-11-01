@@ -51,8 +51,11 @@ class _ContainerCardState extends State<ContainerCard> {
                     labelColor: black,
                     bgColor: Colors.transparent,
                     validator: FormBuilderValidators.compose([
-                      // FormBuilderValidators.required(
-                      //     errorText: 'Заавал бөглөнө үү.'),
+                      (value) {
+                        return validateContainer(
+                          (value != null ? value as String : value) as String?,
+                        );
+                      }
                     ]),
                   ),
                   const SizedBox(width: 5),
@@ -66,8 +69,11 @@ class _ContainerCardState extends State<ContainerCard> {
                     labelColor: black,
                     bgColor: Colors.transparent,
                     validator: FormBuilderValidators.compose([
-                      // FormBuilderValidators.required(
-                      //     errorText: 'Заавал бөглөнө үү.'),
+                      (value) {
+                        return validateContainerNumber(
+                          (value != null ? value as String : value) as String?,
+                        );
+                      }
                     ]),
                   ),
                 ],
@@ -97,5 +103,21 @@ class _ContainerCardState extends State<ContainerCard> {
         ],
       ),
     );
+  }
+}
+
+String? validateContainer(String? value) {
+  if (value == null || value.isEmpty || value.length == 4) {
+    return null;
+  } else {
+    return 'Алдаа!';
+  }
+}
+
+String? validateContainerNumber(String? value) {
+  if (value == null || value.isEmpty || value.length == 7) {
+    return null;
+  } else {
+    return 'Алдаа!';
   }
 }

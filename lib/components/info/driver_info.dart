@@ -39,7 +39,11 @@ class _DriverInfoState extends State<DriverInfo> {
             labelColor: black,
             bgColor: Colors.transparent,
             validator: FormBuilderValidators.compose([
-              FormBuilderValidators.required(errorText: 'Заавал бөглөнө үү.'),
+              (value) {
+                return validateRegisterNo(
+                  (value != null ? value as String : value) as String?,
+                );
+              }
             ]),
           ),
           const SizedBox(
@@ -54,7 +58,11 @@ class _DriverInfoState extends State<DriverInfo> {
             labelColor: black,
             bgColor: Colors.transparent,
             validator: FormBuilderValidators.compose([
-              FormBuilderValidators.required(errorText: 'Заавал бөглөнө үү.'),
+              (value) {
+                return validateText(
+                  (value != null ? value as String : value) as String?,
+                );
+              }
             ]),
           ),
           const SizedBox(
@@ -69,7 +77,11 @@ class _DriverInfoState extends State<DriverInfo> {
             labelColor: black,
             bgColor: Colors.transparent,
             validator: FormBuilderValidators.compose([
-              FormBuilderValidators.required(errorText: 'Заавал бөглөнө үү.'),
+              (value) {
+                return validatePdl(
+                  (value != null ? value as String : value) as String?,
+                );
+              }
             ]),
           ),
           const SizedBox(
@@ -84,11 +96,51 @@ class _DriverInfoState extends State<DriverInfo> {
             labelColor: black,
             bgColor: Colors.transparent,
             validator: FormBuilderValidators.compose([
-              FormBuilderValidators.required(errorText: 'Заавал бөглөнө үү.'),
+              (value) {
+                return validateNumber(
+                  (value != null ? value as String : value) as String?,
+                );
+              }
             ]),
           ),
         ],
       ),
     );
+  }
+}
+
+String? validateRegisterNo(String? value) {
+  RegExp regex = RegExp(r'[а-яА-ЯёЁөӨүҮ]{2}\d{8}$');
+  if (value != null && regex.hasMatch(value)) {
+    return null;
+  } else {
+    return 'Алдаа!';
+  }
+}
+
+String? validateNumber(String? value) {
+  final RegExp numericRegex = RegExp(r'^[0-9]+$');
+  if (value != null && numericRegex.hasMatch(value) && value.length == 8) {
+    return null;
+  } else {
+    return 'Алдаа!';
+  }
+}
+
+String? validatePdl(String? value) {
+  final RegExp numericRegex = RegExp(r'^[0-9]+$');
+  if (value != null && numericRegex.hasMatch(value) && value.length == 5) {
+    return null;
+  } else {
+    return 'Алдаа!';
+  }
+}
+
+String? validateText(String? value) {
+  final RegExp textvalidate = RegExp(r'^[A-Za-z]+$');
+  if (value != null && textvalidate.hasMatch(value)) {
+    return null;
+  } else {
+    return 'Алдаа!';
   }
 }

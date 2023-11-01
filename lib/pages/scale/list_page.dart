@@ -1,6 +1,9 @@
+import 'package:etos_scale_windows/api/trcuk_api.dart';
 import 'package:etos_scale_windows/components/layout/table_header.dart';
 import 'package:etos_scale_windows/contants/colors.dart';
+import 'package:etos_scale_windows/models/result.dart';
 import 'package:flutter/material.dart';
+import 'package:after_layout/after_layout.dart';
 
 class ScaleListPage extends StatefulWidget {
   const ScaleListPage({Key? key}) : super(key: key);
@@ -9,112 +12,28 @@ class ScaleListPage extends StatefulWidget {
   State<ScaleListPage> createState() => _ScaleListPageState();
 }
 
-class _ScaleListPageState extends State<ScaleListPage> {
-  List<Map<String, String>> rowData = [
-    {
-      'index': '1',
-      'name': '0844 УНҮ',
-      'author': 'М.Алтантулга',
-      'quantity': ' 15т ',
-      'date1': '2023/10/31 15:31:30',
-      'date2': '2023/10/31 15:31:30',
-    },
-    {
-      'index': '2',
-      'name': '0844 УНҮ',
-      'author': 'М.Алтантулга',
-      'quantity': ' 15т ',
-      'date1': '2023/10/31 15:31:30',
-      'date2': '2023/10/31 15:31:30',
-    },
-    {
-      'index': '3',
-      'name': '0844 УНҮ',
-      'author': 'М.Алтантулга',
-      'quantity': ' 15т ',
-      'date1': '2023/10/31 15:31:30',
-      'date2': '2023/10/31 15:31:30',
-    },
-    {
-      'index': '4',
-      'name': '0844 УНҮ',
-      'author': 'М.Алтантулга',
-      'quantity': ' 15т ',
-      'date1': '2023/10/31 15:31:30',
-      'date2': '2023/10/31 15:31:30',
-    },
-    {
-      'index': '5',
-      'name': '0844 УНҮ',
-      'author': 'М.Алтантулга',
-      'quantity': ' 15т ',
-      'date1': '2023/10/31 15:31:30',
-      'date2': '2023/10/31 15:31:30',
-    },
-    {
-      'index': '6',
-      'name': '0844 УНҮ',
-      'author': 'М.Алтантулга',
-      'quantity': ' 15т ',
-      'date1': '2023/10/31 15:31:30',
-      'date2': '2023/10/31 15:31:30',
-    },
-    {
-      'index': '7',
-      'name': '0844 УНҮ',
-      'author': 'М.Алтантулга',
-      'quantity': ' 15т ',
-      'date1': '2023/10/31 15:31:30',
-      'date2': '2023/10/31 15:31:30',
-    },
-    {
-      'index': '8',
-      'name': '0844 УНҮ',
-      'author': 'М.Алтантулга',
-      'quantity': ' 15т ',
-      'date1': '2023/10/31 15:31:30',
-      'date2': '2023/10/31 15:31:30',
-    },
-    {
-      'index': '9',
-      'name': '0844 УНҮ',
-      'author': 'М.Алтантулга',
-      'quantity': ' 15т ',
-      'date1': '2023/10/31 15:31:30',
-      'date2': '2023/10/31 15:31:30 ',
-    },
-    {
-      'index': '10',
-      'name': '0844 УНҮ',
-      'author': 'М.Алтантулга',
-      'quantity': ' 15т ',
-      'date1': '2023/10/31 15:31:30',
-      'date2': '2023/10/31 15:31:30',
-    },
-    {
-      'index': '11',
-      'name': '0844 УНҮ',
-      'author': 'М.Алтантулга',
-      'quantity': ' 15т ',
-      'date1': '2023/10/31 15:31:30',
-      'date2': '2023/10/31 15:31:30',
-    },
-  ];
+class _ScaleListPageState extends State<ScaleListPage> with AfterLayoutMixin {
+  int page = 1;
+  int limit = 10;
+  Result scaleList = Result(rows: [], count: 0);
+  list(page, limit) async {
+    Offset offset = Offset(page: page, limit: limit);
+    Filter filter = Filter();
+    scaleList = await TruckApi()
+        .scaleList(ResultArguments(filter: filter, offset: offset));
+    // debugPrint(scaleList.rows);
+  }
+
+  @override
+  afterFirstLayout(BuildContext context) {
+    list(page, limit);
+  }
 
   int currentPage = 1;
   final itemsPerPage = 10;
 
-  List<Map<String, String>> getItemsForCurrentPage() {
-    final startIndex = (currentPage - 1) * itemsPerPage;
-    final endIndex = (startIndex + itemsPerPage) < rowData.length
-        ? (startIndex + itemsPerPage)
-        : rowData.length;
-    return rowData.sublist(startIndex, endIndex);
-  }
-
   @override
   Widget build(BuildContext context) {
-    final currentItems = getItemsForCurrentPage();
     return Container(
       color: gray101,
       child: Row(
@@ -148,9 +67,8 @@ class _ScaleListPageState extends State<ScaleListPage> {
                   ),
                   Expanded(
                     child: ListView.builder(
-                      itemCount: currentItems.length,
-                      itemBuilder: (BuildContext context, int index) {
-                        final row = currentItems[index];
+                      itemCount: scaleList.rows?.length,
+                      itemBuilder: (context, index) {
                         return InkWell(
                           onTap: () {
                             showDialog(
@@ -177,12 +95,12 @@ class _ScaleListPageState extends State<ScaleListPage> {
                                             ),
                                           ),
                                         ),
-                                        Text('Index: ${row['index']}'),
-                                        Text('Name: ${row['name']}'),
-                                        Text('Author: ${row['author']}'),
-                                        Text('Quantity: ${row['quantity']}'),
-                                        Text('Date1: ${row['date1']}'),
-                                        Text('Date2: ${row['date2']}'),
+                                        // Text('Index: ${row['index']}'),
+                                        // Text('Name: ${row['name']}'),
+                                        // Text('Author: ${row['author']}'),
+                                        // Text('Quantity: ${row['quantity']}'),
+                                        // Text('Date1: ${row['date1']}'),
+                                        // Text('Date2: ${row['date2']}'),
                                         const SizedBox(height: 16),
                                         Row(
                                           mainAxisAlignment:
@@ -214,49 +132,59 @@ class _ScaleListPageState extends State<ScaleListPage> {
                                       MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text(
-                                      row['index']!,
-                                      style: const TextStyle(
-                                        color: Colors.black,
+                                      '1',
+                                      style: TextStyle(
+                                        color: black,
                                         fontSize: 15,
                                         fontWeight: FontWeight.w400,
                                       ),
                                     ),
                                     Text(
-                                      row['name']!,
-                                      style: const TextStyle(
-                                        color: Colors.black,
+                                      // row['name']!,
+                                      '1',
+
+                                      style: TextStyle(
+                                        color: black,
                                         fontSize: 15,
                                         fontWeight: FontWeight.w400,
                                       ),
                                     ),
                                     Text(
-                                      row['author']!,
-                                      style: const TextStyle(
-                                        color: Colors.black,
+                                      // row['author']!,
+                                      '1',
+
+                                      style: TextStyle(
+                                        color: black,
                                         fontSize: 15,
                                         fontWeight: FontWeight.w400,
                                       ),
                                     ),
                                     Text(
-                                      row['quantity']!,
-                                      style: const TextStyle(
-                                        color: Colors.black,
+                                      // row['quantity']!,
+                                      '1',
+
+                                      style: TextStyle(
+                                        color: black,
                                         fontSize: 15,
                                         fontWeight: FontWeight.w400,
                                       ),
                                     ),
                                     Text(
-                                      row['date1']!,
-                                      style: const TextStyle(
-                                        color: Colors.black,
+                                      // row['date1']!,
+                                      '1',
+
+                                      style: TextStyle(
+                                        color: black,
                                         fontSize: 15,
                                         fontWeight: FontWeight.w400,
                                       ),
                                     ),
                                     Text(
-                                      row['date2']!,
-                                      style: const TextStyle(
-                                        color: Colors.black,
+                                      // row['date2']!,
+                                      '1',
+
+                                      style: TextStyle(
+                                        color: black,
                                         fontSize: 15,
                                         fontWeight: FontWeight.w400,
                                       ),
@@ -280,7 +208,7 @@ class _ScaleListPageState extends State<ScaleListPage> {
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
                         Text(
-                          'Page $currentPage - ${currentPage * itemsPerPage} of ${rowData.length}',
+                          'Page $currentPage - ${currentPage * itemsPerPage} of ${scaleList.rows?.length}',
                           style: const TextStyle(
                             fontSize: 18,
                           ),
@@ -296,28 +224,45 @@ class _ScaleListPageState extends State<ScaleListPage> {
                               });
                             }
                           },
-                          child: const Icon(
-                            Icons.arrow_back_ios_new_outlined,
-                            size: 35,
+                          child: Container(
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(8),
+                                color: gray102),
+                            padding: const EdgeInsets.all(10),
+                            child: const Center(
+                              child: Icon(
+                                Icons.arrow_back_ios_new_outlined,
+                                size: 22,
+                              ),
+                            ),
                           ),
                         ),
                         const SizedBox(
-                          width: 10,
+                          width: 15,
                         ),
                         GestureDetector(
                           onTap: () {
                             if (currentPage <
-                                (rowData.length / itemsPerPage).ceil()) {
+                                (scaleList.rows!.length / itemsPerPage)
+                                    .ceil()) {
                               setState(() {
                                 currentPage++;
                               });
                             }
                           },
-                          child: const Icon(
-                            Icons.arrow_forward_ios_outlined,
-                            size: 35,
+                          child: Container(
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(8),
+                                color: gray102),
+                            padding: const EdgeInsets.all(10),
+                            child: const Center(
+                              child: Icon(
+                                Icons.arrow_forward_ios_outlined,
+                                size: 22,
+                              ),
+                            ),
                           ),
-                        )
+                        ),
                       ],
                     ),
                   ),

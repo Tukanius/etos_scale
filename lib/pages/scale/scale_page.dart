@@ -7,6 +7,7 @@ import "package:etos_scale_windows/contants/colors.dart";
 import "package:etos_scale_windows/components/info/scale_info.dart";
 import "package:etos_scale_windows/components/info/receipt_info.dart";
 import "package:etos_scale_windows/components/info/vehicle_info.dart";
+import "package:flutter_dropdown_alert/model/data_alert.dart";
 import "package:flutter_form_builder/flutter_form_builder.dart";
 import "package:etos_scale_windows/components/scale_item/camera_card.dart";
 import "package:etos_scale_windows/components/scale_item/container_card.dart";
@@ -14,6 +15,7 @@ import "package:etos_scale_windows/components/scale_item/trailer_card.dart";
 import "package:etos_scale_windows/components/info/driver_info.dart";
 import "package:flutter_libserialport/flutter_libserialport.dart";
 import "package:provider/provider.dart";
+import 'package:flutter_dropdown_alert/alert_controller.dart';
 
 class ScalePage extends StatefulWidget {
   static const routeName = "ScalePage";
@@ -27,6 +29,7 @@ class ScalePage extends StatefulWidget {
 
 class _ScalePageState extends State<ScalePage> with AfterLayoutMixin {
   String scaleData = "000000";
+  bool isLoading = false;
   GlobalKey<FormBuilderState> fbKey = GlobalKey<FormBuilderState>();
 
   @override
@@ -80,37 +83,89 @@ class _ScalePageState extends State<ScalePage> with AfterLayoutMixin {
     debugPrint(form?.value.toString());
 
     if (form!.saveAndValidate()) {
-      Map<String, dynamic> data = {};
+      setState(() {
+        isLoading = true;
+      });
+      try {
+        Map<String, dynamic> data = {};
 
-      data["contractNo"] = form.value["contractNo"];
-      data["receiptNo"] = form.value["receiptNo"];
-      data["receiptDate"] = form.value["receiptDate"];
-      data["supplierName"] = form.value["supplierName"];
-      data["buyerName"] = form.value["buyerName"];
-      data["productName"] = form.value["productName"];
-      data["routeName"] = form.value["routeName"];
-      data["transportName"] = form.value["transportName"];
-      data["vehiclePlateNo"] = form.value["vehiclePlateNo"];
-      data["trailerPlateNumbers"] = [
-        form.value["trailerPlateNumber_0"],
-        form.value["trailerPlateNumber_1"]
-      ];
-      data["fullWeight"] = double.parse(form.value["fullWeight"]);
-      data["unladedWeight"] = double.parse(form.value["unladedWeight"]);
-      data["totalWeight"] = double.parse(form.value["totalWeight"]);
-      data["containerNumbers"] = [
-        form.value["containerNumber_0_4"] + form.value["containerNumber_0_7"],
-        form.value["containerNumber_1_4"] + form.value["containerNumber_1_7"],
-        form.value["containerNumber_2_4"] + form.value["containerNumber_2_7"],
-        form.value["containerNumber_3_4"] + form.value["containerNumber_3_7"],
-      ];
-      data["driverName"] = form.value["driverName"];
-      data["driverPhone"] = form.value["driverPhone"];
-      data["driverRegisterNo"] = form.value["driverRegisterNo"];
-      data["driverPdlNumber"] = form.value["driverPdlNumber"];
+        data["contractNo"] = form.value["contractNo"];
+        data["receiptNo"] = form.value["receiptNo"];
+        data["receiptDate"] = form.value["receiptDate"];
+        data["supplierName"] = form.value["supplierName"];
+        data["buyerName"] = form.value["buyerName"];
+        data["productName"] = form.value["productName"];
+        data["routeName"] = form.value["routeName"];
+        data["transportName"] = form.value["transportName"];
+        data["vehiclePlateNo"] = form.value["vehiclePlateNo"];
+        data["trailerPlateNumbers"] = [];
 
-      await TruckApi().scale(data);
+        if (form.value["trailerPlateNumber_0"]) {
+          data["trailerPlateNumbers"].push(form.value["trailerPlateNumber_0"]);
+        }
+        if (form.value["trailerPlateNumber_1"]) {
+          data["trailerPlateNumbers"].push(form.value["trailerPlateNumber_1"]);
+        }
+        data["fullWeight"] = double.parse(form.value["fullWeight"]);
+        data["unladedWeight"] = double.parse(form.value["unladedWeight"]);
+        data["totalWeight"] = double.parse(form.value["totalWeight"]);
+        data["containerNumbers"] = [];
+
+        if (form.value["containerNumber_0_4"] &&
+            form.value["containerNumber_0_7"]) {
+          data["containerNumbers"].push(
+            form.value["containerNumber_0_4"] +
+                form.value["containerNumber_0_7"],
+          );
+        }
+        if (form.value["containerNumber_1_4"] &&
+            form.value["containerNumber_1_7"]) {
+          data["containerNumbers"].push(form.value["containerNumber_1_4"] +
+              form.value["containerNumber_1_7"]);
+        }
+        if (form.value["containerNumber_2_4"] &&
+            form.value["containerNumber_2_7"]) {
+          data["containerNumbers"].push(form.value["containerNumber_2_4"] +
+              form.value["containerNumber_2_7"]);
+        }
+        if (form.value["containerNumber_3_4"] &&
+            form.value["containerNumber_3_7"]) {
+          data["containerNumbers"].push(form.value["containerNumber_3_4"] +
+              form.value["containerNumber_3_7"]);
+        }
+
+        data["driverName"] = form.value["driverName"];
+        data["driverPhone"] = form.value["driverPhone"];
+        data["driverRegisterNo"] = form.value["driverRegisterNo"];
+        data["driverPdlNumber"] = form.value["driverPdlNumber"];
+
+        await TruckApi().scale(data);
+      } catch (e) {
+        showSnackbar();
+        debugPrint(e.toString());
+        setState(() {
+          isLoading = false;
+        });
+      }
     }
+  }
+
+  showSnackbar() {
+    Map<String, dynamic> payload = <String, dynamic>{};
+    payload["data"] = "content";
+    AlertController.show(
+        "Амжилттай", "Баталгаажуулалт амжилттай", TypeAlert.success, payload);
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    AlertController.onTabListener(
+        (Map<String, dynamic>? payload, TypeAlert type) {
+      if (kDebugMode) {
+        print("$payload - $type");
+      }
+    });
   }
 
   @override
@@ -195,6 +250,7 @@ class _ScalePageState extends State<ScalePage> with AfterLayoutMixin {
                         const VehicleInfo(),
                         const SizedBox(width: 20),
                         ScaleInfo(
+                          isLoading: isLoading,
                           onClick: () {
                             onSubmit();
                           },
