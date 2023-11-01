@@ -1,7 +1,7 @@
 import 'package:etos_scale_windows/components/ui/form_text_field.dart';
 import 'package:etos_scale_windows/contants/colors.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:form_builder_validators/form_builder_validators.dart';
 
 class ContainerCard extends StatefulWidget {
   final int index;
@@ -42,7 +42,7 @@ class _ContainerCardState extends State<ContainerCard> {
               Row(
                 children: [
                   FormTextField(
-                    name: "containerNum_${widget.index}_1",
+                    name: "containerNumber_${widget.index}_1",
                     labelText: "AAAA",
                     filled: true,
                     width: 100,
@@ -50,10 +50,14 @@ class _ContainerCardState extends State<ContainerCard> {
                     textColor: black,
                     labelColor: black,
                     bgColor: Colors.transparent,
+                    validator: FormBuilderValidators.compose([
+                      // FormBuilderValidators.required(
+                      //     errorText: 'Заавал бөглөнө үү.'),
+                    ]),
                   ),
                   const SizedBox(width: 5),
                   FormTextField(
-                    name: "containerNum_${widget.index}_2",
+                    name: "containerNumber_${widget.index}_2",
                     labelText: "0000000",
                     filled: true,
                     width: 100,
@@ -61,6 +65,10 @@ class _ContainerCardState extends State<ContainerCard> {
                     textColor: black,
                     labelColor: black,
                     bgColor: Colors.transparent,
+                    validator: FormBuilderValidators.compose([
+                      // FormBuilderValidators.required(
+                      //     errorText: 'Заавал бөглөнө үү.'),
+                    ]),
                   ),
                 ],
               ),

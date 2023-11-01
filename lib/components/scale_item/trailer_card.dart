@@ -42,15 +42,18 @@ class _TrailerCardState extends State<TrailerCard> {
               Row(
                 children: [
                   FormTextField(
-                    bgColor: Colors.transparent,
-                    name: "trailerPlateNumber[${widget.index}]",
-                    labelText: "Улсын дугаар",
-                    width: 160,
-                    filled: true,
-                    textColor: black,
-                    labelColor: white,
-                    fillColor: white,
-                  ),
+                      bgColor: Colors.transparent,
+                      name: "trailerPlateNumber_${widget.index}",
+                      labelText: "Улсын дугаар",
+                      width: 160,
+                      filled: true,
+                      textColor: black,
+                      labelColor: white,
+                      fillColor: white,
+                      validator: FormBuilderValidators.compose([
+                        // FormBuilderValidators.required(
+                        //     errorText: 'Заавал бөглөнө үү.'),
+                      ])),
                 ],
               ),
             ],
