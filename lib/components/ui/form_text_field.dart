@@ -18,6 +18,7 @@ class FormTextField extends StatefulWidget {
   final bool hasObscureControl;
   final TextEditingController? controller;
   final bool readOnly;
+
   const FormTextField({
     this.suffixIcon,
     super.key,

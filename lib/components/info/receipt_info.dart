@@ -142,7 +142,6 @@ class _ReceiptInfoState extends State<ReceiptInfo> {
                     labelText: "Огноо",
                     filled: true,
                     fillColor: gray102,
-                    readOnly: true,
                     textColor: black,
                     labelColor: black,
                     bgColor: Colors.transparent,

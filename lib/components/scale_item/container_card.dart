@@ -6,9 +6,7 @@ import 'package:flutter_form_builder/flutter_form_builder.dart';
 class ContainerCard extends StatefulWidget {
   final int index;
   final Color? color;
-  final GlobalKey<FormBuilderState> fbKey;
-  const ContainerCard(
-      {super.key, required this.index, this.color, required this.fbKey});
+  const ContainerCard({super.key, required this.index, this.color});
 
   @override
   State<ContainerCard> createState() => _ContainerCardState();
@@ -44,7 +42,6 @@ class _ContainerCardState extends State<ContainerCard> {
               Row(
                 children: [
                   FormTextField(
-                    fbKey: widget.fbKey,
                     name: "containerNum_${widget.index}_1",
                     labelText: "AAAA",
                     filled: true,
@@ -56,7 +53,6 @@ class _ContainerCardState extends State<ContainerCard> {
                   ),
                   const SizedBox(width: 5),
                   FormTextField(
-                    fbKey: widget.fbKey,
                     name: "containerNum_${widget.index}_2",
                     labelText: "0000000",
                     filled: true,
