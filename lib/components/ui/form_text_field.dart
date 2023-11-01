@@ -17,7 +17,7 @@ class FormTextField extends StatefulWidget {
   final bool obscureText;
   final bool hasObscureControl;
   final TextEditingController? controller;
-
+  final bool readOnly;
   const FormTextField({
     this.suffixIcon,
     super.key,
@@ -34,6 +34,7 @@ class FormTextField extends StatefulWidget {
     this.obscureText = false,
     this.hasObscureControl = false,
     this.controller,
+    this.readOnly = false,
   });
 
   @override
@@ -73,6 +74,7 @@ class _FormTextFieldState extends State<FormTextField> {
             name: widget.name,
             validator: widget.validator,
             controller: widget.controller,
+            readOnly: widget.readOnly,
             obscureText:
                 !widget.obscureText ? isPasswordVisible : !isPasswordVisible,
             style: TextStyle(color: widget.textColor ?? white),
