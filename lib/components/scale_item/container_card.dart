@@ -51,11 +51,14 @@ class _ContainerCardState extends State<ContainerCard> {
                     labelColor: black,
                     bgColor: Colors.transparent,
                     validator: FormBuilderValidators.compose([
-                      (value) {
-                        return validateContainer(
-                          (value != null ? value as String : value) as String?,
-                        );
-                      }
+                      widget.index == 0
+                          ? FormBuilderValidators.required(errorText: 'Алдаа!')
+                          : (value) {
+                              return validateContainer(
+                                (value != null ? value as String : value)
+                                    as String?,
+                              );
+                            }
                     ]),
                   ),
                   const SizedBox(width: 5),
@@ -69,11 +72,14 @@ class _ContainerCardState extends State<ContainerCard> {
                     labelColor: black,
                     bgColor: Colors.transparent,
                     validator: FormBuilderValidators.compose([
-                      (value) {
-                        return validateContainerNumber(
-                          (value != null ? value as String : value) as String?,
-                        );
-                      }
+                      widget.index == 0
+                          ? FormBuilderValidators.required(errorText: 'Алдаа!')
+                          : (value) {
+                              return validateContainerNumber(
+                                (value != null ? value as String : value)
+                                    as String?,
+                              );
+                            }
                     ]),
                   ),
                 ],

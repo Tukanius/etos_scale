@@ -28,7 +28,7 @@ class _CameraCardState extends State<CameraCard> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: MediaQuery.of(context).size.width * 0.25,
+      width: (MediaQuery.of(context).size.width - 72) * 0.25,
       height: MediaQuery.of(context).size.width * 0.14,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(

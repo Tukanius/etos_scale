@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:etos_scale_windows/pages/auth/login_page.dart';
+// import 'package:etos_scale_windows/utils/scroll_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:etos_scale_windows/provider/user_provider.dart';
@@ -43,6 +44,7 @@ class MyApp extends StatelessWidget {
       child: Consumer<UserProvider>(
         builder: (context, userProvider, _) {
           return MaterialApp(
+            // scrollBehavior: MyCustomScrollBehavior(),
             title: 'E-TOS',
             theme: ThemeData(),
             debugShowCheckedModeBanner: false,

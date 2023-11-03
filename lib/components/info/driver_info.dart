@@ -58,11 +58,7 @@ class _DriverInfoState extends State<DriverInfo> {
             labelColor: black,
             bgColor: Colors.transparent,
             validator: FormBuilderValidators.compose([
-              (value) {
-                return validateText(
-                  (value != null ? value as String : value) as String?,
-                );
-              }
+              FormBuilderValidators.required(errorText: 'Алдаа!'),
             ]),
           ),
           const SizedBox(
@@ -130,15 +126,6 @@ String? validateNumber(String? value) {
 String? validatePdl(String? value) {
   final RegExp numericRegex = RegExp(r'^[0-9]+$');
   if (value != null && numericRegex.hasMatch(value) && value.length == 5) {
-    return null;
-  } else {
-    return 'Алдаа!';
-  }
-}
-
-String? validateText(String? value) {
-  final RegExp textvalidate = RegExp(r'^[A-Za-z]+$');
-  if (value != null && textvalidate.hasMatch(value)) {
     return null;
   } else {
     return 'Алдаа!';

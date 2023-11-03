@@ -1,4 +1,4 @@
-import "package:etos_scale_windows/api/trcuk_api.dart";
+import 'package:etos_scale_windows/api/truck_api.dart';
 import "package:etos_scale_windows/provider/user_provider.dart";
 import "package:flutter/material.dart";
 import "package:flutter/foundation.dart";
@@ -148,6 +148,7 @@ class _ScalePageState extends State<ScalePage> with AfterLayoutMixin {
         print(data);
 
         await TruckApi().scale(data);
+        Navigator.of(context).pushNamed(ScalePage.routeName);
         showSnackbar();
       } catch (e) {
         //  showSnackbar();
@@ -187,22 +188,22 @@ class _ScalePageState extends State<ScalePage> with AfterLayoutMixin {
             child: ListView(
               children: [
                 SizedBox(
-                  width: MediaQuery.of(context).size.width,
+                  width: MediaQuery.of(context).size.width - 72,
                   height: MediaQuery.of(context).size.width * 0.14,
                   child: ListView(
                       scrollDirection: Axis.horizontal,
                       children: const [
                         CameraCard(),
                         SizedBox(
-                          width: 20,
+                          width: 10,
                         ),
                         CameraCard(),
                         SizedBox(
-                          width: 20,
+                          width: 10,
                         ),
                         CameraCard(),
                         SizedBox(
-                          width: 20,
+                          width: 10,
                         ),
                         CameraCard(),
                       ]),

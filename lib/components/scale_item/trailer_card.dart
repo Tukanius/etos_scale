@@ -51,12 +51,15 @@ class _TrailerCardState extends State<TrailerCard> {
                       labelColor: white,
                       fillColor: white,
                       validator: FormBuilderValidators.compose([
-                        (value) {
-                          return validateTrail(
-                            (value != null ? value as String : value)
-                                as String?,
-                          );
-                        }
+                        widget.index == 0
+                            ? FormBuilderValidators.required(
+                                errorText: 'Алдаа!')
+                            : (value) {
+                                return validateTrail(
+                                  (value != null ? value as String : value)
+                                      as String?,
+                                );
+                              }
                       ])),
                 ],
               ),
