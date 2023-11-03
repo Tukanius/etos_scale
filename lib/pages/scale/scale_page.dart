@@ -9,7 +9,6 @@ import "package:etos_scale_windows/components/info/receipt_info.dart";
 import "package:etos_scale_windows/components/info/vehicle_info.dart";
 import "package:flutter_dropdown_alert/model/data_alert.dart";
 import "package:flutter_form_builder/flutter_form_builder.dart";
-import "package:etos_scale_windows/components/scale_item/camera_card.dart";
 import "package:etos_scale_windows/components/scale_item/container_card.dart";
 import "package:etos_scale_windows/components/scale_item/trailer_card.dart";
 import "package:etos_scale_windows/components/info/driver_info.dart";
@@ -187,27 +186,6 @@ class _ScalePageState extends State<ScalePage> with AfterLayoutMixin {
           Expanded(
             child: ListView(
               children: [
-                SizedBox(
-                  width: MediaQuery.of(context).size.width - 72,
-                  height: MediaQuery.of(context).size.width * 0.14,
-                  child: ListView(
-                      scrollDirection: Axis.horizontal,
-                      children: const [
-                        CameraCard(),
-                        SizedBox(
-                          width: 10,
-                        ),
-                        CameraCard(),
-                        SizedBox(
-                          width: 10,
-                        ),
-                        CameraCard(),
-                        SizedBox(
-                          width: 10,
-                        ),
-                        CameraCard(),
-                      ]),
-                ),
                 const SizedBox(height: 20),
                 Container(
                   width: MediaQuery.of(context).size.width,
