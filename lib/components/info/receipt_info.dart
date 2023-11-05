@@ -1,11 +1,11 @@
-import 'package:etos_scale_windows/components/ui/form_date_field.dart';
-import 'package:etos_scale_windows/components/ui/form_text_field.dart';
 import 'package:etos_scale_windows/contants/colors.dart';
+import 'package:etos_scale_windows/models/result.dart';
 import 'package:flutter/material.dart';
-import 'package:form_builder_validators/form_builder_validators.dart';
+import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 
 class ReceiptInfo extends StatefulWidget {
-  const ReceiptInfo({Key? key}) : super(key: key);
+  final ScaleInfoDetail data;
+  const ReceiptInfo({Key? key, required this.data}) : super(key: key);
 
   @override
   State<ReceiptInfo> createState() => _ReceiptInfoState();
@@ -14,160 +14,260 @@ class ReceiptInfo extends StatefulWidget {
 class _ReceiptInfoState extends State<ReceiptInfo> {
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          'Баримт',
-          style: TextStyle(
-            color: black,
-            fontWeight: FontWeight.w600,
-            fontSize: 16,
+    return SfDataGrid(
+      rowHeight: 70,
+      source: widget.data,
+      columnWidthMode: ColumnWidthMode.auto,
+      isScrollbarAlwaysShown: true,
+      columns: <GridColumn>[
+        GridColumn(
+          columnName: '#',
+          minimumWidth: 10,
+          columnWidthMode: ColumnWidthMode.auto,
+          label: Container(
+            padding: const EdgeInsets.all(8),
+            alignment: Alignment.centerLeft,
+            child: const Center(
+              child: Text(
+                '#',
+              ),
+            ),
           ),
         ),
-        const SizedBox(
-          height: 20,
+        GridColumn(
+          columnWidthMode: ColumnWidthMode.auto,
+          columnName: 'sign',
+          label: Container(
+            padding: const EdgeInsets.all(8),
+            alignment: Alignment.center,
+            child: const Text(
+              'Төрөл',
+            ),
+          ),
         ),
-        Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Expanded(
-                child: Column(
-              children: [
-                FormTextField(
-                  name: "receiptNo",
-                  labelText: "Баримтны дугаар",
-                  filled: true,
-                  fillColor: gray102,
-                  textColor: black,
-                  labelColor: black,
-                  bgColor: Colors.transparent,
-                  validator: FormBuilderValidators.compose([
-                    FormBuilderValidators.required(
-                        errorText: 'Заавал бөглөнө үү.'),
-                  ]),
-                ),
-                const SizedBox(
-                  height: 15,
-                ),
-                FormTextField(
-                  name: "supplierName",
-                  labelText: "Худалдаалагч",
-                  filled: true,
-                  fillColor: gray102,
-                  textColor: black,
-                  labelColor: black,
-                  bgColor: Colors.transparent,
-                  validator: FormBuilderValidators.compose([
-                    FormBuilderValidators.required(
-                        errorText: 'Заавал бөглөнө үү.'),
-                  ]),
-                ),
-                const SizedBox(
-                  height: 15,
-                ),
-                FormTextField(
-                  name: "transportName",
-                  labelText: "Тээвэрлэгч",
-                  filled: true,
-                  fillColor: gray102,
-                  textColor: black,
-                  labelColor: black,
-                  bgColor: Colors.transparent,
-                  validator: FormBuilderValidators.compose([
-                    FormBuilderValidators.required(
-                        errorText: 'Заавал бөглөнө үү.'),
-                  ]),
-                ),
-              ],
-            )),
-            const SizedBox(width: 20),
-            Expanded(
-                child: Column(
-              children: [
-                FormTextField(
-                  name: "contractNo",
-                  labelText: "Гэрээний дугаар",
-                  filled: true,
-                  fillColor: gray102,
-                  textColor: black,
-                  labelColor: black,
-                  bgColor: Colors.transparent,
-                  validator: FormBuilderValidators.compose([
-                    FormBuilderValidators.required(
-                        errorText: 'Заавал бөглөнө үү.'),
-                  ]),
-                ),
-                const SizedBox(
-                  height: 15,
-                ),
-                FormTextField(
-                  name: "buyerName",
-                  labelText: "Худалдан авагч",
-                  filled: true,
-                  fillColor: gray102,
-                  textColor: black,
-                  labelColor: black,
-                  bgColor: Colors.transparent,
-                  validator: FormBuilderValidators.compose([
-                    FormBuilderValidators.required(
-                        errorText: 'Заавал бөглөнө үү.'),
-                  ]),
-                ),
-                const SizedBox(
-                  height: 15,
-                ),
-                FormTextField(
-                  name: "routeName",
-                  labelText: "Чиглэл",
-                  filled: true,
-                  fillColor: gray102,
-                  textColor: black,
-                  labelColor: black,
-                  bgColor: Colors.transparent,
-                  validator: FormBuilderValidators.compose([
-                    FormBuilderValidators.required(
-                        errorText: 'Заавал бөглөнө үү.'),
-                  ]),
-                ),
-              ],
-            )),
-            const SizedBox(width: 20),
-            Expanded(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.end,
+        GridColumn(
+          columnWidthMode: ColumnWidthMode.auto,
+          columnName: 'vehiclePlateNo',
+          label: Container(
+            padding: const EdgeInsets.all(8),
+            alignment: Alignment.center,
+            child: const Text(
+              'Авто машин',
+            ),
+          ),
+        ),
+        GridColumn(
+          columnWidthMode: ColumnWidthMode.auto,
+          columnName: 'vehiclePlateNo',
+          label: Container(
+            padding: const EdgeInsets.all(8),
+            alignment: Alignment.center,
+            child: const Text(
+              'Жин',
+            ),
+          ),
+        ),
+        GridColumn(
+          minimumWidth: 410,
+          columnWidthMode: ColumnWidthMode.fitByCellValue,
+          columnName: 'trailerInfo',
+          label: Container(
+            padding: const EdgeInsets.all(8),
+            alignment: Alignment.centerLeft,
+            child: const Text(
+              'Чиргүүл, чингэлэг',
+            ),
+          ),
+        ),
+        GridColumn(
+          columnWidthMode: ColumnWidthMode.fill,
+          columnName: 'driver',
+          label: Container(
+            padding: const EdgeInsets.all(8),
+            alignment: Alignment.centerLeft,
+            child: const Text(
+              'Жолооч',
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class ScaleInfoDetail extends DataGridSource {
+  ScaleInfoDetail({
+    required Result result,
+    counter = 1,
+  }) {
+    _info = result.rows!
+        .map(
+          (e) => DataGridRow(
+            cells: [
+              DataGridCell(columnName: '#', value: "${counter++}."),
+              DataGridCell(columnName: 'sign', value: e.type),
+              DataGridCell(
+                  columnName: 'vehiclePlateNo', value: e.vehiclePlateNo),
+              DataGridCell(columnName: 'weightValue', value: e.weightValue),
+              DataGridCell(
+                  columnName: 'trailerPlateNumbers',
+                  value: e.trailerPlateNumbers),
+              DataGridCell(
+                  columnName: 'containerNumbers', value: e.containerNumbers),
+              DataGridCell(columnName: 'driver', value: e.driverRegisterNo),
+              DataGridCell(columnName: 'driver', value: e.driverPhone),
+              DataGridCell(columnName: 'driver', value: e.driverPhoneSecond),
+            ],
+          ),
+        )
+        .toList();
+  }
+
+  List<DataGridRow> _info = [];
+
+  @override
+  List<DataGridRow> get rows => _info;
+  int get rowCount => 50;
+
+  get counter => null;
+
+  @override
+  DataGridRowAdapter? buildRow(DataGridRow row) {
+    var trailers = row.getCells()[4].value as List<String>;
+    var contianers = row.getCells()[5].value as List<String>;
+    return DataGridRowAdapter(
+      cells: <Widget>[
+        Container(
+          padding: const EdgeInsets.all(8.0),
+          alignment: Alignment.centerLeft,
+          child: Center(child: Text(row.getCells()[0].value.toString())),
+        ),
+        Container(
+          padding: const EdgeInsets.all(8.0),
+          alignment: Alignment.centerLeft,
+          child: Center(child: Text(row.getCells()[1].value.toString())),
+        ),
+        Container(
+          padding: const EdgeInsets.all(8.0),
+          alignment: Alignment.centerLeft,
+          child: Center(
+            child: Text(
+              row.getCells()[2].value.toString(),
+              style: TextStyle(
+                color: black,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+          ),
+        ),
+        Container(
+          padding: const EdgeInsets.all(8.0),
+          alignment: Alignment.centerLeft,
+          child: Center(child: Text(row.getCells()[3].value.toString())),
+        ),
+        Container(
+          padding: const EdgeInsets.all(8.0),
+          alignment: Alignment.centerLeft,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
                 children: [
-                  FormDateField(
-                    name: "receiptDate",
-                    labelText: "Огноо",
-                    filled: true,
-                    fillColor: gray102,
-                    textColor: black,
-                    labelColor: black,
-                    bgColor: Colors.transparent,
-                    validator: FormBuilderValidators.compose([
-                      FormBuilderValidators.required(
-                          errorText: 'Заавал бөглөнө үү.'),
-                    ]),
-                  ),
-                  const SizedBox(height: 15),
-                  FormTextField(
-                    name: "productName",
-                    labelText: "Нүүрсний төрөл",
-                    filled: true,
-                    fillColor: gray102,
-                    textColor: black,
-                    labelColor: black,
-                    bgColor: Colors.transparent,
-                    validator: FormBuilderValidators.compose([
-                      FormBuilderValidators.required(
-                          errorText: 'Заавал бөглөнө үү.'),
-                    ]),
+                  Container(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 5,
+                      vertical: 3,
+                    ),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(4),
+                      border: Border.all(
+                        color: gray102,
+                      ),
+                    ),
+                    child: Text(
+                      trailers.join(", "),
+                      style: TextStyle(
+                        color: black,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
                   ),
                 ],
               ),
-            )
-          ],
+              const SizedBox(
+                height: 5,
+              ),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Row(
+                    children: [
+                      Text(
+                        contianers.join(", "),
+                        style: TextStyle(
+                          color: black,
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
+        Container(
+          padding: const EdgeInsets.all(8.0),
+          alignment: Alignment.centerLeft,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                children: [
+                  Container(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 5,
+                      vertical: 3,
+                    ),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(4),
+                      border: Border.all(
+                        color: gray102,
+                      ),
+                    ),
+                    child: Text(
+                      row.getCells()[6].value.toString(),
+                      style: TextStyle(
+                        color: black,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(
+                height: 5,
+              ),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Row(
+                    children: [
+                      Text(
+                        "${row.getCells()[7].value.toString()}, ${row.getCells()[8].value.toString()},",
+                        style: TextStyle(
+                          color: black,
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ],
+          ),
         ),
       ],
     );

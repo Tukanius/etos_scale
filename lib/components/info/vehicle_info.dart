@@ -39,69 +39,16 @@ class _VehicleInfoState extends State<VehicleInfo> {
             labelColor: black,
             bgColor: Colors.transparent,
             validator: FormBuilderValidators.compose([
-              (value) {
-                return carNumber(
-                  (value != null ? value as String : value) as String?,
-                );
-              }
+              // (value) {
+              //   return carNumber(
+              //     (value != null ? value as String : value) as String?,
+              //   );
+              // }
+              FormBuilderValidators.required(errorText: 'Алдаа!'),
             ]),
           ),
           const SizedBox(
             height: 15,
-          ),
-          FormTextField(
-            name: "unladedWeight",
-            labelText: "Ачаагүй жин",
-            filled: true,
-            fillColor: gray102,
-            textColor: black,
-            labelColor: black,
-            bgColor: Colors.transparent,
-            validator: FormBuilderValidators.compose([
-              (value) {
-                return validateWeight(
-                  (value != null ? value as String : value) as String?,
-                );
-              }
-            ]),
-          ),
-          const SizedBox(
-            height: 15,
-          ),
-          FormTextField(
-            name: "fullWeight",
-            labelText: "Ачаатай жин",
-            filled: true,
-            fillColor: gray102,
-            textColor: black,
-            labelColor: black,
-            bgColor: Colors.transparent,
-            validator: FormBuilderValidators.compose([
-              (value) {
-                return validateWeight(
-                  (value != null ? value as String : value) as String?,
-                );
-              }
-            ]),
-          ),
-          const SizedBox(
-            height: 15,
-          ),
-          FormTextField(
-            name: "totalWeight",
-            labelText: "Цэвэр жин",
-            filled: true,
-            fillColor: gray102,
-            textColor: black,
-            labelColor: black,
-            bgColor: Colors.transparent,
-            validator: FormBuilderValidators.compose([
-              (value) {
-                return validateWeight(
-                  (value != null ? value as String : value) as String?,
-                );
-              }
-            ]),
           ),
         ],
       ),
@@ -109,19 +56,11 @@ class _VehicleInfoState extends State<VehicleInfo> {
   }
 }
 
-String? carNumber(String? value) {
-  if (value != null && value.length == 7) {
-    return null;
-  } else {
-    return 'Алдаа!';
-  }
-}
-
-String? validateWeight(String? value) {
-  final RegExp numericRegex = RegExp(r'^[0-9]+$');
-  if (value != null && numericRegex.hasMatch(value)) {
-    return null;
-  } else {
-    return 'Алдаа!';
-  }
-}
+// String? carNumber(String? value) {
+//   final pattern = RegExp(r'^\d{4}');
+//   if (value != null && value.length == 7 && pattern.hasMatch(value) == true) {
+//     return null;
+//   } else {
+//     return 'Алдаа!';
+//   }
+// }

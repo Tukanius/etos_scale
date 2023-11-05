@@ -1,7 +1,6 @@
 import 'dart:ui';
 
 import 'package:etos_scale_windows/pages/auth/login_page.dart';
-// import 'package:etos_scale_windows/utils/scroll_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:etos_scale_windows/provider/user_provider.dart';
@@ -10,7 +9,6 @@ import 'package:etos_scale_windows/pages/splash/splash_page.dart';
 import 'package:etos_scale_windows/services/dialog.dart';
 import 'package:etos_scale_windows/services/navigation.dart';
 import 'package:provider/provider.dart';
-import 'package:media_kit/media_kit.dart';
 import 'package:flutter_dropdown_alert/dropdown_alert.dart';
 
 void main() async {
@@ -19,7 +17,6 @@ void main() async {
   DartPluginRegistrant.ensureInitialized();
 
   WidgetsFlutterBinding.ensureInitialized();
-  MediaKit.ensureInitialized();
 
   runApp(const MyApp());
 }

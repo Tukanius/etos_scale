@@ -39,25 +39,11 @@ class _DriverInfoState extends State<DriverInfo> {
             labelColor: black,
             bgColor: Colors.transparent,
             validator: FormBuilderValidators.compose([
-              (value) {
-                return validateRegisterNo(
-                  (value != null ? value as String : value) as String?,
-                );
-              }
-            ]),
-          ),
-          const SizedBox(
-            height: 15,
-          ),
-          FormTextField(
-            name: "driverName",
-            labelText: "Овог нэр",
-            filled: true,
-            fillColor: gray102,
-            textColor: black,
-            labelColor: black,
-            bgColor: Colors.transparent,
-            validator: FormBuilderValidators.compose([
+              // (value) {
+              //   return validateRegisterNo(
+              //     (value != null ? value as String : value) as String?,
+              //   );
+              // }
               FormBuilderValidators.required(errorText: 'Алдаа!'),
             ]),
           ),
@@ -65,8 +51,8 @@ class _DriverInfoState extends State<DriverInfo> {
             height: 15,
           ),
           FormTextField(
-            name: "driverPdlNumber",
-            labelText: "Үнэмлэх (PDL)",
+            name: "driverPhone",
+            labelText: "Утас 1",
             filled: true,
             fillColor: gray102,
             textColor: black,
@@ -74,7 +60,7 @@ class _DriverInfoState extends State<DriverInfo> {
             bgColor: Colors.transparent,
             validator: FormBuilderValidators.compose([
               (value) {
-                return validatePdl(
+                return validateNumber(
                   (value != null ? value as String : value) as String?,
                 );
               }
@@ -84,8 +70,8 @@ class _DriverInfoState extends State<DriverInfo> {
             height: 15,
           ),
           FormTextField(
-            name: "driverPhone",
-            labelText: "Утас",
+            name: "driverPhoneSecond",
+            labelText: "Утас 2",
             filled: true,
             fillColor: gray102,
             textColor: black,
@@ -117,15 +103,6 @@ String? validateRegisterNo(String? value) {
 String? validateNumber(String? value) {
   final RegExp numericRegex = RegExp(r'^[0-9]+$');
   if (value != null && numericRegex.hasMatch(value) && value.length == 8) {
-    return null;
-  } else {
-    return 'Алдаа!';
-  }
-}
-
-String? validatePdl(String? value) {
-  final RegExp numericRegex = RegExp(r'^[0-9]+$');
-  if (value != null && numericRegex.hasMatch(value) && value.length == 5) {
     return null;
   } else {
     return 'Алдаа!';

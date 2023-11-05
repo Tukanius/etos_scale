@@ -2,7 +2,6 @@
 import 'package:after_layout/after_layout.dart';
 import 'package:etos_scale_windows/api/truck_api.dart';
 import 'package:etos_scale_windows/contants/colors.dart';
-import 'package:etos_scale_windows/models/receipt.dart';
 import 'package:etos_scale_windows/models/result.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -17,11 +16,10 @@ class ScaleListPage extends StatefulWidget {
 }
 
 class _ScaleListPageState extends State<ScaleListPage> with AfterLayoutMixin {
-  TableRow tableRow = TableRow(result: Result(rows: [], count: 0));
+  TruckTable tableRow = TruckTable(result: Result(rows: [], count: 0));
   int page = 1;
   int limit = 30;
   bool isLoading = false;
-  int counter = 0;
   loadData(int page, int limit) async {
     Filter filter = Filter();
 
@@ -29,7 +27,7 @@ class _ScaleListPageState extends State<ScaleListPage> with AfterLayoutMixin {
 
     Result res = await TruckApi()
         .scaleList(ResultArguments(filter: filter, offset: offset));
-    setState(() => tableRow = TableRow(result: res));
+    setState(() => tableRow = TruckTable(result: res));
   }
 
   @override
@@ -42,8 +40,6 @@ class _ScaleListPageState extends State<ScaleListPage> with AfterLayoutMixin {
       isLoading = true;
     });
   }
-
-  List<Receipt> info = <Receipt>[];
 
   @override
   Widget build(BuildContext context) {
@@ -237,8 +233,8 @@ class _ScaleListPageState extends State<ScaleListPage> with AfterLayoutMixin {
   }
 }
 
-class TableRow extends DataGridSource {
-  TableRow({
+class TruckTable extends DataGridSource {
+  TruckTable({
     required Result result,
     counter = 1,
   }) {
