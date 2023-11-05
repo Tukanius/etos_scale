@@ -1,4 +1,5 @@
 import 'package:etos_scale_windows/contants/colors.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:intl/intl.dart';
@@ -135,7 +136,9 @@ class _FormDateFieldState extends State<FormDateField> {
                 // widget.controller.text =
                 //     formattedDate; //set foratted date to TextField value.
               } else {
-                print("Date is not selected");
+                if (kDebugMode) {
+                  print("Date is not selected");
+                }
               }
             },
           ),

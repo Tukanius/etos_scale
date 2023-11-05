@@ -10,8 +10,8 @@ import 'http_handler.dart';
 import '../main.dart';
 
 class HttpRequest {
-  // String host = 'http://mine.etos.mn/sca/api';
-  String host = 'http://192.168.1.8:30605/api';
+  String host = 'http://mine.etos.mn/sca/api';
+  // String host = 'http://192.168.1.8:30605/api';
 
   Dio dio = Dio();
 
@@ -40,12 +40,9 @@ class HttpRequest {
 
       var accessToken = await UserProvider.getAccessToken();
       var machineType = 'SCALE';
-      var machineId = await UserProvider.getMachineId();
-
       dio.options.headers = {
         'authorization': 'Bearer $accessToken',
         'machine-type': machineType,
-        'machine-id': machineId
       };
     } catch (err) {
       debugPrint(err.toString());

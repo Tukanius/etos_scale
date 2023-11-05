@@ -4,11 +4,14 @@ part of '../models/scale_form.dart';
 
 ScaleForm _$ScaleFormJson(Map<String, dynamic> json) {
   return ScaleForm(
-    type: json["listenController.value"],
-    vehiclePlateNo: json["vehiclePlateNo"],
-    weightValue: json["weightValue"],
-    driverRegisterNo: json["driverRegisterNo"],
-    driverPhone: json["driverPhone"],
+    type: json["type"] != null ? json["type"] as String : null,
+    vehiclePlateNo: json["vehiclePlateNo"] != null
+        ? json["vehiclePlateNo"] as String
+        : null,
+    weightValue: json["weightValue"] != null ? json["weightValue"] : null,
+    driverRegisterNo:
+        json["driverRegisterNo"] != null ? json["driverRegisterNo"] : null,
+    driverPhone: json["driverPhone"] != null ? json["driverPhone"] : null,
     driverPhoneSecond:
         json["driverPhoneSecond"] != null ? json["driverPhoneSecond"] : '',
     trailerPlateNumbers_0: json["trailerPlateNumbers_0"] != null
@@ -41,8 +44,10 @@ ScaleForm _$ScaleFormJson(Map<String, dynamic> json) {
 }
 
 Map<String, dynamic> _$ScaleFormToJson(ScaleForm instance) {
+  ListenController listenController = ListenController();
+
   Map<String, dynamic> json = {};
-  json['type'] = instance.type;
+  json['type'] = listenController.value;
   json['vehiclePlateNo'] = instance.vehiclePlateNo;
   json['weightValue'] = instance.weightValue;
   json['driverRegisterNo'] = instance.driverRegisterNo;

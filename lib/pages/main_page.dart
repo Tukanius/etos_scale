@@ -23,6 +23,7 @@ class _MainPageState extends State<MainPage>
     with SingleTickerProviderStateMixin, AfterLayoutMixin {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   String scaleData = "000000";
+
   late io.Socket socket;
 
   socketListener() {
@@ -66,7 +67,8 @@ class _MainPageState extends State<MainPage>
         final reader = SerialPortReader(port);
 
         var received = "";
-
+        var machineId =
+            Provider.of<UserProvider>(context, listen: false).machineId;
         reader.stream.listen((data) {
           var chr = String.fromCharCodes(data);
 
@@ -87,8 +89,7 @@ class _MainPageState extends State<MainPage>
       }
     }
     // ignore: use_build_context_synchronously
-    var machineId = Provider.of<UserProvider>(context, listen: true).machineId;
-
+    var machineId = Provider.of<UserProvider>(context, listen: false).machineId;
     socket = io.io(
       'http://192.168.1.8:30605',
       io.OptionBuilder().setTransports(['websocket']).setQuery(

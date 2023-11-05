@@ -111,26 +111,10 @@ class ScaleInfoDetail extends DataGridSource {
               DataGridCell(columnName: 'weightValue', value: e.weightValue),
               DataGridCell(
                   columnName: 'trailerPlateNumbers',
-                  value: e.trailerPlateNumbers_0),
+                  value: e.trailerPlateNumbers),
               DataGridCell(
-                  columnName: 'trailerPlateNumbers',
-                  value: e.trailerPlateNumbers_1),
-              DataGridCell(
-                  columnName: 'containerNumbers', value: e.containerNumber_0_4),
-              DataGridCell(
-                  columnName: 'containerNumbers', value: e.containerNumber_0_7),
-              DataGridCell(
-                  columnName: 'containerNumbers', value: e.containerNumber_1_4),
-              DataGridCell(
-                  columnName: 'containerNumbers', value: e.containerNumber_1_7),
-              DataGridCell(
-                  columnName: 'containerNumbers', value: e.containerNumber_2_4),
-              DataGridCell(
-                  columnName: 'containerNumbers', value: e.containerNumber_2_7),
-              DataGridCell(
-                  columnName: 'containerNumbers', value: e.containerNumber_3_4),
-              DataGridCell(
-                  columnName: 'containerNumbers', value: e.containerNumber_3_7),
+                  columnName: 'containerNumbers', value: e.containerNumbers),
+              DataGridCell(columnName: 'driver', value: e.driverName),
               DataGridCell(columnName: 'driver', value: e.driverRegisterNo),
               DataGridCell(columnName: 'driver', value: e.driverPhone),
               DataGridCell(columnName: 'driver', value: e.driverPhoneSecond),
@@ -150,6 +134,9 @@ class ScaleInfoDetail extends DataGridSource {
 
   @override
   DataGridRowAdapter? buildRow(DataGridRow row) {
+    var trailers = row.getCells()[4].value as List<String>;
+    var contianers = row.getCells()[5].value as List<String>;
+    // contianers.join(", "),
     return DataGridRowAdapter(
       cells: <Widget>[
         Container(
@@ -201,7 +188,7 @@ class ScaleInfoDetail extends DataGridSource {
                       ),
                     ),
                     child: Text(
-                      "${row.getCells()[4].value.toString()}, ${row.getCells()[5].value.toString()}",
+                      trailers.join(", "),
                       style: TextStyle(
                         color: black,
                         fontWeight: FontWeight.w500,
@@ -220,7 +207,7 @@ class ScaleInfoDetail extends DataGridSource {
                   Row(
                     children: [
                       Text(
-                        "${row.getCells()[6].value.toString()}${row.getCells()[7].value.toString()}, ${row.getCells()[8].value.toString()}${row.getCells()[9].value.toString()}, ${row.getCells()[10].value.toString()}${row.getCells()[11].value.toString()}, ${row.getCells()[12].value.toString()}${row.getCells()[13].value.toString()}",
+                        contianers.join(", "),
                         style: TextStyle(
                           color: black,
                         ),
@@ -253,7 +240,7 @@ class ScaleInfoDetail extends DataGridSource {
                       ),
                     ),
                     child: Text(
-                      row.getCells()[14].value.toString(),
+                      row.getCells()[6].value.toString(),
                       style: TextStyle(
                         color: black,
                         fontWeight: FontWeight.w500,
@@ -272,7 +259,7 @@ class ScaleInfoDetail extends DataGridSource {
                   Row(
                     children: [
                       Text(
-                        "${row.getCells()[15].value.toString()}, ${row.getCells()[16].value.toString()},",
+                        "${row.getCells()[7].value.toString()}, ${row.getCells()[8].value.toString()},",
                         style: TextStyle(
                           color: black,
                         ),

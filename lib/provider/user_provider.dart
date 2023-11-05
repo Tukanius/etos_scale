@@ -2,13 +2,35 @@ import 'package:etos_scale_windows/api/auth_api.dart';
 import 'package:flutter/foundation.dart';
 import 'package:etos_scale_windows/models/user.dart';
 import 'package:flutter/services.dart';
-import 'package:platform_device_id/platform_device_id.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:platform_device_id/platform_device_id.dart';
 
 class UserProvider extends ChangeNotifier {
+  // ignore: unused_field
+  String? _deviceId;
   late User? user;
   late String selectedPage = 'ScalePage';
   late String? machineId;
+  String? selectedType;
+
+  void updateType(String newType) {
+    selectedType = newType;
+    notifyListeners();
+  }
+
+  Future<void> fetchDeviceId() async {
+    String? deviceId = await _getDeviceIdFromPlatform();
+    _deviceId = deviceId;
+    notifyListeners();
+  }
+
+  Future<String?> _getDeviceIdFromPlatform() async {
+    try {
+      return await PlatformDeviceId.getDeviceId;
+    } on PlatformException {
+      return 'Failed to get deviceId.';
+    }
+  }
 
   void setSelectedPage(String page) {
     selectedPage = page;
@@ -37,7 +59,6 @@ class UserProvider extends ChangeNotifier {
   static Future<String?> getAccessToken() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String? token = prefs.getString("accessToken");
-
     return token;
   }
 
@@ -48,15 +69,6 @@ class UserProvider extends ChangeNotifier {
 
   login(data) async {
     String accessToken = await AuthApi().login(data);
-    try {
-      var deviceId = await PlatformDeviceId.getDeviceId;
-
-      machineId = deviceId;
-      await setMachineId(deviceId);
-    } on PlatformException {
-      return;
-    }
-
     await setAccessToken(accessToken);
     notifyListeners();
   }

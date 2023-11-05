@@ -22,12 +22,11 @@ class _ReceiptPageState extends State<ReceiptPage> with AfterLayoutMixin {
   bool isLoading = false;
   loadData(int page, int limit) async {
     Filter filter = Filter();
-
     Offset offset = Offset(limit: limit, page: page);
 
-    // Result res = await TruckApi()
-    //     .Receipt(ResultArguments(filter: filter, offset: offset));
-    // setState(() => tableRow = TruckTable(result: res));
+    Result res = await ScaleApi()
+        .getReceiptList(ResultArguments(filter: filter, offset: offset));
+    setState(() => tableRow = TruckTable(result: res));
   }
 
   @override
@@ -263,7 +262,7 @@ class TruckTable extends DataGridSource {
               DataGridCell(columnName: 'transportName', value: e.transportName),
               DataGridCell(columnName: 'contractNo', value: e.contractNo),
               DataGridCell(columnName: 'buyerName', value: e.buyerName),
-              DataGridCell(columnName: 'routeName', value: e.routeName),
+              DataGridCell(columnName: 'routeName', value: e.buyerName),
               DataGridCell(columnName: 'productName', value: e.productName),
               DataGridCell(columnName: 'createdAt', value: e.createdAt),
             ],

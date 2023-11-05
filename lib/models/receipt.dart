@@ -1,28 +1,58 @@
 part '../parts/receipt.dart';
 
 class Receipt {
-  String type;
+  String contractNo;
+  String? receiptNo;
+  String receiptDate;
+  String? supplierName;
+  String? buyerName;
+  String? productName;
+  String transportName;
   String vehiclePlateNo;
-  int weightValue;
+  int fullWeight;
+  int unladedWeight;
+  int totalWeight;
   List<String>? trailerPlateNumbers;
-  List<String>? containerNumbers;
-  List<String>? sealNumbers;
-  String driverRegisterNo;
-  String driverPhone;
+  List<String>? trailers;
   String driverName;
-  String? driverPhoneSecond;
+  String? driverPhone;
+  String driverRegisterNo;
+  String? driverPdlNumber;
+  List<String>? containerNumbers;
+  List<String>? containers;
+  List<String>? truckScales;
+  List<String>? sealNumbers;
+  String? receiptStatus;
+  String? receiptStatusDate;
+  List<String>? receiptStatuses;
+  String createdAt;
 
   Receipt({
-    required this.type,
+    required this.contractNo,
+    this.receiptNo,
+    required this.receiptDate,
+    this.supplierName,
+    this.buyerName,
+    this.productName,
+    required this.transportName,
     required this.vehiclePlateNo,
-    required this.weightValue,
+    required this.fullWeight,
+    required this.unladedWeight,
+    required this.totalWeight,
     this.trailerPlateNumbers,
-    this.containerNumbers,
-    this.sealNumbers,
-    required this.driverRegisterNo,
-    required this.driverPhone,
+    this.trailers,
     required this.driverName,
-    this.driverPhoneSecond,
+    this.driverPhone,
+    required this.driverRegisterNo,
+    this.driverPdlNumber,
+    this.containerNumbers,
+    this.containers,
+    this.truckScales,
+    this.sealNumbers,
+    this.receiptStatus,
+    this.receiptStatusDate,
+    required this.receiptStatuses,
+    required this.createdAt,
   });
 
   static $fromJson(Map<String, dynamic> json) => _$ReceiptFromJson(json);
@@ -31,40 +61,3 @@ class Receipt {
       _$ReceiptFromJson(json);
   Map<String, dynamic> toJson() => _$ReceiptToJson(this);
 }
-// /**
-//  {
-//       "_id": "65475a32800c288979a9149a",
-//       "type": "OUT",
-//       "scale": "6544df8290101b21270e801b",
-//       "customer": "654226de3f4d8675de006f1b",
-//       "vehicle": "65473162d78185a6a359b159",
-//       "vehiclePlateNo": "0008УЕМ",
-//       "vehicleMark": "NISSAN",
-//       "vehicleAxleCount": 2,
-//       "weightValue": 10000,
-//       "trailerCount": 1,
-//       "containerCount": 1,
-//       "trailerPlateNumbers": [
-//           "1446ТЧ"
-//       ],
-//       "sealNumbers": [
-//           "1234"
-//       ],
-//       "trailers": [
-//           "65473234d3a86909a8a8c3b2"
-//       ],
-//       "driverName": "ЭНХБАЯР АМАРТҮВШИН",
-//       "driverPhone": "88879595",
-//       "driverPhoneSecond": null,
-//       "driverRegisterNo": "ЕЮ90011457",
-//       "driverPdlNumber": null,
-//       "containerNumbers": [
-//           "10110144141"
-//       ],
-//       "containers": [],
-//       "truckScaleStatus": "NEW",
-//       "createdAt": "2023-11-05T09:02:42.079Z",
-//       "updatedAt": "2023-11-05T09:02:42.079Z",
-//       "__v": 0
-//         },
-//  */

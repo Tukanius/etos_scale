@@ -45,9 +45,9 @@ class _ScalePageState extends State<ScalePage> with AfterLayoutMixin {
     Filter filter = Filter();
     Offset offset = Offset(limit: limit, page: page);
 
-    // Result res = await TruckApi()
-    //     .scaleReceiptList(ResultArguments(filter: filter, offset: offset));
-    // setState(() => tableRow = ScaleInfoDetail(result: res));
+    Result res = await ScaleApi()
+        .getScaleList(ResultArguments(filter: filter, offset: offset));
+    setState(() => tableRow = ScaleInfoDetail(result: res));
   }
 
   @override
@@ -178,7 +178,6 @@ class _ScalePageState extends State<ScalePage> with AfterLayoutMixin {
                             onSubmit();
                           },
                           scaleData: widget.scaleData,
-                          listenController: listenController,
                         ),
                         const SizedBox(width: 20),
                         const DriverInfo(),

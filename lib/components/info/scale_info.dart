@@ -1,17 +1,7 @@
-import 'package:etos_scale_windows/components/controller/listen.dart';
-import 'package:etos_scale_windows/components/ui/button.dart';
 import 'package:etos_scale_windows/contants/colors.dart';
 import 'package:flutter/material.dart';
 
-class ScaleInfoArguments {
-  ListenController listenController;
-  ScaleInfoArguments({
-    required this.listenController,
-  });
-}
-
 class ScaleInfo extends StatefulWidget {
-  final ListenController listenController;
   final String scaleData;
   final Function()? onClick;
   final bool isLoading;
@@ -20,7 +10,6 @@ class ScaleInfo extends StatefulWidget {
     this.onClick,
     required this.scaleData,
     required this.isLoading,
-    required this.listenController,
   }) : super(key: key);
 
   @override
@@ -57,45 +46,51 @@ class _ScaleInfoState extends State<ScaleInfo> {
               ),
             ),
             const SizedBox(height: 20),
-            Button(
-              isLoading: widget.isLoading,
-              labelText: "Баталгаажуулах",
-              color: colorSecondary,
-              onPress: widget.onClick!,
-            ),
-            const SizedBox(height: 20),
             Row(
-              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(
-                  'Орох',
-                  style: TextStyle(
-                    fontSize: 16,
-                    color: black,
-                    fontWeight: FontWeight.w500,
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: primary,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10.0),
+                    ),
+                  ),
+                  onPressed: widget.onClick,
+                  child: Container(
+                    margin:
+                        const EdgeInsets.symmetric(horizontal: 30, vertical: 8),
+                    child: Text(
+                      'Орох',
+                      style: TextStyle(
+                        color: white,
+                        fontWeight: FontWeight.w500,
+                        fontSize: 16,
+                      ),
+                    ),
                   ),
                 ),
-                Switch(
-                  activeColor: Colors.white,
-                  value: isSelected1,
-                  onChanged: (bool value) {
-                    setState(() {
-                      isSelected1 = !isSelected1;
-                      if (isSelected1 == false) {
-                        widget.listenController.changeVariable("IN");
-                      }
-                      if (isSelected1 == true) {
-                        widget.listenController.changeVariable("OUT");
-                      }
-                    });
-                  },
-                ),
-                Text(
-                  'Гарах',
-                  style: TextStyle(
-                    fontSize: 16,
-                    color: black,
-                    fontWeight: FontWeight.w500,
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: primary,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10.0),
+                    ),
+                  ),
+                  onPressed: widget.onClick,
+
+                  // widget.onClick;
+                  child: Container(
+                    margin:
+                        const EdgeInsets.symmetric(horizontal: 30, vertical: 8),
+                    child: Text(
+                      'Гарах',
+                      style: TextStyle(
+                        color: white,
+                        fontWeight: FontWeight.w500,
+                        fontSize: 16,
+                      ),
+                    ),
                   ),
                 ),
               ],
