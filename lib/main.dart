@@ -1,6 +1,5 @@
 import 'dart:ui';
 
-import 'package:after_layout/after_layout.dart';
 import 'package:etos_scale_windows/pages/auth/login_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
@@ -11,7 +10,6 @@ import 'package:etos_scale_windows/services/dialog.dart';
 import 'package:etos_scale_windows/services/navigation.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_dropdown_alert/dropdown_alert.dart';
-import 'package:socket_io_client/socket_io_client.dart' as io;
 
 void main() async {
   locator.registerLazySingleton(() => NavigationService());
@@ -32,41 +30,7 @@ class MyApp extends StatefulWidget {
   State<MyApp> createState() => _MyAppState();
 }
 
-class _MyAppState extends State<MyApp> with AfterLayoutMixin {
-  late io.Socket socket;
-
-  socketListener() {
-    socket.onConnect((data) => debugPrint('Socket Connection'));
-    socket.onDisconnect((data) => debugPrint('Disconnect'));
-    socket.onConnectError((data) => debugPrint('Socket Connection Error'));
-    socket.on('data', (data) {
-      debugPrint('Received data from server: $data');
-    });
-    socket.onReconnect((data) {
-      debugPrint('Reconnected to the socket server');
-    });
-    socket.onReconnecting((data) {
-      debugPrint('Reconnecting to the socket server');
-    });
-  }
-
-  @override
-  afterFirstLayout(BuildContext context) async {
-    var machineId = Provider.of<UserProvider>(context, listen: true).machineId;
-
-    socket = io.io(
-      'http://192.168.1.8:30605',
-      io.OptionBuilder().setTransports(['websocket']).setQuery(
-        {
-          'machineId': machineId,
-          'machineType': 'SCALE',
-        },
-      ).build(),
-    );
-
-    socketListener();
-  }
-
+class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MultiProvider(

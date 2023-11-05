@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:etos_scale_windows/pages/scale/scale_page.dart';
 import 'package:provider/provider.dart';
 import "package:flutter_libserialport/flutter_libserialport.dart";
+import 'package:socket_io_client/socket_io_client.dart' as io;
 
 class MainPage extends StatefulWidget {
   static const routeName = 'MainPage';
@@ -22,6 +23,23 @@ class _MainPageState extends State<MainPage>
     with SingleTickerProviderStateMixin, AfterLayoutMixin {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   String scaleData = "000000";
+  late io.Socket socket;
+
+  socketListener() {
+    socket.onConnect((data) => debugPrint('Socket Connection'));
+    socket.onDisconnect((data) => debugPrint('Disconnect'));
+    socket.onConnectError((data) => debugPrint('Socket Connection Error'));
+    socket.on('data', (data) {
+      debugPrint('Received data from server: $data');
+    });
+    socket.onReconnect((data) {
+      debugPrint('Reconnected to the socket server');
+    });
+    socket.onReconnecting((data) {
+      debugPrint('Reconnecting to the socket server');
+    });
+  }
+
   void _onSidebarItemSelected(String item) {
     Provider.of<UserProvider>(context, listen: false).setSelectedPage(item);
   }
@@ -68,6 +86,20 @@ class _MainPageState extends State<MainPage>
         }
       }
     }
+    // ignore: use_build_context_synchronously
+    var machineId = Provider.of<UserProvider>(context, listen: true).machineId;
+
+    socket = io.io(
+      'http://192.168.1.8:30605',
+      io.OptionBuilder().setTransports(['websocket']).setQuery(
+        {
+          'machineId': machineId,
+          'machineType': 'SCALE',
+        },
+      ).build(),
+    );
+
+    socketListener();
   }
 
   @override
