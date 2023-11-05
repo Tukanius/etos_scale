@@ -92,7 +92,7 @@ class _ScalePageState extends State<ScalePage> with AfterLayoutMixin {
   afterFirstLayout(BuildContext context) async {
     await initPlatformState();
     socket = IO.io(
-      'http://192.168.1.96:30605',
+      'http://192.168.1.8:30605',
       IO.OptionBuilder().setTransports(['websocket']).setQuery(
         {
           'machineId': _deviceId,
