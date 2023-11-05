@@ -1,36 +1,36 @@
-// part '../parts/truck_receipt.dart';
+part '../parts/receipt.dart';
 
-// class TruckReceipt {
-//   String type;
-//   String vehiclePlateNo;
-//   int weightValue;
-//   List<String>? trailerPlateNumbers;
-//   List<String>? containerNumbers;
-//   List<String>? sealNumbers;
-//   String driverRegisterNo;
-//   String driverPhone;
-//   String driverName;
-//   String? driverPhoneSecond;
+class Receipt {
+  String type;
+  String vehiclePlateNo;
+  int weightValue;
+  List<String>? trailerPlateNumbers;
+  List<String>? containerNumbers;
+  List<String>? sealNumbers;
+  String driverRegisterNo;
+  String driverPhone;
+  String driverName;
+  String? driverPhoneSecond;
 
-//   TruckReceipt({
-//     required this.type,
-//     required this.vehiclePlateNo,
-//     required this.weightValue,
-//     this.trailerPlateNumbers,
-//     this.containerNumbers,
-//     this.sealNumbers,
-//     required this.driverRegisterNo,
-//     required this.driverPhone,
-//     required this.driverName,
-//     this.driverPhoneSecond,
-//   });
+  Receipt({
+    required this.type,
+    required this.vehiclePlateNo,
+    required this.weightValue,
+    this.trailerPlateNumbers,
+    this.containerNumbers,
+    this.sealNumbers,
+    required this.driverRegisterNo,
+    required this.driverPhone,
+    required this.driverName,
+    this.driverPhoneSecond,
+  });
 
-//   static $fromJson(Map<String, dynamic> json) => _$TruckReceiptFromJson(json);
+  static $fromJson(Map<String, dynamic> json) => _$ReceiptFromJson(json);
 
-//   factory TruckReceipt.fromJson(Map<String, dynamic> json) =>
-//       _$TruckReceiptFromJson(json);
-//   Map<String, dynamic> toJson() => _$TruckReceiptToJson(this);
-// }
+  factory Receipt.fromJson(Map<String, dynamic> json) =>
+      _$ReceiptFromJson(json);
+  Map<String, dynamic> toJson() => _$ReceiptToJson(this);
+}
 // /**
 //  {
 //       "_id": "65475a32800c288979a9149a",

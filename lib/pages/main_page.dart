@@ -2,7 +2,7 @@ import 'package:after_layout/after_layout.dart';
 import 'package:etos_scale_windows/components/drawer/settings_drawer.dart';
 import 'package:etos_scale_windows/components/layout/navbar.dart';
 import 'package:etos_scale_windows/contants/colors.dart';
-import 'package:etos_scale_windows/pages/scale/list_page.dart';
+import 'package:etos_scale_windows/pages/scale/receipt_page.dart';
 import 'package:etos_scale_windows/provider/user_provider.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -111,9 +111,10 @@ class _MainPageState extends State<MainPage>
       return ScalePage(
         scaleData: scaleData,
       );
-    } else if (selectedItem == 'ScaleList') {
-      return const ScaleListPage();
+    } else if (selectedItem == 'ReceiptPage') {
+      return const ReceiptPage();
     }
+
     return const SizedBox(
       child: Center(
         child: Text('NOTHING IN HERE XD'),

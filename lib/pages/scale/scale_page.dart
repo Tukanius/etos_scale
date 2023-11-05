@@ -1,8 +1,8 @@
-import 'package:etos_scale_windows/api/truck_api.dart';
+import 'package:etos_scale_windows/api/scale_api.dart';
 import "package:etos_scale_windows/components/controller/listen.dart";
 import "package:etos_scale_windows/components/scale_item/contianer_seal.dart";
 import "package:etos_scale_windows/models/result.dart";
-import "package:etos_scale_windows/models/truck_scale_form.dart";
+import 'package:etos_scale_windows/models/scale_form.dart';
 import "package:flutter/foundation.dart";
 import "package:flutter/material.dart";
 import "package:after_layout/after_layout.dart";
@@ -44,6 +44,7 @@ class _ScalePageState extends State<ScalePage> with AfterLayoutMixin {
   loadData(int page, int limit) async {
     Filter filter = Filter();
     Offset offset = Offset(limit: limit, page: page);
+
     // Result res = await TruckApi()
     //     .scaleReceiptList(ResultArguments(filter: filter, offset: offset));
     // setState(() => tableRow = ScaleInfoDetail(result: res));
@@ -56,16 +57,18 @@ class _ScalePageState extends State<ScalePage> with AfterLayoutMixin {
 
   onSubmit() async {
     final form = fbKey.currentState;
+
     if (kDebugMode) {
       print(form?.value.toString());
     }
+
     if (form!.saveAndValidate()) {
       setState(() {
         isLoading = true;
       });
       try {
-        await TruckApi()
-            .scaleReceipt(TruckScaleForm.fromJson(form.value).toJson());
+        await ScaleApi().truck(ScaleForm.fromJson(form.value).toJson());
+
         showSnackbar();
         // ignore: use_build_context_synchronously
         Navigator.of(context).pushNamed(ScalePage.routeName);

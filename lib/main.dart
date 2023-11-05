@@ -1,11 +1,8 @@
-import 'dart:async';
 import 'dart:ui';
 
 import 'package:after_layout/after_layout.dart';
 import 'package:etos_scale_windows/pages/auth/login_page.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:get_it/get_it.dart';
 import 'package:etos_scale_windows/provider/user_provider.dart';
 import 'package:etos_scale_windows/pages/main_page.dart';
@@ -14,8 +11,7 @@ import 'package:etos_scale_windows/services/dialog.dart';
 import 'package:etos_scale_windows/services/navigation.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_dropdown_alert/dropdown_alert.dart';
-import 'package:platform_device_id/platform_device_id.dart';
-import 'package:socket_io_client/socket_io_client.dart' as IO;
+import 'package:socket_io_client/socket_io_client.dart' as io;
 
 void main() async {
   locator.registerLazySingleton(() => NavigationService());
@@ -37,27 +33,9 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> with AfterLayoutMixin {
-  String? _deviceId;
-  late IO.Socket socket;
+  late io.Socket socket;
 
-  Future<void> initPlatformState() async {
-    String? deviceId;
-    try {
-      deviceId = await PlatformDeviceId.getDeviceId;
-    } on PlatformException {
-      deviceId = 'Failed to get deviceId.';
-    }
-    if (!mounted) return;
-
-    setState(() {
-      _deviceId = deviceId;
-      if (kDebugMode) {
-        print("deviceId->$_deviceId");
-      }
-    });
-  }
-
-  _connectSocket() {
+  socketListener() {
     socket.onConnect((data) => debugPrint('Socket Connection'));
     socket.onDisconnect((data) => debugPrint('Disconnect'));
     socket.onConnectError((data) => debugPrint('Socket Connection Error'));
@@ -74,17 +52,19 @@ class _MyAppState extends State<MyApp> with AfterLayoutMixin {
 
   @override
   afterFirstLayout(BuildContext context) async {
-    await initPlatformState();
-    socket = IO.io(
+    var machineId = Provider.of<UserProvider>(context, listen: true).machineId;
+
+    socket = io.io(
       'http://192.168.1.8:30605',
-      IO.OptionBuilder().setTransports(['websocket']).setQuery(
+      io.OptionBuilder().setTransports(['websocket']).setQuery(
         {
-          'machineId': _deviceId,
+          'machineId': machineId,
           'machineType': 'SCALE',
         },
       ).build(),
     );
-    _connectSocket();
+
+    socketListener();
   }
 
   @override

@@ -95,8 +95,8 @@ class _CustomSideNavigationBarState extends State<CustomSideNavigationBar> {
               InkWell(
                 onTap: () {
                   setState(() {
-                    widget.selectedItem == 'ScaleList';
-                    widget.onItemSelected('ScaleList');
+                    widget.selectedItem == 'ReceiptPage';
+                    widget.onItemSelected('ReceiptPage');
                   });
                 },
                 child: Column(
@@ -111,7 +111,7 @@ class _CustomSideNavigationBarState extends State<CustomSideNavigationBar> {
                       ),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),
-                        color: widget.selectedItem == 'ScaleList'
+                        color: widget.selectedItem == 'ReceiptPage'
                             ? selectedColor
                             : colorBlue,
                       ),
@@ -121,7 +121,7 @@ class _CustomSideNavigationBarState extends State<CustomSideNavigationBar> {
                           height: 25,
                           width: 25,
                           // ignore: deprecated_member_use
-                          color: widget.selectedItem == 'ScaleList'
+                          color: widget.selectedItem == 'ReceiptPage'
                               ? black
                               : white,
                         ),

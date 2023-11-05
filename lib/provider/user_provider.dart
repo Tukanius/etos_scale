@@ -1,11 +1,14 @@
 import 'package:etos_scale_windows/api/auth_api.dart';
 import 'package:flutter/foundation.dart';
 import 'package:etos_scale_windows/models/user.dart';
+import 'package:flutter/services.dart';
+import 'package:platform_device_id/platform_device_id.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class UserProvider extends ChangeNotifier {
   late User? user;
   late String selectedPage = 'ScalePage';
+  late String? machineId;
 
   void setSelectedPage(String page) {
     selectedPage = page;
@@ -24,6 +27,13 @@ class UserProvider extends ChangeNotifier {
     prefs.setString("serialPort", port);
   }
 
+  static Future<String?> getMachineId() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String? token = prefs.getString("machineId");
+
+    return token;
+  }
+
   static Future<String?> getAccessToken() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String? token = prefs.getString("accessToken");
@@ -38,8 +48,22 @@ class UserProvider extends ChangeNotifier {
 
   login(data) async {
     String accessToken = await AuthApi().login(data);
-    setAccessToken(accessToken);
+    try {
+      var deviceId = await PlatformDeviceId.getDeviceId;
+
+      machineId = deviceId;
+      await setMachineId(deviceId);
+    } on PlatformException {
+      return;
+    }
+
+    await setAccessToken(accessToken);
     notifyListeners();
+  }
+
+  setMachineId(String? deviceId) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    if (deviceId != null) prefs.setString("machineId", deviceId);
   }
 
   setAccessToken(String? token) async {

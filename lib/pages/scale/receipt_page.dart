@@ -1,6 +1,6 @@
 // import 'package:after_layout/after_layout.dart';
 import 'package:after_layout/after_layout.dart';
-import 'package:etos_scale_windows/api/truck_api.dart';
+import 'package:etos_scale_windows/api/scale_api.dart';
 import 'package:etos_scale_windows/contants/colors.dart';
 import 'package:etos_scale_windows/models/result.dart';
 import 'package:flutter/material.dart';
@@ -8,14 +8,14 @@ import 'package:intl/intl.dart';
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-class ScaleListPage extends StatefulWidget {
-  const ScaleListPage({Key? key}) : super(key: key);
+class ReceiptPage extends StatefulWidget {
+  const ReceiptPage({Key? key}) : super(key: key);
 
   @override
-  State<ScaleListPage> createState() => _ScaleListPageState();
+  State<ReceiptPage> createState() => _ReceiptPageState();
 }
 
-class _ScaleListPageState extends State<ScaleListPage> with AfterLayoutMixin {
+class _ReceiptPageState extends State<ReceiptPage> with AfterLayoutMixin {
   TruckTable tableRow = TruckTable(result: Result(rows: [], count: 0));
   int page = 1;
   int limit = 30;
@@ -26,7 +26,7 @@ class _ScaleListPageState extends State<ScaleListPage> with AfterLayoutMixin {
     Offset offset = Offset(limit: limit, page: page);
 
     // Result res = await TruckApi()
-    //     .scaleList(ResultArguments(filter: filter, offset: offset));
+    //     .Receipt(ResultArguments(filter: filter, offset: offset));
     // setState(() => tableRow = TruckTable(result: res));
   }
 

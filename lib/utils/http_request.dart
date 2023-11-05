@@ -11,7 +11,7 @@ import '../main.dart';
 
 class HttpRequest {
   // String host = 'http://mine.etos.mn/sca/api';
-  String host = 'http://192.168.1.96:30605/api';
+  String host = 'http://192.168.1.8:30605/api';
 
   Dio dio = Dio();
 
@@ -38,18 +38,14 @@ class HttpRequest {
 
       dio.interceptors.add(CookieManager(cookieJar));
 
-      var token = await UserProvider.getAccessToken();
-      var deviceToken = "";
-      // debugPrint('++++++++++++++++++++++deviceToken+++++++++++++++ ');
-      // debugPrint(deviceToken);
-      // debugPrint('+++++++++++++++++++++++deviceToken++++++++++++++ ');
+      var accessToken = await UserProvider.getAccessToken();
+      var machineType = 'SCALE';
+      var machineId = await UserProvider.getMachineId();
 
       dio.options.headers = {
-        'authorization': 'Bearer $token',
-        'device-token': deviceToken,
-        'device_type': 'MOS',
-        'device_imei': 'test-imei',
-        'device_info': 'iphone 13'
+        'authorization': 'Bearer $accessToken',
+        'machine-type': machineType,
+        'machine-id': machineId
       };
     } catch (err) {
       debugPrint(err.toString());
