@@ -1,6 +1,6 @@
-import 'package:etos_scale_windows/models/receipt.dart';
+import 'package:etos_scale_windows/models/truck_receipt.dart';
 import 'package:etos_scale_windows/models/result.dart';
-import 'package:etos_scale_windows/models/scale_receipt.dart';
+import 'package:etos_scale_windows/models/truck_scale_form.dart';
 import 'package:etos_scale_windows/utils/http_request.dart';
 
 final httpRequest = HttpRequest("http://mine.etos.mn/sca/api");
@@ -13,20 +13,20 @@ class TruckApi {
   //   return Receipt.fromJson(res as Map<String, dynamic>);
   // }
 
-  scaleList(ResultArguments resultArguments) async {
-    var res =
-        await httpRequest.get('/truck/receipt', data: resultArguments.toJson());
-    return Result.fromJson(res, Receipt.fromJson);
-  }
+  // scaleList(ResultArguments resultArguments) async {
+  //   var res =
+  //       await httpRequest.get('/truck/receipt', data: resultArguments.toJson());
+  //   return Result.fromJson(res, Receipt.fromJson);
+  // }
 
   scaleReceipt(data) async {
     var res = await httpRequest1.post('/truck/scale', data: data);
-    return ScaleReceipt.fromJson(res as Map<String, dynamic>);
+    return TruckScaleForm.fromJson(res as Map<String, dynamic>);
   }
 
-  scaleReceiptList(ResultArguments resultArguments) async {
-    var res =
-        await httpRequest1.get('/truck/scale', data: resultArguments.toJson());
-    return Result.fromJson(res, ScaleReceipt.fromJson);
-  }
+  // scaleReceiptList(ResultArguments resultArguments) async {
+  //   var res =
+  //       await httpRequest1.get('/truck/scale', data: resultArguments.toJson());
+  //   return Result.fromJson(res, ScaleReceipt.fromJson);
+  // }
 }

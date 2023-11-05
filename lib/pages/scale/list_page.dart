@@ -25,9 +25,9 @@ class _ScaleListPageState extends State<ScaleListPage> with AfterLayoutMixin {
 
     Offset offset = Offset(limit: limit, page: page);
 
-    Result res = await TruckApi()
-        .scaleList(ResultArguments(filter: filter, offset: offset));
-    setState(() => tableRow = TruckTable(result: res));
+    // Result res = await TruckApi()
+    //     .scaleList(ResultArguments(filter: filter, offset: offset));
+    // setState(() => tableRow = TruckTable(result: res));
   }
 
   @override

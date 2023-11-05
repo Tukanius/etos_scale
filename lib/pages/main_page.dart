@@ -1,11 +1,14 @@
+import 'package:after_layout/after_layout.dart';
 import 'package:etos_scale_windows/components/drawer/settings_drawer.dart';
 import 'package:etos_scale_windows/components/layout/navbar.dart';
 import 'package:etos_scale_windows/contants/colors.dart';
 import 'package:etos_scale_windows/pages/scale/list_page.dart';
 import 'package:etos_scale_windows/provider/user_provider.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:etos_scale_windows/pages/scale/scale_page.dart';
 import 'package:provider/provider.dart';
+import "package:flutter_libserialport/flutter_libserialport.dart";
 
 class MainPage extends StatefulWidget {
   static const routeName = 'MainPage';
@@ -16,11 +19,55 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends State<MainPage>
-    with SingleTickerProviderStateMixin {
+    with SingleTickerProviderStateMixin, AfterLayoutMixin {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
-
+  String scaleData = "000000";
   void _onSidebarItemSelected(String item) {
     Provider.of<UserProvider>(context, listen: false).setSelectedPage(item);
+  }
+
+  @override
+  afterFirstLayout(BuildContext context) async {
+    final serialPort = await Provider.of<UserProvider>(context, listen: false)
+        .getSelectedSerialPort();
+    if (serialPort != null) {
+      final port = SerialPort(serialPort);
+
+      if (!port.isOpen && port.openReadWrite()) {
+        if (kDebugMode) {
+          debugPrint("PORT OPENED: $serialPort");
+          debugPrint(SerialPort.lastError as String?);
+        }
+
+        var portConfig = SerialPortConfig()
+          ..baudRate = 9600
+          ..bits = 8
+          ..stopBits = 1;
+        port.config = portConfig;
+
+        final reader = SerialPortReader(port);
+
+        var received = "";
+
+        reader.stream.listen((data) {
+          var chr = String.fromCharCodes(data);
+
+          received += chr;
+
+          if (received.length == 12) {
+            setState(() {
+              scaleData = received.substring(2, 8);
+            });
+
+            received = "";
+          }
+        });
+      } else {
+        if (kDebugMode) {
+          debugPrint("PORT ClOSED: $serialPort");
+        }
+      }
+    }
   }
 
   @override
@@ -61,7 +108,9 @@ class _MainPageState extends State<MainPage>
     final selectedItem = Provider.of<UserProvider>(context).selectedPage;
 
     if (selectedItem == 'ScalePage') {
-      return const ScalePage();
+      return ScalePage(
+        scaleData: scaleData,
+      );
     } else if (selectedItem == 'ScaleList') {
       return const ScaleListPage();
     }

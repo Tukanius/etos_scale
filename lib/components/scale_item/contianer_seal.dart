@@ -34,7 +34,7 @@ class _ContainerSealState extends State<ContainerSeal> {
             ),
           ),
           FormTextField(
-            name: "sealNumber${widget.index}_4",
+            name: "sealNumbers_${widget.index}",
             labelText: "",
             filled: true,
             fillColor: gray102,
