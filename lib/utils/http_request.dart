@@ -27,9 +27,9 @@ class HttpRequest {
     uri = '$host$api';
     debugPrint(uri);
 
-    debugPrint('+++++++++++++++++++++++++++++++++++++++++++++++++++');
+    debugPrint('+++++++++++++++++++++++HANDLER++++++++++++++++++++++++++++');
     debugPrint('handler: $handler');
-    debugPrint('+++++++++++++++++++++++++++++++++++++++++++++++++++ ');
+    debugPrint('+++++++++++++++++++++++++HANDLER++++++++++++++++++++++++++ ');
 
     try {
       Directory dir = await getTemporaryDirectory();

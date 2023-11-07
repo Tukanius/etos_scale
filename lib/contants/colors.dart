@@ -22,6 +22,7 @@ Color colorPurple = HexColor("#65B0F6");
 
 Color white = HexColor("#FFFFFF");
 Color black = HexColor("#000000");
+Color textcolor = HexColor("#3D3D3D");
 Color gray101 = HexColor("#F3F3F3");
 Color gray102 = HexColor("#E0E0E0");
 Color selectedColor = HexColor("#FFC600");

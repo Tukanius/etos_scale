@@ -7,9 +7,9 @@ class Receipt {
   String? supplierName;
   String? buyerName;
   String? productName;
-  String transportName;
+  String? transportName;
   String vehiclePlateNo;
-  int fullWeight;
+  int? fullWeight;
   int unladedWeight;
   int totalWeight;
   List<String>? trailerPlateNumbers;
@@ -34,9 +34,9 @@ class Receipt {
     this.supplierName,
     this.buyerName,
     this.productName,
-    required this.transportName,
+    this.transportName,
     required this.vehiclePlateNo,
-    required this.fullWeight,
+    this.fullWeight,
     required this.unladedWeight,
     required this.totalWeight,
     this.trailerPlateNumbers,

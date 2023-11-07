@@ -35,7 +35,6 @@ class MyApp extends StatelessWidget {
       child: Consumer<UserProvider>(
         builder: (context, userProvider, _) {
           return MaterialApp(
-            // scrollBehavior: MyCustomScrollBehavior(),
             title: 'E-TOS',
             theme: ThemeData(),
             debugShowCheckedModeBanner: false,

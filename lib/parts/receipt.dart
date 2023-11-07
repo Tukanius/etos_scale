@@ -10,7 +10,8 @@ Receipt _$ReceiptFromJson(Map<String, dynamic> json) {
     buyerName: json["buyerName"] != null ? json["buyerName"] as String : null,
     productName:
         json["productName"] != null ? json["productName"] as String : null,
-    transportName: json["transportName"] as String,
+    transportName:
+        json['transportName'] != null ? json["transportName"] as String : null,
     vehiclePlateNo: json["vehiclePlateNo"] as String,
     fullWeight: json["fullWeight"],
     unladedWeight: json["unladedWeight"],
@@ -31,8 +32,9 @@ Receipt _$ReceiptFromJson(Map<String, dynamic> json) {
         .toList(),
     containers:
         (json["containers"] as List).map((item) => item as String).toList(),
-    truckScales:
-        (json["truckScales"] as List).map((item) => item as String).toList(),
+    truckScales: json["truckScales"] != null
+        ? (json["truckScales"] as List).map((item) => item as String).toList()
+        : null,
     sealNumbers:
         (json["sealNumbers"] as List).map((item) => item as String).toList(),
     receiptStatus:

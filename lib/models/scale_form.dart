@@ -1,14 +1,10 @@
-import 'package:etos_scale_windows/components/controller/listen.dart';
-
 part '../parts/scale_form.dart';
 
 class ScaleForm {
   String? type;
   String? vehiclePlateNo;
   double? weightValue;
-  String? driverRegisterNo;
-  String? driverPhone;
-  String? driverPhoneSecond;
+  String? weightType;
 
   String? containerNumber_0_4;
   String? containerNumber_0_7;
@@ -22,21 +18,16 @@ class ScaleForm {
   String? containerNumber_3_4;
   String? containerNumber_3_7;
 
-  String? trailerPlateNumbers_0;
-  String? trailerPlateNumbers_1;
+  String? trailerPlateNumber_0;
+  String? trailerPlateNumber_1;
 
   String? sealNumbers_0;
   String? sealNumbers_1;
-  String? sealNumbers_2;
-  String? sealNumbers_3;
 
   ScaleForm({
     this.type,
     this.vehiclePlateNo,
     this.weightValue,
-    this.driverRegisterNo,
-    this.driverPhone,
-    this.driverPhoneSecond,
     this.containerNumber_0_4,
     this.containerNumber_0_7,
     this.containerNumber_1_4,
@@ -45,12 +36,11 @@ class ScaleForm {
     this.containerNumber_2_7,
     this.containerNumber_3_4,
     this.containerNumber_3_7,
-    this.trailerPlateNumbers_0,
-    this.trailerPlateNumbers_1,
+    this.trailerPlateNumber_0,
+    this.trailerPlateNumber_1,
     this.sealNumbers_0,
     this.sealNumbers_1,
-    this.sealNumbers_2,
-    this.sealNumbers_3,
+    this.weightType,
   });
   static $fromJson(Map<String, dynamic> json) => _$ScaleFormJson(json);
 

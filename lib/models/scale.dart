@@ -4,40 +4,28 @@ class Scale {
   String id;
   String type;
   String vehiclePlateNo;
-  String vehicleMark;
-  int vehicleAxleCount;
   int weightValue;
-  int trailerCount;
+  String weightType;
   int containerCount;
   List<String> containerNumbers;
   List<String> trailerPlateNumbers;
   List<String> sealNumbers;
-  String driverName;
-  String driverPhone;
-  String? driverPhoneSecond;
-  String driverRegisterNo;
-  String? driverPdlNumber;
-  String? truckScaleStatus;
+  String truckScaleStatus;
+  String truckScaleStatusDate;
   String createdAt;
 
   Scale({
     required this.id,
     required this.type,
     required this.vehiclePlateNo,
-    required this.vehicleMark,
-    required this.vehicleAxleCount,
     required this.weightValue,
-    required this.trailerCount,
     required this.containerNumbers,
-    required this.containerCount,
     required this.trailerPlateNumbers,
     required this.sealNumbers,
-    required this.driverName,
-    required this.driverPhone,
-    this.driverPhoneSecond,
-    required this.driverRegisterNo,
-    this.driverPdlNumber,
-    this.truckScaleStatus,
+    required this.weightType,
+    required this.containerCount,
+    required this.truckScaleStatus,
+    required this.truckScaleStatusDate,
     required this.createdAt,
   });
   static $fromJson(Map<String, dynamic> json) => _$ScaleFromJson(json);

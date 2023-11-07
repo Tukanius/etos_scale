@@ -7,6 +7,7 @@ import 'package:etos_scale_windows/provider/user_provider.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:etos_scale_windows/pages/scale/scale_page.dart';
+import 'package:platform_device_id/platform_device_id.dart';
 import 'package:provider/provider.dart';
 import "package:flutter_libserialport/flutter_libserialport.dart";
 import 'package:socket_io_client/socket_io_client.dart' as io;
@@ -67,8 +68,6 @@ class _MainPageState extends State<MainPage>
         final reader = SerialPortReader(port);
 
         var received = "";
-        var machineId =
-            Provider.of<UserProvider>(context, listen: false).machineId;
         reader.stream.listen((data) {
           var chr = String.fromCharCodes(data);
 
@@ -88,10 +87,9 @@ class _MainPageState extends State<MainPage>
         }
       }
     }
-    // ignore: use_build_context_synchronously
-    var machineId = Provider.of<UserProvider>(context, listen: false).machineId;
+    var machineId = await PlatformDeviceId.getDeviceId;
     socket = io.io(
-      'http://192.168.1.8:30605',
+      'http://192.168.1.96:30605',
       io.OptionBuilder().setTransports(['websocket']).setQuery(
         {
           'machineId': machineId,

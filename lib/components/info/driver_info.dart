@@ -1,7 +1,5 @@
-import 'package:etos_scale_windows/components/ui/form_text_field.dart';
 import 'package:etos_scale_windows/contants/colors.dart';
 import 'package:flutter/material.dart';
-import 'package:form_builder_validators/form_builder_validators.dart';
 
 class DriverInfo extends StatefulWidget {
   const DriverInfo({
@@ -20,7 +18,7 @@ class _DriverInfoState extends State<DriverInfo> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Жолооч',
+            'Гэрээ',
             style: TextStyle(
               color: black,
               fontWeight: FontWeight.w600,
@@ -28,83 +26,166 @@ class _DriverInfoState extends State<DriverInfo> {
             ),
           ),
           const SizedBox(
-            height: 20,
+            height: 15,
           ),
-          FormTextField(
-            name: "driverRegisterNo",
-            labelText: "Регистрийн дугаар",
-            filled: true,
-            fillColor: gray102,
-            textColor: black,
-            labelColor: black,
-            bgColor: Colors.transparent,
-            validator: FormBuilderValidators.compose([
-              // (value) {
-              //   return validateRegisterNo(
-              //     (value != null ? value as String : value) as String?,
-              //   );
-              // }
-              FormBuilderValidators.required(errorText: 'Алдаа!'),
-            ]),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'Гэрээны дугаар',
+                style: TextStyle(
+                  fontSize: 13,
+                  fontWeight: FontWeight.w500,
+                  color: black,
+                ),
+              ),
+              const SizedBox(
+                height: 5,
+              ),
+              Row(
+                children: [
+                  Expanded(
+                    child: Container(
+                      height: 40,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        color: gray102,
+                      ),
+                      padding: const EdgeInsets.symmetric(horizontal: 10),
+                      alignment: Alignment.center,
+                      child: const Text(
+                        'dataaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa',
+                        overflow: TextOverflow.ellipsis,
+                        maxLines: 1,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ],
           ),
           const SizedBox(
             height: 15,
           ),
-          FormTextField(
-            name: "driverPhone",
-            labelText: "Утас 1",
-            filled: true,
-            fillColor: gray102,
-            textColor: black,
-            labelColor: black,
-            bgColor: Colors.transparent,
-            validator: FormBuilderValidators.compose([
-              (value) {
-                return validateNumber(
-                  (value != null ? value as String : value) as String?,
-                );
-              }
-            ]),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'Баримтын дугаар',
+                style: TextStyle(
+                  fontSize: 13,
+                  fontWeight: FontWeight.w500,
+                  color: black,
+                ),
+              ),
+              const SizedBox(
+                height: 5,
+              ),
+              Row(
+                children: [
+                  Expanded(
+                    child: Container(
+                      height: 40,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        color: gray102,
+                      ),
+                      padding: const EdgeInsets.symmetric(horizontal: 10),
+                      alignment: Alignment.center,
+                      child: const Text(
+                        'dataaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa',
+                        overflow: TextOverflow.ellipsis,
+                        maxLines: 1,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ],
           ),
           const SizedBox(
             height: 15,
           ),
-          FormTextField(
-            name: "driverPhoneSecond",
-            labelText: "Утас 2",
-            filled: true,
-            fillColor: gray102,
-            textColor: black,
-            labelColor: black,
-            bgColor: Colors.transparent,
-            validator: FormBuilderValidators.compose([
-              (value) {
-                return validateNumber(
-                  (value != null ? value as String : value) as String?,
-                );
-              }
-            ]),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'Худалдан авагч',
+                style: TextStyle(
+                  fontSize: 13,
+                  fontWeight: FontWeight.w500,
+                  color: black,
+                ),
+              ),
+              const SizedBox(
+                height: 5,
+              ),
+              Row(
+                children: [
+                  Expanded(
+                    child: Container(
+                      height: 40,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        color: gray102,
+                      ),
+                      padding: const EdgeInsets.symmetric(horizontal: 10),
+                      alignment: Alignment.center,
+                      child: const Text(
+                        'dataaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa',
+                        overflow: TextOverflow.ellipsis,
+                        maxLines: 1,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
+          const SizedBox(
+            height: 10,
+          ),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'Борлуулагч',
+                style: TextStyle(
+                  fontSize: 13,
+                  fontWeight: FontWeight.w500,
+                  color: black,
+                ),
+              ),
+              const SizedBox(
+                height: 5,
+              ),
+              Row(
+                children: [
+                  Expanded(
+                    child: Container(
+                      height: 40,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        color: gray102,
+                      ),
+                      padding: const EdgeInsets.symmetric(horizontal: 10),
+                      alignment: Alignment.center,
+                      child: const Text(
+                        'dataaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa',
+                        overflow: TextOverflow.ellipsis,
+                        maxLines: 1,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
+          const SizedBox(
+            height: 10,
           ),
         ],
       ),
     );
-  }
-}
-
-String? validateRegisterNo(String? value) {
-  RegExp regex = RegExp(r'[а-яА-ЯёЁөӨүҮ]{2}\d{8}$');
-  if (value != null && regex.hasMatch(value)) {
-    return null;
-  } else {
-    return 'Алдаа!';
-  }
-}
-
-String? validateNumber(String? value) {
-  final RegExp numericRegex = RegExp(r'^[0-9]+$');
-  if (value != null && numericRegex.hasMatch(value) && value.length == 8) {
-    return null;
-  } else {
-    return 'Алдаа!';
   }
 }

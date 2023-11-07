@@ -1,14 +1,14 @@
+import "package:after_layout/after_layout.dart";
 import 'package:etos_scale_windows/api/scale_api.dart';
-import "package:etos_scale_windows/components/controller/listen.dart";
+import "package:etos_scale_windows/components/info/scale_list.dart";
 import "package:etos_scale_windows/components/scale_item/contianer_seal.dart";
 import "package:etos_scale_windows/models/result.dart";
 import 'package:etos_scale_windows/models/scale_form.dart';
+import "package:etos_scale_windows/pages/main_page.dart";
 import "package:flutter/foundation.dart";
 import "package:flutter/material.dart";
-import "package:after_layout/after_layout.dart";
 import "package:etos_scale_windows/contants/colors.dart";
 import "package:etos_scale_windows/components/info/scale_info.dart";
-import "package:etos_scale_windows/components/info/receipt_info.dart";
 import "package:etos_scale_windows/components/info/vehicle_info.dart";
 import "package:flutter_dropdown_alert/model/data_alert.dart";
 import "package:flutter_form_builder/flutter_form_builder.dart";
@@ -34,25 +34,28 @@ class _ScalePageState extends State<ScalePage> with AfterLayoutMixin {
   int limit = 30;
   int counter = 0;
   bool isLoading = false;
-  String scaleData = '';
-  ScaleInfoDetail tableRow = ScaleInfoDetail(
-    result: Result(rows: [], count: 0),
-  );
+  ScaleForm sendingData = ScaleForm();
   GlobalKey<FormBuilderState> fbKey = GlobalKey<FormBuilderState>();
-  ListenController listenController = ListenController();
+  Result details = Result(count: 0, rows: []);
+  String type = "IN";
+  List<String> driverPlate = [];
 
   loadData(int page, int limit) async {
     Filter filter = Filter();
     Offset offset = Offset(limit: limit, page: page);
-
-    Result res = await ScaleApi()
+    details = await ScaleApi()
         .getScaleList(ResultArguments(filter: filter, offset: offset));
-    setState(() => tableRow = ScaleInfoDetail(result: res));
   }
 
   @override
-  afterFirstLayout(BuildContext context) async {
+  afterFirstLayout(BuildContext context) {
+    setState(() {
+      isLoading = false;
+    });
     loadData(page, limit);
+    setState(() {
+      isLoading = true;
+    });
   }
 
   onSubmit() async {
@@ -66,12 +69,18 @@ class _ScalePageState extends State<ScalePage> with AfterLayoutMixin {
       setState(() {
         isLoading = true;
       });
-      try {
-        await ScaleApi().truck(ScaleForm.fromJson(form.value).toJson());
 
-        showSnackbar();
+      try {
+        sendingData = ScaleForm.fromJson(form.value);
+        setState(() {
+          sendingData.type = type;
+          sendingData.weightValue = double.parse(widget.scaleData);
+          sendingData.weightType = "BOTH";
+        });
+        await ScaleApi().truck(sendingData.toJson());
         // ignore: use_build_context_synchronously
-        Navigator.of(context).pushNamed(ScalePage.routeName);
+        Navigator.of(context).pushNamed(MainPage.routeName);
+        showSnackbar();
       } catch (e) {
         if (kDebugMode) {
           print(e.toString());
@@ -132,15 +141,7 @@ class _ScalePageState extends State<ScalePage> with AfterLayoutMixin {
                         const SizedBox(
                           width: 20,
                         ),
-                        ContainerSeal(index: 1, color: colorRed),
-                        const SizedBox(
-                          width: 20,
-                        ),
-                        ContainerSeal(index: 2, color: colorGreen),
-                        const SizedBox(
-                          width: 20,
-                        ),
-                        ContainerSeal(index: 3, color: colorYellow)
+                        ContainerSeal(index: 1, color: colorYellow)
                       ]),
                 ),
                 const SizedBox(height: 20),
@@ -177,6 +178,11 @@ class _ScalePageState extends State<ScalePage> with AfterLayoutMixin {
                           onClick: () {
                             onSubmit();
                           },
+                          setType: (value) {
+                            setState(() {
+                              type = value;
+                            });
+                          },
                           scaleData: widget.scaleData,
                         ),
                         const SizedBox(width: 20),
@@ -186,20 +192,22 @@ class _ScalePageState extends State<ScalePage> with AfterLayoutMixin {
                   ),
                 ),
                 const SizedBox(height: 20),
-                Container(
-                  width: MediaQuery.of(context).size.width,
-                  alignment: Alignment.center,
-                  child: Container(
-                    width: 1180,
-                    height: 1200,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      color: gray101,
-                    ),
-                    padding: const EdgeInsets.all(20),
-                    child: ReceiptInfo(data: tableRow),
-                  ),
-                ),
+                details.count! > 0
+                    ? Container(
+                        width: MediaQuery.of(context).size.width,
+                        alignment: Alignment.center,
+                        child: Container(
+                          width: 1180,
+                          height: 1200,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: ScaleList(
+                            data: details,
+                          ),
+                        ),
+                      )
+                    : const SizedBox(),
                 const SizedBox(height: 20),
               ],
             ),
