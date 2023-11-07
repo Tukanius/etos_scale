@@ -1,8 +1,10 @@
 import "package:after_layout/after_layout.dart";
 import 'package:etos_scale_windows/api/scale_api.dart';
+import "package:etos_scale_windows/components/info/scale_card.dart";
 import "package:etos_scale_windows/components/info/scale_list.dart";
 import "package:etos_scale_windows/components/scale_item/contianer_seal.dart";
 import "package:etos_scale_windows/models/result.dart";
+import "package:etos_scale_windows/models/scale.dart";
 import 'package:etos_scale_windows/models/scale_form.dart';
 import "package:etos_scale_windows/pages/main_page.dart";
 import "package:flutter/foundation.dart";
@@ -36,15 +38,20 @@ class _ScalePageState extends State<ScalePage> with AfterLayoutMixin {
   bool isLoading = false;
   ScaleForm sendingData = ScaleForm();
   GlobalKey<FormBuilderState> fbKey = GlobalKey<FormBuilderState>();
-  Result details = Result(count: 0, rows: []);
+  Result result = Result(count: 0, rows: []);
   String type = "IN";
   List<String> driverPlate = [];
 
   loadData(int page, int limit) async {
     Filter filter = Filter();
     Offset offset = Offset(limit: limit, page: page);
-    details = await ScaleApi()
-        .getScaleList(ResultArguments(filter: filter, offset: offset));
+
+    var res =
+        await ScaleApi().list(ResultArguments(filter: filter, offset: offset));
+
+    setState(() {
+      result = res;
+    });
   }
 
   @override
@@ -192,22 +199,15 @@ class _ScalePageState extends State<ScalePage> with AfterLayoutMixin {
                   ),
                 ),
                 const SizedBox(height: 20),
-                details.count! > 0
-                    ? Container(
-                        width: MediaQuery.of(context).size.width,
-                        alignment: Alignment.center,
-                        child: Container(
-                          width: 1180,
-                          height: 1200,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          child: ScaleList(
-                            data: details,
-                          ),
-                        ),
-                      )
-                    : const SizedBox(),
+                Container(
+                    width: MediaQuery.of(context).size.width,
+                    alignment: Alignment.center,
+                    child: SizedBox(
+                        width: 1180,
+                        child: Column(
+                            children: result.rows!
+                                .map((row) => ScaleCard(data: row as Scale))
+                                .toList()))),
                 const SizedBox(height: 20),
               ],
             ),

@@ -14,6 +14,9 @@ Scale _$ScaleFromJson(Map<String, dynamic> json) {
     containerNumbers: (json["containerNumbers"] as List)
         .map((item) => item as String)
         .toList(),
+    receipt: json['receipt'] != null
+        ? Receipt.fromJson(json['receipt'] as Map<String, dynamic>)
+        : null,
     containerCount: json["containerCount"],
     createdAt: json["createdAt"] as String,
     truckScaleStatus: json["truckScaleStatus"],

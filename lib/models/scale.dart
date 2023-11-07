@@ -1,3 +1,5 @@
+import 'package:etos_scale_windows/models/receipt.dart';
+
 part '../parts/scale.dart';
 
 class Scale {
@@ -7,6 +9,7 @@ class Scale {
   int weightValue;
   String weightType;
   int containerCount;
+  Receipt? receipt;
   List<String> containerNumbers;
   List<String> trailerPlateNumbers;
   List<String> sealNumbers;
@@ -26,9 +29,9 @@ class Scale {
     required this.containerCount,
     required this.truckScaleStatus,
     required this.truckScaleStatusDate,
+    this.receipt,
     required this.createdAt,
   });
-  static $fromJson(Map<String, dynamic> json) => _$ScaleFromJson(json);
 
   factory Scale.fromJson(Map<String, dynamic> json) => _$ScaleFromJson(json);
   Map<String, dynamic> toJson() => _$ScaleToJson(this);

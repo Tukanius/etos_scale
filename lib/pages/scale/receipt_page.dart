@@ -1,6 +1,5 @@
 // import 'package:after_layout/after_layout.dart';
 import 'package:after_layout/after_layout.dart';
-import 'package:etos_scale_windows/api/scale_api.dart';
 import 'package:etos_scale_windows/contants/colors.dart';
 import 'package:etos_scale_windows/models/result.dart';
 import 'package:flutter/material.dart';
@@ -24,9 +23,9 @@ class _ReceiptPageState extends State<ReceiptPage> with AfterLayoutMixin {
     Filter filter = Filter();
     Offset offset = Offset(limit: limit, page: page);
 
-    Result res = await ScaleApi()
-        .getReceiptList(ResultArguments(filter: filter, offset: offset));
-    setState(() => tableRow = TruckTable(result: res));
+    // Result res = await ReceiptApi()
+    //     .list(ResultArguments(filter: filter, offset: offset));
+    // setState(() => tableRow = TruckTable(result: res));
   }
 
   @override

@@ -20,20 +20,14 @@ class _ScaleListState extends State<ScaleList> with AfterLayoutMixin {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Expanded(
-          child: ListView.builder(
-            scrollDirection: Axis.vertical,
-            itemCount: widget.data!.count,
-            itemBuilder: (context, index) {
-              return ScaleCard(
-                data: widget.data!.rows![index],
-              );
-            },
-          ),
-        ),
-      ],
+    return ListView.builder(
+      scrollDirection: Axis.vertical,
+      itemCount: widget.data!.count,
+      itemBuilder: (context, index) {
+        return ScaleCard(
+          data: widget.data!.rows![index],
+        );
+      },
     );
   }
 }

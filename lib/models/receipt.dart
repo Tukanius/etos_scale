@@ -55,8 +55,6 @@ class Receipt {
     required this.createdAt,
   });
 
-  static $fromJson(Map<String, dynamic> json) => _$ReceiptFromJson(json);
-
   factory Receipt.fromJson(Map<String, dynamic> json) =>
       _$ReceiptFromJson(json);
   Map<String, dynamic> toJson() => _$ReceiptToJson(this);
