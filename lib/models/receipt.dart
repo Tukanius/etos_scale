@@ -13,18 +13,14 @@ class Receipt {
   int unladedWeight;
   int totalWeight;
   List<String>? trailerPlateNumbers;
-  List<String>? trailers;
   String driverName;
   String? driverPhone;
   String driverRegisterNo;
   String? driverPdlNumber;
   List<String>? containerNumbers;
-  List<String>? containers;
-  List<String>? truckScales;
   List<String>? sealNumbers;
   String? receiptStatus;
   String? receiptStatusDate;
-  List<String>? receiptStatuses;
   String createdAt;
 
   Receipt({
@@ -40,18 +36,14 @@ class Receipt {
     required this.unladedWeight,
     required this.totalWeight,
     this.trailerPlateNumbers,
-    this.trailers,
     required this.driverName,
     this.driverPhone,
     required this.driverRegisterNo,
     this.driverPdlNumber,
     this.containerNumbers,
-    this.containers,
-    this.truckScales,
     this.sealNumbers,
     this.receiptStatus,
     this.receiptStatusDate,
-    required this.receiptStatuses,
     required this.createdAt,
   });
 

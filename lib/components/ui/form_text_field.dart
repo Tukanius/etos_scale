@@ -18,25 +18,26 @@ class FormTextField extends StatefulWidget {
   final bool hasObscureControl;
   final TextEditingController? controller;
   final bool readOnly;
+  final Function(String?)? onChange;
 
-  const FormTextField({
-    this.suffixIcon,
-    super.key,
-    required this.name,
-    required this.labelText,
-    this.width,
-    this.textColor,
-    this.filled = false,
-    this.labelColor,
-    this.bgColor,
-    this.padding,
-    this.validator,
-    this.fillColor,
-    this.obscureText = false,
-    this.hasObscureControl = false,
-    this.controller,
-    this.readOnly = false,
-  });
+  const FormTextField(
+      {this.suffixIcon,
+      super.key,
+      required this.name,
+      required this.labelText,
+      this.width,
+      this.textColor,
+      this.filled = false,
+      this.labelColor,
+      this.bgColor,
+      this.padding,
+      this.validator,
+      this.fillColor,
+      this.obscureText = false,
+      this.hasObscureControl = false,
+      this.controller,
+      this.readOnly = false,
+      this.onChange});
 
   @override
   State<FormTextField> createState() => _FormTextFieldState();
@@ -76,6 +77,7 @@ class _FormTextFieldState extends State<FormTextField> {
             validator: widget.validator,
             controller: widget.controller,
             readOnly: widget.readOnly,
+            onChanged: widget.onChange,
             obscureText:
                 !widget.obscureText ? isPasswordVisible : !isPasswordVisible,
             style: TextStyle(color: widget.textColor ?? white),

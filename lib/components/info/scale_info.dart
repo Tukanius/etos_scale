@@ -103,55 +103,55 @@ class _ScaleInfoState extends State<ScaleInfo> {
             //     ),
             //   ],
             // ),
-            SizedBox(
-              height: 40,
-              child: ToggleButtons(
-                borderColor: textcolor,
-                fillColor: colorBlue,
-                borderWidth: 1,
-                selectedBorderColor: Colors.black,
-                borderRadius: BorderRadius.circular(10),
-                selectedColor: white,
-                onPressed: (int index) {
-                  setState(() {
-                    for (int i = 0; i < isSelected.length; i++) {
-                      isSelected[i] = i == index;
-                    }
-                  });
-                  if (index == 0) {
-                    widget.setType?.call('IN');
-                  } else if (index == 1) {
-                    widget.setType?.call('OUT');
-                  }
-                },
-                isSelected: isSelected,
-                children: <Widget>[
-                  Container(
-                    padding: EdgeInsets.symmetric(horizontal: 60),
-                    child: const Text(
-                      'Орох',
-                      style: TextStyle(
-                        fontWeight: FontWeight.w600,
-                        fontSize: 16,
-                      ),
-                    ),
-                  ),
-                  Container(
-                    padding: EdgeInsets.symmetric(horizontal: 60),
-                    child: const Text(
-                      'Гарах',
-                      style: TextStyle(
-                        fontWeight: FontWeight.w600,
-                        fontSize: 16,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            const SizedBox(
-              height: 15,
-            ),
+            // SizedBox(
+            //   height: 40,
+            //   child: ToggleButtons(
+            //     borderColor: textcolor,
+            //     fillColor: colorBlue,
+            //     borderWidth: 1,
+            //     selectedBorderColor: Colors.black,
+            //     borderRadius: BorderRadius.circular(10),
+            //     selectedColor: white,
+            //     onPressed: (int index) {
+            //       setState(() {
+            //         for (int i = 0; i < isSelected.length; i++) {
+            //           isSelected[i] = i == index;
+            //         }
+            //       });
+            //       if (index == 0) {
+            //         widget.setType?.call('IN');
+            //       } else if (index == 1) {
+            //         widget.setType?.call('OUT');
+            //       }
+            //     },
+            //     isSelected: isSelected,
+            //     children: <Widget>[
+            //       Container(
+            //         padding: EdgeInsets.symmetric(horizontal: 60),
+            //         child: const Text(
+            //           'Орох',
+            //           style: TextStyle(
+            //             fontWeight: FontWeight.w600,
+            //             fontSize: 16,
+            //           ),
+            //         ),
+            //       ),
+            //       Container(
+            //         padding: EdgeInsets.symmetric(horizontal: 60),
+            //         child: const Text(
+            //           'Гарах',
+            //           style: TextStyle(
+            //             fontWeight: FontWeight.w600,
+            //             fontSize: 16,
+            //           ),
+            //         ),
+            //       ),
+            //     ],
+            //   ),
+            // ),
+            // const SizedBox(
+            //   height: 15,
+            // ),
             Button(
               labelText: 'Баталгаажуулах',
               color: colorBlue,

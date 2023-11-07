@@ -46,8 +46,30 @@ ScaleForm _$ScaleFormJson(Map<String, dynamic> json) {
   );
 }
 
-Map<String, dynamic> _$ScaleFormToJson(ScaleForm instance) {
+Map<String, dynamic> _$ScaleFormToJson(ScaleForm instance, String? type) {
   Map<String, dynamic> json = {};
+
+  if (type == 'form_builder') {
+    json['containerNumber_0_4'] = instance.containerNumber_0_4;
+    json['containerNumber_0_7'] = instance.containerNumber_0_7;
+    json['containerNumber_1_4'] = instance.containerNumber_1_4;
+    json['containerNumber_1_7'] = instance.containerNumber_1_7;
+    json['containerNumber_2_4'] = instance.containerNumber_2_4;
+    json['containerNumber_2_7'] = instance.containerNumber_2_7;
+    json['containerNumber_3_4'] = instance.containerNumber_3_4;
+    json['containerNumber_3_7'] = instance.containerNumber_3_7;
+
+    json['sealNumbers_0'] = instance.sealNumbers_0;
+    json['sealNumbers_1'] = instance.sealNumbers_1;
+
+    json['trailerPlateNumber_0'] = instance.trailerPlateNumber_0;
+    json['trailerPlateNumber_1'] = instance.trailerPlateNumber_1;
+
+    print(json);
+
+    return json;
+  }
+
   json['type'] = instance.type;
   json['vehiclePlateNo'] = instance.vehiclePlateNo;
   json['weightValue'] = instance.weightValue;

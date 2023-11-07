@@ -1,12 +1,15 @@
 import 'package:etos_scale_windows/components/ui/form_text_field.dart';
 import 'package:etos_scale_windows/contants/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 
 class ContainerCard extends StatefulWidget {
   final int index;
   final Color? color;
-  const ContainerCard({super.key, required this.index, this.color});
+  final GlobalKey<FormBuilderFieldState> container1;
+  const ContainerCard(
+      {super.key, required this.index, this.color, required this.container1});
 
   @override
   State<ContainerCard> createState() => _ContainerCardState();
@@ -42,6 +45,7 @@ class _ContainerCardState extends State<ContainerCard> {
               Row(
                 children: [
                   FormTextField(
+                    key: widget.container1,
                     name: "containerNumber_${widget.index}_4",
                     labelText: "AAAA",
                     filled: true,

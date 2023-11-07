@@ -1,6 +1,11 @@
+import 'package:flutter/cupertino.dart';
+import 'package:flutter_form_builder/flutter_form_builder.dart';
+
 part '../parts/scale_form.dart';
 
 class ScaleForm {
+  final GlobalKey<FormBuilderState> fbKey = GlobalKey<FormBuilderState>();
+
   String? type;
   String? vehiclePlateNo;
   double? weightValue;
@@ -46,5 +51,5 @@ class ScaleForm {
 
   factory ScaleForm.fromJson(Map<String, dynamic> json) =>
       _$ScaleFormJson(json);
-  Map<String, dynamic> toJson() => _$ScaleFormToJson(this);
+  Map<String, dynamic> toJson({String? type}) => _$ScaleFormToJson(this, type);
 }

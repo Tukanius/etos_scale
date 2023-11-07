@@ -1,14 +1,14 @@
-import 'dart:ffi';
-
 import 'package:etos_scale_windows/components/ui/form_text_field.dart';
 import 'package:etos_scale_windows/contants/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 
 class VehicleInfo extends StatefulWidget {
-  const VehicleInfo({
-    Key? key,
-  }) : super(key: key);
+  final Function(String?) onChangeVehicleNo;
+  final bool isSearchable;
+  const VehicleInfo(
+      {Key? key, required this.onChangeVehicleNo, required this.isSearchable})
+      : super(key: key);
 
   @override
   State<VehicleInfo> createState() => _VehicleInfoState();
@@ -35,6 +35,7 @@ class _VehicleInfoState extends State<VehicleInfo> {
           Stack(
             children: [
               FormTextField(
+                onChange: widget.onChangeVehicleNo,
                 name: "vehiclePlateNo",
                 labelText: "Улсын дугаар",
                 filled: true,
@@ -53,14 +54,16 @@ class _VehicleInfoState extends State<VehicleInfo> {
               ),
               Positioned(
                 right: 10,
-                bottom: 10,
-                child: SizedBox(
-                  width: 20,
-                  height: 20,
-                  child: CircularProgressIndicator(
-                    color: colorBlue,
-                  ),
-                ),
+                bottom: 7,
+                child: widget.isSearchable
+                    ? SizedBox(
+                        width: 20,
+                        height: 20,
+                        child: CircularProgressIndicator(
+                          color: colorBlue,
+                        ),
+                      )
+                    : const SizedBox(),
               ),
             ],
           ),

@@ -19,7 +19,6 @@ Receipt _$ReceiptFromJson(Map<String, dynamic> json) {
     trailerPlateNumbers: (json["trailerPlateNumbers"] as List)
         .map((item) => item as String)
         .toList(),
-    trailers: (json["trailers"] as List).map((item) => item as String).toList(),
     driverName: json["driverName"] as String,
     driverPhone:
         json["driverPhone"] != null ? json["driverPhone"] as String : null,
@@ -30,11 +29,6 @@ Receipt _$ReceiptFromJson(Map<String, dynamic> json) {
     containerNumbers: (json["containerNumbers"] as List)
         .map((item) => item as String)
         .toList(),
-    containers:
-        (json["containers"] as List).map((item) => item as String).toList(),
-    truckScales: json["truckScales"] != null
-        ? (json["truckScales"] as List).map((item) => item as String).toList()
-        : null,
     sealNumbers:
         (json["sealNumbers"] as List).map((item) => item as String).toList(),
     receiptStatus:
@@ -42,9 +36,6 @@ Receipt _$ReceiptFromJson(Map<String, dynamic> json) {
     receiptStatusDate: json["receiptStatusDate"] != null
         ? json["receiptStatusDate"] as String
         : null,
-    receiptStatuses: (json["receiptStatuses"] as List)
-        .map((item) => item as String)
-        .toList(),
     createdAt: json["createdAt"] as String,
   );
 }
@@ -63,18 +54,14 @@ Map<String, dynamic> _$ReceiptToJson(Receipt instance) {
   json['unladedWeight'] = instance.unladedWeight;
   json['totalWeight'] = instance.totalWeight;
   json['trailerPlateNumbers'] = instance.trailerPlateNumbers;
-  json['trailers'] = instance.trailers;
   json['driverName'] = instance.driverName;
   json['driverPhone'] = instance.driverPhone;
   json['driverRegisterNo'] = instance.driverRegisterNo;
   json['driverPdlNumber'] = instance.driverPdlNumber;
   json['containerNumbers'] = instance.containerNumbers;
-  json['containers'] = instance.containers;
-  json['truckScales'] = instance.truckScales;
   json['sealNumbers'] = instance.sealNumbers;
   json['receiptStatus'] = instance.receiptStatus;
   json['receiptStatusDate'] = instance.receiptStatusDate;
-  json['receiptStatuses'] = instance.receiptStatuses;
   json['createdAt'] = instance.createdAt;
 
   return json;
