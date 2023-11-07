@@ -19,6 +19,7 @@ class FormTextField extends StatefulWidget {
   final TextEditingController? controller;
   final bool readOnly;
   final Function(String?)? onChange;
+  final String? initialValue;
 
   const FormTextField(
       {this.suffixIcon,
@@ -37,7 +38,8 @@ class FormTextField extends StatefulWidget {
       this.hasObscureControl = false,
       this.controller,
       this.readOnly = false,
-      this.onChange});
+      this.onChange,
+      this.initialValue});
 
   @override
   State<FormTextField> createState() => _FormTextFieldState();
@@ -73,6 +75,7 @@ class _FormTextFieldState extends State<FormTextField> {
             height: 5,
           ),
           FormBuilderTextField(
+            initialValue: widget.initialValue,
             name: widget.name,
             validator: widget.validator,
             controller: widget.controller,

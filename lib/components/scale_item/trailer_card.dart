@@ -1,20 +1,29 @@
 import 'package:etos_scale_windows/components/ui/form_text_field.dart';
 import 'package:etos_scale_windows/contants/colors.dart';
+import 'package:etos_scale_windows/models/scale_form.dart';
 import 'package:flutter/material.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 
 class TrailerCard extends StatefulWidget {
   final int index;
-  const TrailerCard({
-    Key? key,
-    required this.index,
-  }) : super(key: key);
+  final ScaleForm formData;
+  const TrailerCard({Key? key, required this.index, required this.formData})
+      : super(key: key);
 
   @override
   State<TrailerCard> createState() => _TrailerCardState();
 }
 
 class _TrailerCardState extends State<TrailerCard> {
+  getConroller(int index) {
+    switch (index) {
+      case 0:
+        return widget.formData.trailerPlateNumber_0Controller;
+      case 1:
+        return widget.formData.trailerPlateNumber_1Controller;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -42,6 +51,7 @@ class _TrailerCardState extends State<TrailerCard> {
               Row(
                 children: [
                   FormTextField(
+                      controller: getConroller(widget.index),
                       bgColor: Colors.transparent,
                       name: "trailerPlateNumber_${widget.index}",
                       labelText: "Улсын дугаар",
@@ -51,15 +61,12 @@ class _TrailerCardState extends State<TrailerCard> {
                       labelColor: white,
                       fillColor: white,
                       validator: FormBuilderValidators.compose([
-                        widget.index == 0
-                            ? FormBuilderValidators.required(
-                                errorText: 'Алдаа!')
-                            : (value) {
-                                return validateTrail(
-                                  (value != null ? value as String : value)
-                                      as String?,
-                                );
-                              }
+                        (value) {
+                          return validateTrail(
+                            (value != null ? value as String : value)
+                                as String?,
+                          );
+                        }
                       ])),
                 ],
               ),

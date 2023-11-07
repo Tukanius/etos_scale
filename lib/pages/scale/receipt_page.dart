@@ -20,8 +20,8 @@ class _ReceiptPageState extends State<ReceiptPage> with AfterLayoutMixin {
   int limit = 30;
   bool isLoading = false;
   loadData(int page, int limit) async {
-    Filter filter = Filter();
-    Offset offset = Offset(limit: limit, page: page);
+    // Filter filter = Filter();
+    // Offset offset = Offset(limit: limit, page: page);
 
     // Result res = await ReceiptApi()
     //     .list(ResultArguments(filter: filter, offset: offset));

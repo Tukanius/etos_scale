@@ -1,16 +1,16 @@
 import 'package:etos_scale_windows/contants/colors.dart';
+import 'package:etos_scale_windows/models/scale_form.dart';
 import 'package:flutter/material.dart';
 
-class DriverInfo extends StatefulWidget {
-  const DriverInfo({
-    Key? key,
-  }) : super(key: key);
+class ContractInfo extends StatefulWidget {
+  final ScaleForm formData;
+  const ContractInfo({Key? key, required this.formData}) : super(key: key);
 
   @override
-  State<DriverInfo> createState() => _DriverInfoState();
+  State<ContractInfo> createState() => _ContractInfoState();
 }
 
-class _DriverInfoState extends State<DriverInfo> {
+class _ContractInfoState extends State<ContractInfo> {
   @override
   Widget build(BuildContext context) {
     return Expanded(
@@ -52,9 +52,9 @@ class _DriverInfoState extends State<DriverInfo> {
                         color: gray102,
                       ),
                       padding: const EdgeInsets.symmetric(horizontal: 10),
-                      alignment: Alignment.center,
-                      child: const Text(
-                        'dataaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa',
+                      alignment: Alignment.centerLeft,
+                      child: Text(
+                        widget.formData.contractNo ?? '-',
                         overflow: TextOverflow.ellipsis,
                         maxLines: 1,
                       ),
@@ -91,9 +91,9 @@ class _DriverInfoState extends State<DriverInfo> {
                         color: gray102,
                       ),
                       padding: const EdgeInsets.symmetric(horizontal: 10),
-                      alignment: Alignment.center,
-                      child: const Text(
-                        'dataaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa',
+                      alignment: Alignment.centerLeft,
+                      child: Text(
+                        widget.formData.receiptNo ?? '-',
                         overflow: TextOverflow.ellipsis,
                         maxLines: 1,
                       ),
@@ -130,9 +130,9 @@ class _DriverInfoState extends State<DriverInfo> {
                         color: gray102,
                       ),
                       padding: const EdgeInsets.symmetric(horizontal: 10),
-                      alignment: Alignment.center,
-                      child: const Text(
-                        'dataaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa',
+                      alignment: Alignment.centerLeft,
+                      child: Text(
+                        widget.formData.buyerName ?? '-',
                         overflow: TextOverflow.ellipsis,
                         maxLines: 1,
                       ),
@@ -169,9 +169,9 @@ class _DriverInfoState extends State<DriverInfo> {
                         color: gray102,
                       ),
                       padding: const EdgeInsets.symmetric(horizontal: 10),
-                      alignment: Alignment.center,
-                      child: const Text(
-                        'dataaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa',
+                      alignment: Alignment.centerLeft,
+                      child: Text(
+                        widget.formData.supplierName ?? '-',
                         overflow: TextOverflow.ellipsis,
                         maxLines: 1,
                       ),

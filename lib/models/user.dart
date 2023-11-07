@@ -1,14 +1,22 @@
 part '../parts/user.dart';
 
 class User {
-  String? id;
+  String id;
+  String customer;
+  String firstname;
+  String lastname;
   String? email;
-  String? username;
+  String? password;
+  String? scaleType = "BOTH";
+  String? weightType = "BOTH";
 
   User({
-    this.id,
-    this.email,
-    this.username,
+    required this.id,
+    required this.customer,
+    required this.firstname,
+    required this.lastname,
+    this.scaleType,
+    this.weightType,
   });
 
   static toAuthJson(Map<String, dynamic> json) => _$UserToAuthJson(json);

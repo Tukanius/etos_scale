@@ -41,8 +41,8 @@ ScaleForm _$ScaleFormJson(Map<String, dynamic> json) {
     containerNumber_3_7: json["containerNumber_3_7"] != null
         ? json["containerNumber_3_7"]
         : null,
-    sealNumbers_0: json["sealNumbers_0"] != null ? json["sealNumbers_0"] : null,
-    sealNumbers_1: json["sealNumbers_1"] != null ? json["sealNumbers_1"] : null,
+    sealNumber_0: json["sealNumbers_0"] != null ? json["sealNumbers_0"] : null,
+    sealNumber_1: json["sealNumbers_1"] != null ? json["sealNumbers_1"] : null,
   );
 }
 
@@ -59,13 +59,11 @@ Map<String, dynamic> _$ScaleFormToJson(ScaleForm instance, String? type) {
     json['containerNumber_3_4'] = instance.containerNumber_3_4;
     json['containerNumber_3_7'] = instance.containerNumber_3_7;
 
-    json['sealNumbers_0'] = instance.sealNumbers_0;
-    json['sealNumbers_1'] = instance.sealNumbers_1;
+    json['sealNumbers_0'] = instance.sealNumber_0;
+    json['sealNumbers_1'] = instance.sealNumber_1;
 
     json['trailerPlateNumber_0'] = instance.trailerPlateNumber_0;
     json['trailerPlateNumber_1'] = instance.trailerPlateNumber_1;
-
-    print(json);
 
     return json;
   }
@@ -77,48 +75,58 @@ Map<String, dynamic> _$ScaleFormToJson(ScaleForm instance, String? type) {
   json['weightType'] = instance.weightType;
 
   json['trailerPlateNumbers'] = [];
-  if (instance.trailerPlateNumber_0 != null) {
+  if (instance.trailerPlateNumber_0 != null &&
+      instance.trailerPlateNumber_0 != "") {
     json['trailerPlateNumbers'].add(instance.trailerPlateNumber_0);
   }
 
-  if (instance.trailerPlateNumber_1 != null) {
+  if (instance.trailerPlateNumber_1 != null &&
+      instance.trailerPlateNumber_1 != "") {
     json['trailerPlateNumbers'].add(instance.trailerPlateNumber_1);
   }
 
   json['containerNumbers'] = [];
 
   if (instance.containerNumber_0_4 != null &&
-      instance.containerNumber_0_7 != null) {
+      instance.containerNumber_0_7 != null &&
+      instance.containerNumber_0_4 != "" &&
+      instance.containerNumber_0_7 != "") {
     json['containerNumbers']
         .add('${instance.containerNumber_0_4}${instance.containerNumber_0_7}');
   }
 
   if (instance.containerNumber_1_4 != null &&
-      instance.containerNumber_1_7 != null) {
+      instance.containerNumber_1_7 != null &&
+      instance.containerNumber_1_4 != "" &&
+      instance.containerNumber_1_7 != "") {
     json['containerNumbers']
         .add('${instance.containerNumber_1_4}${instance.containerNumber_1_7}');
   }
 
   if (instance.containerNumber_2_4 != null &&
-      instance.containerNumber_2_7 != null) {
+      instance.containerNumber_2_7 != null &&
+      instance.containerNumber_2_4 != "" &&
+      instance.containerNumber_2_7 != "") {
     json['containerNumbers']
         .add('${instance.containerNumber_2_4}${instance.containerNumber_2_7}');
   }
 
   if (instance.containerNumber_3_4 != null &&
-      instance.containerNumber_3_7 != null) {
+      instance.containerNumber_3_7 != null &&
+      instance.containerNumber_3_4 != "" &&
+      instance.containerNumber_3_7 != "") {
     json['containerNumbers']
         .add('${instance.containerNumber_3_4}${instance.containerNumber_3_7}');
   }
 
   json['sealNumbers'] = [];
 
-  if (instance.sealNumbers_0 != null) {
-    json['sealNumbers'].add(instance.sealNumbers_0);
+  if (instance.sealNumber_0 != null && instance.sealNumber_0 != "") {
+    json['sealNumbers'].add(instance.sealNumber_0);
   }
 
-  if (instance.sealNumbers_1 != null) {
-    json['sealNumbers'].add(instance.sealNumbers_1);
+  if (instance.sealNumber_1 != null && instance.sealNumber_1 != "") {
+    json['sealNumbers'].add(instance.sealNumber_1);
   }
 
   return json;

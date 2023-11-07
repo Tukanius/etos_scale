@@ -1,18 +1,30 @@
 import 'package:etos_scale_windows/components/ui/form_text_field.dart';
 import 'package:etos_scale_windows/contants/colors.dart';
+import 'package:etos_scale_windows/models/scale_form.dart';
 import 'package:flutter/material.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 
-class ContainerSeal extends StatefulWidget {
+class SealCard extends StatefulWidget {
   final int index;
   final Color? color;
-  const ContainerSeal({super.key, required this.index, this.color});
+  final ScaleForm formData;
+  const SealCard(
+      {super.key, required this.index, this.color, required this.formData});
 
   @override
-  State<ContainerSeal> createState() => _ContainerSealState();
+  State<SealCard> createState() => _SealCardState();
 }
 
-class _ContainerSealState extends State<ContainerSeal> {
+class _SealCardState extends State<SealCard> {
+  getConroller(int index) {
+    switch (index) {
+      case 0:
+        return widget.formData.sealNumber_0Controller;
+      case 1:
+        return widget.formData.sealNumber_1Controller;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -35,7 +47,8 @@ class _ContainerSealState extends State<ContainerSeal> {
             ),
           ),
           FormTextField(
-            name: "sealNumbers_${widget.index}",
+            controller: getConroller(widget.index),
+            name: "sealNumber_${widget.index}",
             labelText: "",
             filled: true,
             fillColor: gray102,
@@ -43,13 +56,11 @@ class _ContainerSealState extends State<ContainerSeal> {
             labelColor: black,
             bgColor: Colors.transparent,
             validator: FormBuilderValidators.compose([
-              widget.index == 0
-                  ? FormBuilderValidators.required(errorText: 'Алдаа!')
-                  : (value) {
-                      return validateContainerSeal(
-                        (value != null ? value as String : value) as String?,
-                      );
-                    }
+              (value) {
+                return validateSealCard(
+                  (value != null ? value as String : value) as String?,
+                );
+              }
             ]),
           ),
         ],
@@ -58,7 +69,7 @@ class _ContainerSealState extends State<ContainerSeal> {
   }
 }
 
-String? validateContainerSeal(String? value) {
+String? validateSealCard(String? value) {
   if (value == null || value.isEmpty || value.length == 4) {
     return null;
   } else {

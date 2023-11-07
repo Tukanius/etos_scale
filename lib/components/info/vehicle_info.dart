@@ -1,13 +1,18 @@
 import 'package:etos_scale_windows/components/ui/form_text_field.dart';
 import 'package:etos_scale_windows/contants/colors.dart';
+import 'package:etos_scale_windows/models/scale_form.dart';
 import 'package:flutter/material.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 
 class VehicleInfo extends StatefulWidget {
   final Function(String?) onChangeVehicleNo;
   final bool isSearchable;
+  final ScaleForm formData;
   const VehicleInfo(
-      {Key? key, required this.onChangeVehicleNo, required this.isSearchable})
+      {Key? key,
+      required this.onChangeVehicleNo,
+      required this.isSearchable,
+      required this.formData})
       : super(key: key);
 
   @override
@@ -94,9 +99,9 @@ class _VehicleInfoState extends State<VehicleInfo> {
                         color: gray102,
                       ),
                       padding: const EdgeInsets.symmetric(horizontal: 10),
-                      alignment: Alignment.center,
-                      child: const Text(
-                        'dataaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa',
+                      alignment: Alignment.centerLeft,
+                      child: Text(
+                        widget.formData.driverName ?? '-',
                         overflow: TextOverflow.ellipsis,
                         maxLines: 1,
                       ),
@@ -133,9 +138,9 @@ class _VehicleInfoState extends State<VehicleInfo> {
                         color: gray102,
                       ),
                       padding: const EdgeInsets.symmetric(horizontal: 10),
-                      alignment: Alignment.center,
-                      child: const Text(
-                        'dataaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa',
+                      alignment: Alignment.centerLeft,
+                      child: Text(
+                        widget.formData.driverRegisterNo ?? '-',
                         overflow: TextOverflow.ellipsis,
                         maxLines: 1,
                       ),
@@ -172,9 +177,9 @@ class _VehicleInfoState extends State<VehicleInfo> {
                         color: gray102,
                       ),
                       padding: const EdgeInsets.symmetric(horizontal: 10),
-                      alignment: Alignment.center,
-                      child: const Text(
-                        'dataaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa',
+                      alignment: Alignment.centerLeft,
+                      child: Text(
+                        widget.formData.driverPhone ?? '-',
                         overflow: TextOverflow.ellipsis,
                         maxLines: 1,
                       ),

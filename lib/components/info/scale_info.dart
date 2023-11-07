@@ -4,13 +4,11 @@ import 'package:flutter/material.dart';
 
 class ScaleInfo extends StatefulWidget {
   final String scaleData;
-  final Function()? onClick;
-  final Function(String value)? setType;
+  final Function()? onSubmit;
   final bool isLoading;
   const ScaleInfo({
     Key? key,
-    this.onClick,
-    this.setType,
+    this.onSubmit,
     required this.scaleData,
     required this.isLoading,
   }) : super(key: key);
@@ -64,7 +62,7 @@ class _ScaleInfoState extends State<ScaleInfo> {
             //           borderRadius: BorderRadius.circular(10.0),
             //         ),
             //       ),
-            //       onPressed: widget.onClick,
+            //       onPressed: widget.onChange,
             //       child: Container(
             //         margin:
             //             const EdgeInsets.symmetric(horizontal: 30, vertical: 8),
@@ -85,9 +83,9 @@ class _ScaleInfoState extends State<ScaleInfo> {
             //           borderRadius: BorderRadius.circular(10.0),
             //         ),
             //       ),
-            //       onPressed: widget.onClick,
+            //       onPressed: widget.onChange,
 
-            //       // widget.onClick;
+            //       // widget.onChange;
             //       child: Container(
             //         margin:
             //             const EdgeInsets.symmetric(horizontal: 30, vertical: 8),
@@ -155,7 +153,7 @@ class _ScaleInfoState extends State<ScaleInfo> {
             Button(
               labelText: 'Баталгаажуулах',
               color: colorBlue,
-              onPress: widget.onClick!,
+              onPress: widget.onSubmit!,
             ),
           ],
         ),

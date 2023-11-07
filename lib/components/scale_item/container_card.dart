@@ -1,21 +1,47 @@
 import 'package:etos_scale_windows/components/ui/form_text_field.dart';
 import 'package:etos_scale_windows/contants/colors.dart';
+import 'package:etos_scale_windows/models/scale_form.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 
 class ContainerCard extends StatefulWidget {
   final int index;
   final Color? color;
-  final GlobalKey<FormBuilderFieldState> container1;
+  final ScaleForm formData;
   const ContainerCard(
-      {super.key, required this.index, this.color, required this.container1});
+      {super.key, required this.index, this.color, required this.formData});
 
   @override
   State<ContainerCard> createState() => _ContainerCardState();
 }
 
 class _ContainerCardState extends State<ContainerCard> {
+  get4Controller(int index) {
+    switch (index) {
+      case 0:
+        return widget.formData.containerNumber_0_4Controller;
+      case 1:
+        return widget.formData.containerNumber_1_4Controller;
+      case 2:
+        return widget.formData.containerNumber_2_4Controller;
+      case 3:
+        return widget.formData.containerNumber_3_4Controller;
+    }
+  }
+
+  get7Controller(int index) {
+    switch (index) {
+      case 0:
+        return widget.formData.containerNumber_0_7Controller;
+      case 1:
+        return widget.formData.containerNumber_1_7Controller;
+      case 2:
+        return widget.formData.containerNumber_2_7Controller;
+      case 3:
+        return widget.formData.containerNumber_3_7Controller;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -45,7 +71,7 @@ class _ContainerCardState extends State<ContainerCard> {
               Row(
                 children: [
                   FormTextField(
-                    key: widget.container1,
+                    controller: get4Controller(widget.index),
                     name: "containerNumber_${widget.index}_4",
                     labelText: "AAAA",
                     filled: true,
@@ -55,18 +81,16 @@ class _ContainerCardState extends State<ContainerCard> {
                     labelColor: black,
                     bgColor: Colors.transparent,
                     validator: FormBuilderValidators.compose([
-                      widget.index == 0
-                          ? FormBuilderValidators.required(errorText: 'Алдаа!')
-                          : (value) {
-                              return validateContainer(
-                                (value != null ? value as String : value)
-                                    as String?,
-                              );
-                            }
+                      (value) {
+                        return validateContainer(
+                          (value != null ? value as String : value) as String?,
+                        );
+                      }
                     ]),
                   ),
                   const SizedBox(width: 5),
                   FormTextField(
+                    controller: get7Controller(widget.index),
                     name: "containerNumber_${widget.index}_7",
                     labelText: "0000000",
                     filled: true,
@@ -76,14 +100,11 @@ class _ContainerCardState extends State<ContainerCard> {
                     labelColor: black,
                     bgColor: Colors.transparent,
                     validator: FormBuilderValidators.compose([
-                      widget.index == 0
-                          ? FormBuilderValidators.required(errorText: 'Алдаа!')
-                          : (value) {
-                              return validateContainerNumber(
-                                (value != null ? value as String : value)
-                                    as String?,
-                              );
-                            }
+                      (value) {
+                        return validateContainerNumber(
+                          (value != null ? value as String : value) as String?,
+                        );
+                      }
                     ]),
                   ),
                 ],
