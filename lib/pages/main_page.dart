@@ -88,8 +88,11 @@ class _MainPageState extends State<MainPage>
       }
     }
     var machineId = await PlatformDeviceId.getDeviceId;
+    print('===========================');
+    print(machineId);
+    print('===========================');
     socket = io.io(
-      'http://192.168.1.8:30605',
+      'http://192.168.1.96:30605',
       io.OptionBuilder().setTransports(['websocket']).setQuery(
         {
           'machineId': machineId,

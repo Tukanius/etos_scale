@@ -8,7 +8,6 @@ import "package:etos_scale_windows/models/result.dart";
 import "package:etos_scale_windows/models/scale.dart";
 import 'package:etos_scale_windows/models/scale_form.dart';
 import "package:etos_scale_windows/pages/main_page.dart";
-import "package:etos_scale_windows/provider/user_provider.dart";
 import "package:flutter/foundation.dart";
 import "package:flutter/material.dart";
 import "package:etos_scale_windows/contants/colors.dart";
@@ -20,7 +19,6 @@ import "package:etos_scale_windows/components/scale_item/container_card.dart";
 import "package:etos_scale_windows/components/scale_item/trailer_card.dart";
 import 'package:etos_scale_windows/components/info/contract_info.dart';
 import 'package:flutter_dropdown_alert/alert_controller.dart';
-import "package:provider/provider.dart";
 
 class ScalePage extends StatefulWidget {
   static const routeName = "ScalePage";
@@ -44,6 +42,8 @@ class _ScalePageState extends State<ScalePage> with AfterLayoutMixin {
 
   Result result = Result(count: 0, rows: []);
   Receipt? receipt;
+  String type = "IN";
+  String weightType = "LADED";
 
   loadData(int page, int limit) async {
     Filter filter = Filter();
@@ -58,7 +58,7 @@ class _ScalePageState extends State<ScalePage> with AfterLayoutMixin {
   }
 
   @override
-  afterFirstLayout(BuildContext context) {
+  afterFirstLayout(BuildContext context) async {
     setState(() {
       isLoading = false;
     });
@@ -69,8 +69,6 @@ class _ScalePageState extends State<ScalePage> with AfterLayoutMixin {
   }
 
   onSubmit() async {
-    var user = Provider.of<UserProvider>(context, listen: false).user;
-
     final form = formData.fbKey.currentState;
 
     if (kDebugMode) {
@@ -86,17 +84,16 @@ class _ScalePageState extends State<ScalePage> with AfterLayoutMixin {
         formData = ScaleForm.fromJson(form.value);
 
         setState(() {
-          formData.type = user?.scaleType;
-          formData.weightType = user?.weightType;
+          formData.type = type;
+          formData.weightType = weightType;
           formData.weightValue = double.parse(widget.scaleData);
         });
-
         await ScaleApi().truck(formData.toJson());
         // ignore: use_build_context_synchronously
         Navigator.of(context).pushNamed(MainPage.routeName);
-
-        showSnackbar();
       } catch (e) {
+        await showSnackbar();
+
         if (kDebugMode) {
           print(e.toString());
         }
@@ -105,6 +102,14 @@ class _ScalePageState extends State<ScalePage> with AfterLayoutMixin {
         });
       }
     }
+  }
+
+  showSnackbar() async {
+    await AlertController.show(
+      "Амжилттай",
+      "Баталгаажуулалт амжилттай",
+      TypeAlert.success,
+    );
   }
 
   onChangeVehicleNo(String? value) async {
@@ -167,13 +172,6 @@ class _ScalePageState extends State<ScalePage> with AfterLayoutMixin {
         });
       }
     }
-  }
-
-  showSnackbar() {
-    Map<String, dynamic> payload = <String, dynamic>{};
-    payload["data"] = "content";
-    AlertController.show(
-        "Амжилттай", "Баталгаажуулалт амжилттай", TypeAlert.success, payload);
   }
 
   @override
@@ -272,6 +270,16 @@ class _ScalePageState extends State<ScalePage> with AfterLayoutMixin {
                         ),
                         const SizedBox(width: 20),
                         ScaleInfo(
+                          setType: (value) {
+                            setState(() {
+                              type = value;
+                            });
+                          },
+                          setWeightType: (value) {
+                            setState(() {
+                              weightType = value;
+                            });
+                          },
                           isLoading: isLoading,
                           onSubmit: () {
                             onSubmit();
@@ -286,14 +294,17 @@ class _ScalePageState extends State<ScalePage> with AfterLayoutMixin {
                 ),
                 const SizedBox(height: 20),
                 Container(
-                    width: MediaQuery.of(context).size.width,
-                    alignment: Alignment.center,
-                    child: SizedBox(
-                        width: 1180,
-                        child: Column(
-                            children: result.rows!
-                                .map((row) => ScaleCard(data: row as Scale))
-                                .toList()))),
+                  width: MediaQuery.of(context).size.width,
+                  alignment: Alignment.center,
+                  child: SizedBox(
+                    width: 1180,
+                    child: Column(
+                      children: result.rows!
+                          .map((row) => ScaleCard(data: row as Scale))
+                          .toList(),
+                    ),
+                  ),
+                ),
                 const SizedBox(height: 20),
               ],
             ),

@@ -126,54 +126,6 @@ class _ScaleCardState extends State<ScaleCard> {
                               ],
                             )
                           ]),
-                          // Column(
-                          //   crossAxisAlignment: CrossAxisAlignment.start,
-                          //   children: [
-                          //     Text(
-                          //       'Машины жин',
-                          //       style: TextStyle(
-                          //         color: textcolor,
-                          //         fontSize: 14,
-                          //         fontWeight: FontWeight.w500,
-                          //       ),
-                          //     ),
-                          //     const SizedBox(
-                          //       height: 10,
-                          //     ),
-                          //     Text(
-                          //       '${widget.data.weightValue}КГ',
-                          //       style: TextStyle(
-                          //         color: black,
-                          //         fontSize: 24,
-                          //         fontWeight: FontWeight.w700,
-                          //       ),
-                          //     ),
-                          //   ],
-                          // ),
-                          // Column(
-                          //   crossAxisAlignment: CrossAxisAlignment.start,
-                          //   children: [
-                          //     Text(
-                          //       'Бохир жин',
-                          //       style: TextStyle(
-                          //         color: textcolor,
-                          //         fontSize: 14,
-                          //         fontWeight: FontWeight.w500,
-                          //       ),
-                          //     ),
-                          //     const SizedBox(
-                          //       height: 10,
-                          //     ),
-                          //     Text(
-                          //       '------КГ',
-                          //       style: TextStyle(
-                          //         color: black,
-                          //         fontSize: 24,
-                          //         fontWeight: FontWeight.w700,
-                          //       ),
-                          //     ),
-                          //   ],
-                          // ),
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.end,
                             children: [

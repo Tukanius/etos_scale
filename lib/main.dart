@@ -36,7 +36,9 @@ class MyApp extends StatelessWidget {
         builder: (context, userProvider, _) {
           return MaterialApp(
             title: 'E-TOS',
-            theme: ThemeData(),
+            theme: ThemeData(
+              visualDensity: VisualDensity.adaptivePlatformDensity,
+            ),
             debugShowCheckedModeBanner: false,
             builder: (context, child) => Stack(
               children: [child!, const DropdownAlert()],
