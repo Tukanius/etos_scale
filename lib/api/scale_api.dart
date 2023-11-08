@@ -2,8 +2,7 @@ import 'package:etos_scale_windows/models/result.dart';
 import 'package:etos_scale_windows/models/scale.dart';
 import 'package:etos_scale_windows/utils/http_request.dart';
 
-// final httpRequest = HttpRequest("http://mine.etos.mn/sca/api");
-// final httpRequest = HttpRequest("http://192.168.1.96:30606/api");
+// final httpRequest = HttpRequest("http://set.etos.mn/set/api");
 final httpRequest = HttpRequest("http://192.168.1.96:30606/api");
 
 class ScaleApi {
