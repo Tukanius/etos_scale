@@ -1,14 +1,12 @@
 import 'package:etos_scale_windows/models/receipt.dart';
-
 part '../parts/scale.dart';
 
 class Scale {
-  String id;
-  String type;
+  String? id;
   String vehiclePlateNo;
-  int weightValue;
   String weightType;
-  int containerCount;
+  String type;
+  int weightValue;
   Receipt? receipt;
   List<String> containerNumbers;
   List<String> trailerPlateNumbers;
@@ -16,9 +14,12 @@ class Scale {
   String truckScaleStatus;
   String truckScaleStatusDate;
   String createdAt;
+  String driverName;
+  String driverRegisterNo;
+  String driverPhone;
 
   Scale({
-    required this.id,
+    this.id,
     required this.type,
     required this.vehiclePlateNo,
     required this.weightValue,
@@ -26,11 +27,13 @@ class Scale {
     required this.trailerPlateNumbers,
     required this.sealNumbers,
     required this.weightType,
-    required this.containerCount,
     required this.truckScaleStatus,
     required this.truckScaleStatusDate,
     this.receipt,
     required this.createdAt,
+    required this.driverName,
+    required this.driverRegisterNo,
+    required this.driverPhone,
   });
 
   factory Scale.fromJson(Map<String, dynamic> json) => _$ScaleFromJson(json);

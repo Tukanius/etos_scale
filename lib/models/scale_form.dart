@@ -7,7 +7,7 @@ class ScaleForm {
   final GlobalKey<FormBuilderState> fbKey = GlobalKey<FormBuilderState>();
 
   String? type;
-  double? weightValue;
+  int? weightValue;
   String? weightType;
 
   String? vehiclePlateNo;

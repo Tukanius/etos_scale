@@ -1,8 +1,8 @@
 import 'package:etos_scale_windows/models/receipt.dart';
 import 'package:etos_scale_windows/utils/http_request.dart';
 
-// final httpRequest = HttpRequest("http://set.etos.mn/set/api");
-final httpRequest = HttpRequest("http://192.168.1.96:30606/api");
+final httpRequest = HttpRequest("http://set.etos.mn/se1/api");
+// final httpRequest = HttpRequest("http://192.168.1.96:30606/api");
 
 class ReceiptApi {
   found(value) async {

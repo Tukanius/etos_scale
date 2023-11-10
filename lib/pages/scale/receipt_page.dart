@@ -1,6 +1,7 @@
 import 'package:after_layout/after_layout.dart';
 import 'package:etos_scale_windows/api/scale_api.dart';
 import 'package:etos_scale_windows/components/info/scale_card.dart';
+import 'package:etos_scale_windows/contants/colors.dart';
 import 'package:etos_scale_windows/models/result.dart';
 import 'package:etos_scale_windows/models/scale.dart';
 import 'package:flutter/material.dart';
@@ -47,14 +48,17 @@ class _ReceiptPageState extends State<ReceiptPage> with AfterLayoutMixin {
       child: Container(
         width: MediaQuery.of(context).size.width,
         margin: const EdgeInsets.all(20),
-        child: SizedBox(
-          width: 1180,
-          child: Column(
-            children: result.rows!
-                .map((row) => ScaleCard(data: row as Scale))
-                .toList(),
-          ),
-        ),
+        child: isLoading == false
+            ? Center(
+                child: CircularProgressIndicator(
+                  color: colorBlue,
+                ),
+              )
+            : Column(
+                children: result.rows!
+                    .map((row) => ScaleCard(data: row as Scale))
+                    .toList(),
+              ),
       ),
     );
   }

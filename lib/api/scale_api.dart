@@ -2,8 +2,8 @@ import 'package:etos_scale_windows/models/result.dart';
 import 'package:etos_scale_windows/models/scale.dart';
 import 'package:etos_scale_windows/utils/http_request.dart';
 
-// final httpRequest = HttpRequest("http://set.etos.mn/set/api");
-final httpRequest = HttpRequest("http://192.168.1.96:30606/api");
+final httpRequest = HttpRequest("http://set.etos.mn/se1/api");
+// final httpRequest = HttpRequest("http://192.168.1.96:30606/api");
 
 class ScaleApi {
   list(ResultArguments arguments) async {
@@ -15,6 +15,6 @@ class ScaleApi {
   truck(data) async {
     var res = await httpRequest.post('/truck/scale', data: data);
 
-    return Scale.fromJson(res);
+    return res;
   }
 }

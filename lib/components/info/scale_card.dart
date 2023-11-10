@@ -30,10 +30,10 @@ class _ScaleCardState extends State<ScaleCard> {
           Row(
             children: [
               Container(
-                width: 8,
+                width: 10,
                 height: 215,
                 decoration: BoxDecoration(
-                  color: gray102,
+                  color: widget.data.type == "IN" ? colorYellow : colorGreen,
                   borderRadius: const BorderRadius.only(
                     topLeft: Radius.circular(10),
                     bottomLeft: Radius.circular(10),
@@ -50,82 +50,138 @@ class _ScaleCardState extends State<ScaleCard> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Row(children: [
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  'Машины дугаар',
-                                  style: TextStyle(
-                                    color: textcolor,
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w500,
+                          Row(
+                            children: [
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    'Машины дугаар',
+                                    style: TextStyle(
+                                      color: textcolor,
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w500,
+                                    ),
                                   ),
-                                ),
-                                const SizedBox(
-                                  height: 10,
-                                ),
-                                Text(
-                                  widget.data.vehiclePlateNo,
-                                  style: TextStyle(
-                                    color: black,
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.w500,
+                                  const SizedBox(
+                                    height: 10,
                                   ),
-                                ),
-                              ],
-                            ),
-                            const SizedBox(width: 40),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  'Чиргүүлын дугаар',
-                                  style: TextStyle(
-                                    color: textcolor,
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w500,
+                                  Text(
+                                    widget.data.vehiclePlateNo,
+                                    style: TextStyle(
+                                      color: black,
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.w500,
+                                    ),
                                   ),
-                                ),
-                                const SizedBox(
-                                  height: 10,
-                                ),
-                                Text(
-                                  widget.data.trailerPlateNumbers.join(", "),
-                                  style: TextStyle(
-                                    color: black,
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.w500,
+                                ],
+                              ),
+                              const SizedBox(width: 40),
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    'Чиргүүлын дугаар',
+                                    style: TextStyle(
+                                      color: textcolor,
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w500,
+                                    ),
                                   ),
-                                ),
-                              ],
-                            ),
-                            const SizedBox(width: 40),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  'Хэмжилтийн жин',
-                                  style: TextStyle(
-                                    color: textcolor,
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w500,
+                                  const SizedBox(
+                                    height: 10,
                                   ),
-                                ),
-                                const SizedBox(
-                                  height: 10,
-                                ),
-                                Text(
-                                  '${widget.data.weightValue}',
-                                  style: TextStyle(
-                                    color: black,
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.w500,
+                                  Text(
+                                    widget.data.trailerPlateNumbers.join(", "),
+                                    style: TextStyle(
+                                      color: black,
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.w500,
+                                    ),
                                   ),
-                                ),
-                              ],
-                            )
-                          ]),
+                                ],
+                              ),
+                              const SizedBox(width: 40),
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    'Хэмжилтийн жин',
+                                    style: TextStyle(
+                                      color: textcolor,
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                                  ),
+                                  const SizedBox(
+                                    height: 10,
+                                  ),
+                                  Text(
+                                    '${widget.data.weightValue}',
+                                    style: TextStyle(
+                                      color: black,
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              const SizedBox(width: 40),
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    'Төлөв',
+                                    style: TextStyle(
+                                      color: textcolor,
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                                  ),
+                                  const SizedBox(
+                                    height: 10,
+                                  ),
+                                  Text(
+                                    widget.data.type == 'IN'
+                                        ? "Орсон"
+                                        : "Гарсан",
+                                    style: TextStyle(
+                                      color: black,
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              const SizedBox(width: 40),
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    'Ачаатай эсэх',
+                                    style: TextStyle(
+                                      color: textcolor,
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                                  ),
+                                  const SizedBox(
+                                    height: 10,
+                                  ),
+                                  Text(
+                                    widget.data.weightType == 'LADED'
+                                        ? "Ачаатай"
+                                        : "Ачаагүй",
+                                    style: TextStyle(
+                                      color: black,
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.end,
                             children: [
@@ -278,7 +334,10 @@ class _ScaleCardState extends State<ScaleCard> {
                             ],
                           ),
                           Text(
-                            'Жолооч: ${widget.data.receipt != null ? '${widget.data.receipt?.driverName ?? '-'}, ${widget.data.receipt?.driverRegisterNo ?? '-'}, ${widget.data.receipt?.driverPhone ?? '-'}' : '-'}',
+                            // 'Жолооч: ${widget.data.receipt != null ? '${widget.data.receipt?.driverName ?? '-'}, ${widget.data.receipt?.driverRegisterNo ?? '-'}, ${widget.data.receipt?.driverPhone ?? '-'}' : '-'}',
+                            widget.data.driverName == ''
+                                ? 'Жолооч:-'
+                                : 'Жолооч:  ${widget.data.driverName}, ${widget.data.driverRegisterNo}, ${widget.data.driverPhone}',
                             style: TextStyle(
                               color: textcolor,
                               fontWeight: FontWeight.w500,

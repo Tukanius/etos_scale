@@ -18,7 +18,6 @@ Color colorRed = HexColor("#F42828");
 Color colorOrange = HexColor("#FFB572");
 Color colorBlue = HexColor("#1177E8");
 Color colorPurple = HexColor("#65B0F6");
-Color blueColor = HexColor("#0969D4");
 // Color colorGreen = HexColor("#28d700");
 
 Color white = HexColor("#FFFFFF");

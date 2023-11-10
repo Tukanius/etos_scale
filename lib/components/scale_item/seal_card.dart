@@ -2,7 +2,6 @@ import 'package:etos_scale_windows/components/ui/form_text_field.dart';
 import 'package:etos_scale_windows/contants/colors.dart';
 import 'package:etos_scale_windows/models/scale_form.dart';
 import 'package:flutter/material.dart';
-import 'package:form_builder_validators/form_builder_validators.dart';
 
 class SealCard extends StatefulWidget {
   final int index;
@@ -55,13 +54,13 @@ class _SealCardState extends State<SealCard> {
             textColor: black,
             labelColor: black,
             bgColor: Colors.transparent,
-            validator: FormBuilderValidators.compose([
-              (value) {
-                return validateSealCard(
-                  (value != null ? value as String : value) as String?,
-                );
-              }
-            ]),
+            // validator: FormBuilderValidators.compose([
+            //   (value) {
+            //     return validateSealCard(
+            //       (value != null ? value as String : value) as String?,
+            //     );
+            //   }
+            // ]),
           ),
         ],
       ),

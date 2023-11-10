@@ -2,12 +2,15 @@ import "package:after_layout/after_layout.dart";
 import "package:etos_scale_windows/api/receipt.dart";
 import 'package:etos_scale_windows/api/scale_api.dart';
 import "package:etos_scale_windows/components/info/scale_card.dart";
+import "package:etos_scale_windows/components/scale_item/camera_card.dart";
 import 'package:etos_scale_windows/components/scale_item/seal_card.dart';
+import "package:etos_scale_windows/models/device.dart";
 import "package:etos_scale_windows/models/receipt.dart";
 import "package:etos_scale_windows/models/result.dart";
 import "package:etos_scale_windows/models/scale.dart";
 import 'package:etos_scale_windows/models/scale_form.dart';
 import "package:etos_scale_windows/pages/main_page.dart";
+import "package:etos_scale_windows/provider/user_provider.dart";
 import "package:flutter/foundation.dart";
 import "package:flutter/material.dart";
 import "package:etos_scale_windows/contants/colors.dart";
@@ -19,6 +22,7 @@ import "package:etos_scale_windows/components/scale_item/container_card.dart";
 import "package:etos_scale_windows/components/scale_item/trailer_card.dart";
 import 'package:etos_scale_windows/components/info/contract_info.dart';
 import 'package:flutter_dropdown_alert/alert_controller.dart';
+import "package:provider/provider.dart";
 
 class ScalePage extends StatefulWidget {
   static const routeName = "ScalePage";
@@ -44,6 +48,7 @@ class _ScalePageState extends State<ScalePage> with AfterLayoutMixin {
   Receipt? receipt;
   String type = "IN";
   String weightType = "LADED";
+  Device? device;
 
   loadData(int page, int limit) async {
     Filter filter = Filter();
@@ -61,6 +66,10 @@ class _ScalePageState extends State<ScalePage> with AfterLayoutMixin {
   afterFirstLayout(BuildContext context) async {
     setState(() {
       isLoading = false;
+    });
+    var user = Provider.of<UserProvider>(context, listen: false).user;
+    setState(() {
+      device = user?.device;
     });
     loadData(page, limit);
     setState(() {
@@ -86,14 +95,14 @@ class _ScalePageState extends State<ScalePage> with AfterLayoutMixin {
         setState(() {
           formData.type = type;
           formData.weightType = weightType;
-          formData.weightValue = double.parse(widget.scaleData);
+          formData.weightValue = int.parse(widget.scaleData);
         });
         await ScaleApi().truck(formData.toJson());
+        await loadData(page, limit);
+        showSnackbar();
         // ignore: use_build_context_synchronously
         Navigator.of(context).pushNamed(MainPage.routeName);
       } catch (e) {
-        await showSnackbar();
-
         if (kDebugMode) {
           print(e.toString());
         }
@@ -102,6 +111,19 @@ class _ScalePageState extends State<ScalePage> with AfterLayoutMixin {
         });
       }
     }
+  }
+
+  void onRefresh() async {
+    await Future.delayed(const Duration(milliseconds: 1000));
+    setState(() {
+      isLoading = true;
+    });
+    await loadData(page, limit);
+    // ignore: use_build_context_synchronously
+    Navigator.of(context).pushNamed(MainPage.routeName);
+    setState(() {
+      isLoading = false;
+    });
   }
 
   showSnackbar() async {
@@ -153,6 +175,17 @@ class _ScalePageState extends State<ScalePage> with AfterLayoutMixin {
               count++;
             });
           }
+          if (receipt?.sealNumbers != null) {
+            int count = 0;
+            receipt?.sealNumbers?.forEach((seal) {
+              if (count == 0) {
+                formData.sealNumber_0 = seal;
+              } else if (count == 1) {
+                formData.sealNumber_1 = seal;
+              }
+              count++;
+            });
+          }
           formData.contractNo = receipt?.contractNo;
           formData.receiptNo = receipt?.receiptNo;
           formData.buyerName = receipt?.buyerName;
@@ -183,17 +216,64 @@ class _ScalePageState extends State<ScalePage> with AfterLayoutMixin {
           Expanded(
             child: ListView(
               children: [
+                SizedBox(
+                  width: MediaQuery.of(context).size.width - 72,
+                  height: MediaQuery.of(context).size.width * 0.14,
+                  child: ListView(
+                    scrollDirection: Axis.horizontal,
+                    children: [
+                      device?.camera1 != null
+                          ? CameraCard(
+                              index: 0,
+                              camera: device?.camera1,
+                            )
+                          : const SizedBox(),
+                      device?.camera2 != null
+                          ? CameraCard(
+                              index: 1,
+                              camera: device?.camera2,
+                            )
+                          : const SizedBox(),
+                      device?.camera3 != null
+                          ? CameraCard(
+                              index: 2,
+                              camera: device?.camera3,
+                            )
+                          : const SizedBox(),
+                      device?.camera4 != null
+                          ? CameraCard(
+                              index: 3,
+                              camera: device?.camera4,
+                            )
+                          : const SizedBox(),
+                      device?.camera5 != null
+                          ? CameraCard(
+                              index: 4,
+                              camera: device?.camera5,
+                            )
+                          : const SizedBox(),
+                      device?.camera6 != null
+                          ? CameraCard(
+                              index: 5,
+                              camera: device?.camera6,
+                            )
+                          : const SizedBox(),
+                    ],
+                  ),
+                ),
                 const SizedBox(height: 20),
                 Container(
                   width: MediaQuery.of(context).size.width,
                   alignment: Alignment.center,
                   child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
+                      mainAxisAlignment:
+                          MainAxisAlignment.center, // 9999УБХ 0008УЕМ
                       children: [
                         ContainerCard(
-                            index: 0,
-                            color: colorBlue,
-                            formData: formData), // 9999УБХ 0008УЕМ
+                          index: 0,
+                          color: colorBlue,
+                          formData: formData,
+                        ),
                         const SizedBox(
                           width: 20,
                         ),
@@ -299,9 +379,47 @@ class _ScalePageState extends State<ScalePage> with AfterLayoutMixin {
                   child: SizedBox(
                     width: 1180,
                     child: Column(
-                      children: result.rows!
-                          .map((row) => ScaleCard(data: row as Scale))
-                          .toList(),
+                      children: [
+                        result.count != 0
+                            ? Container(
+                                margin: const EdgeInsets.only(bottom: 15),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Container(
+                                      margin: const EdgeInsets.only(left: 20),
+                                      child: Text(
+                                        'Жагсаалт',
+                                        style: TextStyle(
+                                          color: black,
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.w500,
+                                        ),
+                                      ),
+                                    ),
+                                    GestureDetector(
+                                      onTap: onRefresh,
+                                      child: Container(
+                                        margin:
+                                            const EdgeInsets.only(right: 20),
+                                        child: Icon(
+                                          Icons.refresh,
+                                          color: black,
+                                          size: 25,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              )
+                            : const SizedBox(),
+                        Column(
+                          children: result.rows!
+                              .map((row) => ScaleCard(data: row as Scale))
+                              .toList(),
+                        ),
+                      ],
                     ),
                   ),
                 ),

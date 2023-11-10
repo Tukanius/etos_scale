@@ -10,6 +10,7 @@ import 'package:etos_scale_windows/services/dialog.dart';
 import 'package:etos_scale_windows/services/navigation.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_dropdown_alert/dropdown_alert.dart';
+import 'package:media_kit/media_kit.dart';
 
 void main() async {
   locator.registerLazySingleton(() => NavigationService());
@@ -17,6 +18,7 @@ void main() async {
   DartPluginRegistrant.ensureInitialized();
 
   WidgetsFlutterBinding.ensureInitialized();
+  MediaKit.ensureInitialized();
 
   runApp(const MyApp());
 }

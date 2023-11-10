@@ -9,6 +9,9 @@ User _$UserFromJson(Map<String, dynamic> json) {
     scaleType: json['scale'] != null ? json['scale']['type'] as String : "IN",
     weightType:
         json['scale'] != null ? json['scale']['weightType'] as String : "LADED",
+    device: json['device'] != null
+        ? Device.fromJson(json['device'] as Map<String, dynamic>)
+        : null,
   );
 }
 
@@ -19,7 +22,7 @@ Map<String, dynamic> _$UserToJson(User instance) {
   json['firstname'] = instance.firstname;
   json['lastname'] = instance.lastname;
   json['customer'] = instance.customer;
-
+  json['device'] = instance.device;
   return json;
 }
 

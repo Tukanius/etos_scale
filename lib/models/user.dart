@@ -1,3 +1,5 @@
+import 'package:etos_scale_windows/models/device.dart';
+
 part '../parts/user.dart';
 
 class User {
@@ -9,6 +11,7 @@ class User {
   String? password;
   String? scaleType = "BOTH";
   String? weightType = "BOTH";
+  Device? device;
 
   User({
     required this.id,
@@ -17,6 +20,7 @@ class User {
     required this.lastname,
     this.scaleType,
     this.weightType,
+    this.device,
   });
 
   static toAuthJson(Map<String, dynamic> json) => _$UserToAuthJson(json);

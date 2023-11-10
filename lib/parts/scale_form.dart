@@ -41,8 +41,8 @@ ScaleForm _$ScaleFormJson(Map<String, dynamic> json) {
     containerNumber_3_7: json["containerNumber_3_7"] != null
         ? json["containerNumber_3_7"]
         : null,
-    sealNumber_0: json["sealNumbers_0"] != null ? json["sealNumbers_0"] : null,
-    sealNumber_1: json["sealNumbers_1"] != null ? json["sealNumbers_1"] : null,
+    sealNumber_0: json["sealNumber_0"] != null ? json["sealNumber_0"] : null,
+    sealNumber_1: json["sealNumber_1"] != null ? json["sealNumber_1"] : null,
   );
 }
 
@@ -59,8 +59,8 @@ Map<String, dynamic> _$ScaleFormToJson(ScaleForm instance, String? type) {
     json['containerNumber_3_4'] = instance.containerNumber_3_4;
     json['containerNumber_3_7'] = instance.containerNumber_3_7;
 
-    json['sealNumbers_0'] = instance.sealNumber_0;
-    json['sealNumbers_1'] = instance.sealNumber_1;
+    json['sealNumber_0'] = instance.sealNumber_0;
+    json['sealNumber_1'] = instance.sealNumber_1;
 
     json['trailerPlateNumber_0'] = instance.trailerPlateNumber_0;
     json['trailerPlateNumber_1'] = instance.trailerPlateNumber_1;

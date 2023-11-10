@@ -11,6 +11,7 @@ import 'package:platform_device_id/platform_device_id.dart';
 import 'package:provider/provider.dart';
 import "package:flutter_libserialport/flutter_libserialport.dart";
 import 'package:socket_io_client/socket_io_client.dart' as io;
+import 'package:libserialport/libserialport.dart';
 
 class MainPage extends StatefulWidget {
   static const routeName = 'MainPage';
@@ -50,13 +51,17 @@ class _MainPageState extends State<MainPage>
   afterFirstLayout(BuildContext context) async {
     final serialPort = await Provider.of<UserProvider>(context, listen: false)
         .getSelectedSerialPort();
+    print('=====SERAILPORTTT=====');
+    print(serialPort);
+    print('=====SERAILPORTTT=====');
+
     if (serialPort != null) {
       final port = SerialPort(serialPort);
 
       if (!port.isOpen && port.openReadWrite()) {
         if (kDebugMode) {
           debugPrint("PORT OPENED: $serialPort");
-          debugPrint(SerialPort.lastError as String?);
+          debugPrint(SerialPort.lastError.toString());
         }
 
         var portConfig = SerialPortConfig()
@@ -87,16 +92,14 @@ class _MainPageState extends State<MainPage>
         }
       }
     }
-    var machineId = await PlatformDeviceId.getDeviceId;
-    print('===========================');
-    print(machineId);
-    print('===========================');
+    String? machineId = await PlatformDeviceId.getDeviceId;
+    // 'http://192.168.1.96:80',
     socket = io.io(
-      'http://192.168.1.96:30605',
+      'http://mine.etos.mn:80',
       io.OptionBuilder().setTransports(['websocket']).setQuery(
         {
-          'machineId': machineId,
-          'machineType': 'SCALE',
+          'machineId': "${machineId?.trim()}",
+          'machineType': "SCALE",
         },
       ).build(),
     );

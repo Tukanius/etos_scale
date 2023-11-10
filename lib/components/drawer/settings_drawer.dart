@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:after_layout/after_layout.dart';
 import 'package:flutter_libserialport/flutter_libserialport.dart';
 import 'package:provider/provider.dart';
+import 'package:libserialport/libserialport.dart';
 
 class SettingsDrawer extends StatefulWidget {
   const SettingsDrawer({super.key});
